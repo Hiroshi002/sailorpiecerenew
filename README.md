@@ -1,33 +1,41 @@
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=000000&height=200&section=header&text=ULTIMATE%20CALCULATOR&fontSize=80&fontAlignY=40&animation=twinkling&fontColor=FF0055" />
+  <img src="https://capsule-render.vercel.app/api?type=rect&color=1e293b&height=250&section=header&text=SAILOR%20PIECE&fontSize=80&animation=fadeIn&fontColor=FFD700" />
 </p>
 <p align="center">
-  <img src="https://img.shields.io/badge/STATUS-ONLINE-brightgreen?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/VERSION-1.0.0-blueviolet?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/LICENSE-MIT-red?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Roblox-Project-white?style=for-the-badge&logo=roblox&logoColor=red" />
+  <img src="https://img.shields.io/badge/Status-In%20Development-orange?style=for-the-badge" />
+  <a href="https://sailorpiecerenew.netlify.app/">
+    <img src="https://img.shields.io/badge/Preview-Web%20Site-blue?style=for-the-badge" />
+  </a>
 </p>
 ---
-## 🎮 MISSION OBJECTIVE
-**Level Up Your Math Skills!** โปรเจกต์เครื่องคิดเลขที่ครอบคลุมทุกความยาก ตั้งแต่เควสระดับประถม (Easy) ไปจนถึงระดับมหาวิทยาลัย (Hardcore) ออกแบบมาเพื่อให้นักพัฒนาและนักเรียนจัดการตัวเลขได้เหมือนการปราบบอส
+## ⚓ ABOUT THE WORLD
+**Sailor Piece** เป็นโปรเจกต์ที่พัฒนาแมพบน **Roblox** โดยได้รับแรงบันดาลใจจากการผจญภัยในท้องทะเลและอนิเมะ เว็บไซต์นี้ทำหน้าที่เป็น Hub หลักสำหรับแสดงข้อมูลตัวละคร ระบบภายในเกม และประกาศอัปเดตต่างๆ ให้กับผู้เล่นใน Community
+> [!TIP]
+> เข้าชมเว็บไซต์ตัวอย่างเพื่อดูดีไซน์ของโปรเจกต์ได้ที่: [sailorpiecerenew.netlify.app](https://sailorpiecerenew.netlify.app/)
 ---
-## 🛠 TECH STACK [INVENTORY]
+## 🎮 GAMEPLAY FEATURES (In-Map)
+* 🗺️ **Exploration:** ออกสำรวจเกาะต่างๆ ที่ถูกสร้างขึ้นอย่างประณีตใน Roblox Studio
+* ⚔️ **Combat System:** ระบบการต่อสู้ที่ลื่นไหล พร้อมเอฟเฟกต์สุดอลังการ
+* ⚓ **Sailing:** ล่องเรือข้ามมหาสมุทรเพื่อตามล่าขุมทรัพย์และบอสสุดโหด
+* 💎 **Economy:** ระบบสะสมเงินและไอเทมเพื่ออัปเกรดตัวละครของคุณ
+---
+## 🛠️ DEVELOPER LOG (Tech Stack)
+โปรเจกต์นี้เป็นการทำงานร่วมกันระหว่าง **Roblox Studio** และ **Web Technologies**:
 
-| Slot | Item | Level |
-| :--- | :--- | :--- |
-| **Framework** | `Next.js 15` | MAX |
-| **Language** | `TypeScript` | ELITE |
-| **Styling** | `Tailwind CSS` | EPIC |
-| **Deployment** | `Vercel` | LEGENDARY |
+| Category | Tools / Tech |
+| :--- | :--- |
+| **Game Engine** | `Roblox Studio (Luau)` |
+| **Frontend Hub** | `Next.js` + `TypeScript` |
+| **Styling** | `Tailwind CSS` |
+| **Site Hosting** | `Netlify` |
 
 ---
-## 🔥 KEY FEATURES
-* ⚔️ **Multi-Tier Calculation:** เลือกระดับความยากของสมการตามระดับชั้น
-* 🛡 **Secure Login:** ระบบ Inventory เก็บประวัติการคำนวณส่วนตัว
-* ⚡ **High FPS (Fast Page Speed):** โหลดไวด้วย Server Components
-* 🎨 **Cyber Pastel Theme:** ดีไซน์ล้ำๆ ในโทน Blue & Pink Neon
----
-## 🕹️ HOW TO PLAY (Installation)
-### Quest 1: Prepare your environment
-```bash
-git clone [https://github.com/your-username/repo-name.git](https://github.com/your-username/repo-name.git)
-cd repo-name
+## 🏗️ FOLDER STRUCTURE
+```text
+.
+├── 📂 roblox-files    # ไฟล์โมเดลและสคริปต์หลักในเกม (.rbxl / .lua)
+├── 📂 web-interface   # โค้ดส่วนของเว็บไซต์ Next.js
+│   ├── 📂 components  # UI Elements (Cards, Nav, Hero)
+│   └── 📂 public      # Game Assets & Screenshots
+└── 📜 README.md       # คู่มือการพัฒนา
