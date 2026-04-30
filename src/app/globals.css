@@ -1,26 +1,137 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg-dark: #050505;
+    --bg-panel: rgba(15, 15, 15, 0.85);
+    --accent-red: #ff1e38;
+    --accent-gold: #ffb800;
+    --border-action: rgba(255, 30, 56, 0.4);
+  }
+
+  /* Custom Global Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0a0a;
+    border-left: 1px solid rgba(255, 30, 56, 0.2);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--accent-red);
+    border-radius: 0px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-gold);
+  }
+
+  /* Dropdown Custom Scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+    border: none;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 30, 56, 0.6);
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 184, 0, 1);
+  }
+
+  body {
+    background-color: var(--bg-dark);
+    color: #fff;
+    background-image: 
+      radial-gradient(ellipse at top right, rgba(255, 30, 56, 0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at left 40%, rgba(255, 184, 0, 0.08) 0%, transparent 40%),
+      linear-gradient(45deg, rgba(255,30,56,0.03) 25%, transparent 25%, transparent 75%, rgba(255,30,56,0.03) 75%, rgba(255,30,56,0.03)), 
+      linear-gradient(45deg, rgba(255,30,56,0.03) 25%, transparent 25%, transparent 75%, rgba(255,30,56,0.03) 75%, rgba(255,30,56,0.03));
+    background-size: 100% 100%, 100% 100%, 30px 30px, 30px 30px;
+    background-position: 0 0, 0 0, 0 0, 15px 15px;
+    background-attachment: fixed;
+    overflow-x: hidden;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .clip-diagonal {
+    clip-path: polygon(25px 0, 100% 0, 100% calc(100% - 25px), calc(100% - 25px) 100%, 0 100%, 0 25px);
+  }
+  
+  .clip-button {
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  }
+
+  .text-kinetic {
+    font-family: "Impact", "Oswald", "Inter", sans-serif;
+    font-style: italic;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  
+  .text-shadow-red {
+    text-shadow: 3px 3px 0px rgba(255, 30, 56, 1), -1px -1px 0px rgba(0,0,0,1);
+  }
+  
+  .text-shadow-gold {
+    text-shadow: 2px 2px 0px rgba(255, 184, 0, 1), -1px -1px 0px rgba(0,0,0,1);
+  }
+
+  .panel-action {
+    @apply bg-[var(--bg-panel)] backdrop-blur-md border border-[var(--border-action)] transition-all duration-300;
+    box-shadow: inset 0 0 25px rgba(255, 30, 56, 0.08), 0 15px 40px rgba(0,0,0,0.8);
+  }
+  
+  .panel-action:hover {
+    @apply border-[var(--accent-red)] scale-[1.02];
+    box-shadow: 0 0 35px rgba(255, 30, 56, 0.3), inset 0 0 15px rgba(255, 30, 56, 0.15);
+    transform: translateY(-8px) skewX(-1.5deg);
+    z-index: 20;
+  }
+  
+  @keyframes rainbow-pulse {
+    0%   { color: #ff1e38; border-color: #ff1e38; text-shadow: 0 0 10px #ff1e38; box-shadow: 0 0 10px #ff1e38; }
+    20%  { color: #ffb800; border-color: #ffb800; text-shadow: 0 0 10px #ffb800; box-shadow: 0 0 10px #ffb800; }
+    40%  { color: #00ff00; border-color: #00ff00; text-shadow: 0 0 10px #00ff00; box-shadow: 0 0 10px #00ff00; }
+    60%  { color: #00ffff; border-color: #00ffff; text-shadow: 0 0 10px #00ffff; box-shadow: 0 0 10px #00ffff; }
+    80%  { color: #ff00ff; border-color: #ff00ff; text-shadow: 0 0 10px #ff00ff; box-shadow: 0 0 10px #ff00ff; }
+    100% { color: #ff1e38; border-color: #ff1e38; text-shadow: 0 0 10px #ff1e38; box-shadow: 0 0 10px #ff1e38; }
+  }
+
+  .rainbow-fx {
+    animation: rainbow-pulse 4s linear infinite;
+  }
+
+  /* Premium Icon Utilities */
+  .icon-glow-red {
+    filter: drop-shadow(0 0 5px rgba(255, 30, 56, 0.6));
+  }
+  .icon-glow-gold {
+    filter: drop-shadow(0 0 5px rgba(255, 184, 0, 0.6));
+  }
+  .icon-glow-blue {
+    filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.6));
+  }
+  .icon-glow-green {
+    filter: drop-shadow(0 0 5px rgba(34, 197, 94, 0.6));
+  }
+  .icon-hover-pulse:hover {
+    transform: scale(1.15);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .icon-hover-rotate:hover {
+    transform: rotate(360deg);
+    transition: transform 0.8s ease-in-out;
+  }
+  .icon-premium-wrapper {
+    @apply relative flex items-center justify-center p-3 rounded-xl bg-white/5 border border-white/10 transition-all duration-300;
+    backdrop-filter: blur(8px);
+  }
+  .icon-premium-wrapper:hover {
+    @apply bg-white/10 border-white/30;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  }
 }
