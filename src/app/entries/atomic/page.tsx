@@ -92,7 +92,7 @@ export default function Atomic() {
               Wiki Entry
             </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 text-white text-kinetic uppercase tracking-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" style={{ textShadow: "3px 3px 0px rgba(255, 30, 56, 1), -1px -1px 0px rgba(0,0,0,1)" }}>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 text-white text-kinetic uppercase tracking-normal drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" style={{ textShadow: "3px 3px 0px rgba(255, 30, 56, 1), -1px -1px 0px rgba(0,0,0,1)" }}>
               Atomic
             </h1>
 
@@ -123,26 +123,26 @@ export default function Atomic() {
         </div>
 
         {/* Content Section: Overview */}
-        <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--accent-red)] opacity-5 blur-3xl group-hover:opacity-20 transition-opacity duration-700 pointer-events-none" />
           
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Overview &amp; How to Obtain</h2>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+            <ul className="space-y-6">
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>Atomic is bought from the Atomic NPC on Lawless Island after you already own Shadow.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>The unlock needs the Eminence Incarnate title, 45,000 Gems, four Atomic Boss materials, 80 Abyss Sigils, and the base Shadow sword.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>Atomic has its own F move mastery route on Lawless Island and is currently one of the strongest swords in the game.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>Travel to Lawless Island and go to the right corner to find the Atomic NPC.</span>
               </li>
             </ul>
@@ -150,7 +150,7 @@ export default function Atomic() {
         </div>
 
         {/* Content Section: Required materials */}
-        <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Required Materials and Gates</h2>
             
@@ -255,7 +255,7 @@ export default function Atomic() {
         </div>
 
         {/* Content Section: Moveset */}
-        <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Moveset</h2>
             
@@ -268,7 +268,7 @@ export default function Atomic() {
         </div>
 
         {/* Content Section: Mastery Tasks */}
-        <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Atomic F Move Mastery</h2>
             <div className="overflow-x-auto">

@@ -48,7 +48,7 @@ export default function Page() {
               </div>
             </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 text-white text-kinetic uppercase tracking-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" style={{ textShadow: "3px 3px 0px rgba(255, 30, 56, 1), -1px -1px 0px rgba(0,0,0,1)" }}>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 text-white text-kinetic uppercase tracking-normal drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" style={{ textShadow: "3px 3px 0px rgba(255, 30, 56, 1), -1px -1px 0px rgba(0,0,0,1)" }}>
               The World
             </h1>
 
@@ -88,34 +88,34 @@ export default function Page() {
         </div>
 
         {/* Content Section: Overview */}
-        <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--accent-red)] opacity-5 blur-3xl group-hover:opacity-20 transition-opacity duration-700 pointer-events-none" />
           
           <div className="mb-4 relative z-10">
-            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Overview</h2>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+            <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
+            <ul className="space-y-6">
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>The World is one of the newly tracked Sea 2 fighting styles.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>Buying The World requires Primordial Bloodline, the Time Tyrant title, 80 Dominion Brand, 20 Power Fragment, 12 Time Remnant, 6 World Core, and 2 Vampire Omen.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>The World Boss is summoned through The World Summoner and costs 1 Dominion Brand on Normal difficulty.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>The World Boss has 5,000,000,000 HP and a per-difficulty drop table for Power Fragment, Time Remnant, World Outfit, World Core, and Vampire Omen.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>Dominion Brand is a low-chance Bizarre Island NPC drop used both for spawning The World Boss and buying The World style.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>The World also has a separate mastery route for the F move, with four objectives and a reward of the F move plus +30% damage.</span>
               </li>
             </ul>
@@ -123,24 +123,24 @@ export default function Page() {
         </div>
 
         {/* Content Section: How to get The World */}
-        <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">How to obtain The World</h2>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">1.</span>
+            <ul className="space-y-6">
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">1.</span>
                 <span>Use The World Summoner to spawn The World Boss and start farming the material route tied to the style.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">2.</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">2.</span>
                 <span>Normal difficulty costs 1 Dominion Brand, with higher difficulties increasing that cost to 2, 3, and 4.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">3.</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">3.</span>
                 <span>Dominion Brand drops at low chance from Bizarre Island NPCs, then after farming the rest of the route bring Primordial Bloodline, the Time Tyrant title, and the full material bundle to buy The World.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">4.</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">4.</span>
                 <span>Extreme currently leads the published Power Fragment, Time Remnant, World Outfit, World Core, and Vampire Omen rates.</span>
               </li>
             </ul>
@@ -148,7 +148,7 @@ export default function Page() {
         </div>
 
         {/* Content Section: Required materials */}
-        <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Requirements & Materials</h2>
             
@@ -246,7 +246,7 @@ export default function Page() {
         </div>
 
         {/* Content Section: F Move Prep Tracker */}
-        <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">The World mastery and F move tracker</h2>
             
@@ -294,7 +294,7 @@ export default function Page() {
         </div>
 
         {/* Content Section: Current The World boss details */}
-        <div id="current-the-world-boss-details" className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+        <div id="current-the-world-boss-details" className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Current The World boss details</h2>
             <div className="overflow-x-auto">
@@ -345,7 +345,7 @@ export default function Page() {
         </div>
 
         {/* Content Section: Current The World boss drops */}
-        <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Current The World boss drops</h2>
             <div className="overflow-x-auto">
@@ -444,32 +444,32 @@ export default function Page() {
         </div>
 
         {/* Content Section: Route notes */}
-        <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Route Notes</h2>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+            <ul className="space-y-6">
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>The World page now tracks both sides of the route: spawning the boss and buying the style afterward.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>Primordial Bloodline is currently the big gate that makes this route different from a normal title-plus-material style purchase.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>Dominion Brand matters twice on this route because it is both the summon currency and part of the final buy bundle.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>The listed boss-drop percentages stay on the normalized 100%-luck baseline used across the site.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>The World mastery route is fully listed here, including the four objectives needed for the F move unlock.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>The mastery reward is the F move plus a permanent +30% Damage bonus.</span>
               </li>
             </ul>
@@ -477,7 +477,7 @@ export default function Page() {
         </div>
 
         {/* Content Section: Moveset */}
-        <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Moveset</h2>
             

@@ -164,8 +164,8 @@ export default function EntryPage() {
               Wiki Entry
             </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 text-white text-kinetic uppercase tracking-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" style={{ textShadow: "3px 3px 0px rgba(255, 30, 56, 1), -1px -1px 0px rgba(0,0,0,1)" }}>
-              ${escapeJsx(data.h1)}
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 text-white text-kinetic uppercase tracking-normal drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" style={{ textShadow: "3px 3px 0px rgba(255, 30, 56, 1), -1px -1px 0px rgba(0,0,0,1)" }}>
+              ${"$"}{escapeJsx(data.h1)}
             </h1>
 
             <p className="text-xl text-gray-300 mb-8 max-w-3xl leading-relaxed border-l-4 border-[var(--accent-red)] pl-4 backdrop-blur-sm bg-black/20 py-2">
@@ -201,11 +201,11 @@ export default function EntryPage() {
           <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--accent-red)] opacity-5 blur-3xl group-hover:opacity-20 transition-opacity duration-700 pointer-events-none" />
           
           <div className="mb-4 relative z-10">
-            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Overview</h2>
-            <ul className="space-y-4">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
+            <ul className="space-y-6">
               ${data.overviewItems.map(item => `
-                <li className="flex items-start gap-3 text-gray-300">
-                  <span className="text-[var(--accent-red)] mt-1">•</span>
+                <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                  <span className="text-[var(--accent-red)] mt-1.5">•</span>
                   <span>${escapeJsx(item)}</span>
                 </li>`).join('\n              ')}
             </ul>

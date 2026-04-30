@@ -45,7 +45,7 @@ export default function Page() {
               </div>
             </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 text-white text-kinetic uppercase tracking-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" style={{ textShadow: "3px 3px 0px rgba(255, 30, 56, 1), -1px -1px 0px rgba(0,0,0,1)" }}>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 text-white text-kinetic uppercase tracking-normal drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" style={{ textShadow: "3px 3px 0px rgba(255, 30, 56, 1), -1px -1px 0px rgba(0,0,0,1)" }}>
               Cosmic Being
             </h1>
 
@@ -85,38 +85,38 @@ export default function Page() {
         </div>
 
         {/* Content Section: Overview */}
-        <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--accent-red)] opacity-5 blur-3xl group-hover:opacity-20 transition-opacity duration-700 pointer-events-none" />
           
           <div className="mb-4 relative z-10">
-            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Overview</h2>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+            <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
+            <ul className="space-y-6">
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>Cosmic Being is one of the newly tracked Sea 2 fighting styles.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>It can be obtained either by trading materials to the Cosmic Being NPC on Punch Island or by defeating the Garou world boss tied to the route.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>The NPC route requires the Cosmic Being title, 12 Cosmic Essence, 8 Star Mark, 5 Galaxy Shard, and 2 Monster Pulse.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>Garou has 499,999,997,952 HP and drops Cosmic Essence, Star Mark, Galaxy Shard, Cosmic Body, Monster Pulse, Cosmic Being, Guild Key, Aura Crate, and Cosmetic Crate.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>The tracked Garou row lists Cosmic Being at 0.525%, which this page treats as the direct style unlock chance.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>Garou appears 30 minutes after server start and then 30 minutes after the previous kill, while also using an adaptation mechanic at each 25% HP lost.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>Cosmic Being also has a separate Cosmic Master questline for the F move: defeat the world boss 15 times, reach Infinite Tower floor 90+ five times, and obtain Astral Bloodline.</span>
               </li>
             </ul>
@@ -124,16 +124,16 @@ export default function Page() {
         </div>
 
         {/* Content Section: How to get Cosmic Being */}
-        <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">How to obtain Cosmic Being</h2>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">1.</span>
+            <ul className="space-y-6">
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">1.</span>
                 <span>Talk to the Cosmic Being NPC on top of a building in Punch Island and trade the required materials listed below.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">2.</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">2.</span>
                 <span>Alternatively, defeat the Garou world boss in the middle of Punch Island for a direct drop chance.</span>
               </li>
             </ul>
@@ -141,7 +141,7 @@ export default function Page() {
         </div>
 
         {/* Content Section: Required materials */}
-        <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Requirements & Materials</h2>
             
@@ -225,7 +225,7 @@ export default function Page() {
         </div>
 
         {/* Content Section: F Move Prep Tracker */}
-        <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Cosmic Being F Move Prep Tracker</h2>
             
@@ -273,28 +273,28 @@ export default function Page() {
         </div>
 
         {/* Content Section: Cosmic Garou mechanics */}
-        <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Garou World Boss Mechanics</h2>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+            <ul className="space-y-6">
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>Garou first spawns in the middle of Punch Island 30 minutes after server start and then respawns 30 minutes after the previous kill.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>The timer only resets after the previous boss has been killed, so missed or stalled spawns should not be treated like a stacking timer.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>Boss HP is not currently reported to scale upward with extra players attacking it.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>At each 25% HP lost, the boss can trigger one of four adaptations: <span className="text-yellow-400">Harden</span> (+10% extra damage reduction on top of base 40%), <span className="text-red-400">Rage</span> (+25% more damage against players), <span className="text-blue-400">Accelerate</span> (+25% movement speed), or <span className="text-green-400">Regenerate</span> (10% of lost HP).</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>That adaptation passive can only activate 3 times during one boss life, and the same adaptation can repeat again in a row.</span>
               </li>
             </ul>
@@ -302,7 +302,7 @@ export default function Page() {
         </div>
 
         {/* Content Section: Moveset */}
-        <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Moveset</h2>
             

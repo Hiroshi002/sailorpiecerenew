@@ -40,7 +40,7 @@ export default function Page() {
               Wiki Entry
             </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 text-white text-kinetic uppercase tracking-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" style={{ textShadow: "3px 3px 0px rgba(255, 30, 56, 1), -1px -1px 0px rgba(0,0,0,1)" }}>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 text-white text-kinetic uppercase tracking-normal drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" style={{ textShadow: "3px 3px 0px rgba(255, 30, 56, 1), -1px -1px 0px rgba(0,0,0,1)" }}>
               Alucard
             </h1>
 
@@ -80,22 +80,22 @@ export default function Page() {
         </div>
 
         {/* Content Section: Overview */}
-        <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--accent-red)] opacity-5 blur-3xl group-hover:opacity-20 transition-opacity duration-700 pointer-events-none" />
           
           <div className="mb-4 relative z-10">
-            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Overview</h2>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+            <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
+            <ul className="space-y-6">
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>Alucard is a fighting style in Sailor Piece.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>Alucard is known for lifesteal-heavy style with strong sustain.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>Alucard is unlocked through Alucard Trainer on Sailor Island.</span>
               </li>
             </ul>
@@ -103,16 +103,16 @@ export default function Page() {
         </div>
 
         {/* Content Section: How to obtain */}
-        <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">How to obtain Alucard</h2>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">1.</span>
+            <ul className="space-y-6">
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">1.</span>
                 <span>Travel to Sailor Island and find the Alucard Trainer near the water in the left corner of the island.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">2.</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">2.</span>
                 <span>Make sure you already have the Vampire race and Vampire King title before bringing the rest of the bundle.</span>
               </li>
             </ul>
@@ -120,7 +120,7 @@ export default function Page() {
         </div>
 
         {/* Content Section: Required materials */}
-        <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Required Materials and Gates</h2>
             
@@ -202,7 +202,7 @@ export default function Page() {
         </div>
 
         {/* Content Section: Moveset */}
-        <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Moveset</h2>
             
@@ -221,13 +221,13 @@ export default function Page() {
         <div className="panel-action clip-diagonal p-8 mb-12 relative overflow-hidden group">
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">How to equip the style</h2>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+            <ul className="space-y-6">
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>Open your inventory and switch to the Melee tab.</span>
               </li>
-              <li className="flex items-start gap-3 text-gray-300">
-                <span className="text-[var(--accent-red)] mt-1">•</span>
+              <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                <span className="text-[var(--accent-red)] mt-1.5">•</span>
                 <span>Select Alucard and equip it after unlocking the style.</span>
               </li>
             </ul>

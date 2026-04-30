@@ -18,10 +18,10 @@ export default function Header() {
       <div className="w-full flex justify-between items-center px-4 sm:px-8 py-3 sm:py-5 border-b border-[var(--border-action)]">
         <Link href="/" className="flex items-center gap-3 sm:gap-4 group">
           <div className="w-10 h-10 sm:w-14 sm:h-14 bg-gradient-to-br from-[var(--accent-red)] to-[#500000] flex items-center justify-center clip-button border border-[var(--accent-red)] group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(255,30,56,0.4)]">
-            <span className="text-white font-black text-lg sm:text-2xl italic tracking-tighter">SP</span>
+            <span className="text-white font-black text-lg sm:text-2xl italic tracking-normal">SP</span>
           </div>
           <div className="flex flex-col">
-            <span className="text-lg sm:text-2xl font-black text-white text-kinetic tracking-wider">Sailor Piece Wiki</span>
+            <span className="text-lg sm:text-2xl font-black text-white text-kinetic tracking-[0.08em]">Sailor Piece Wiki</span>
             <span className="text-[8px] sm:text-[10px] text-[var(--accent-gold)] uppercase tracking-[0.1em] sm:tracking-[0.2em] font-black w-max">Unleash the Grand Sea</span>
           </div>
         </Link>

@@ -93,7 +93,7 @@ export default function EntryPage() {
               Wiki Entry
             </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 text-white text-kinetic uppercase tracking-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" style={{ textShadow: "3px 3px 0px rgba(255, 30, 56, 1), -1px -1px 0px rgba(0,0,0,1)" }}>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 text-white text-kinetic uppercase tracking-normal drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" style={{ textShadow: "3px 3px 0px rgba(255, 30, 56, 1), -1px -1px 0px rgba(0,0,0,1)" }}>
               Demon Wing
             </h1>
 
@@ -124,12 +124,12 @@ export default function EntryPage() {
         </div>
 
         {/* Content Section: Overview */}
-        <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--accent-red)] opacity-5 blur-3xl group-hover:opacity-20 transition-opacity duration-700 pointer-events-none" />
           
           <div className="mb-4 relative z-10">
-            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Overview</h2>
-            <ul className="space-y-4">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
+            <ul className="space-y-6">
               
             </ul>
           </div>
@@ -137,7 +137,7 @@ export default function EntryPage() {
 
         {/* Content Section: Route Details */}
         {routeDetails.length > 0 && (
-          <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+          <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
             <div className="mb-4 relative z-10">
               <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Route Details</h2>
               
@@ -169,7 +169,7 @@ export default function EntryPage() {
 
         {/* Content Section: Moveset */}
         {moveset.length > 0 && (
-          <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+          <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
             <div className="mb-4 relative z-10">
               <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Moveset</h2>
               

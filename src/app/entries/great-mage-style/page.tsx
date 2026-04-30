@@ -146,7 +146,7 @@ export default function EntryPage() {
               Wiki Entry
             </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 text-white text-kinetic uppercase tracking-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" style={{ textShadow: "3px 3px 0px rgba(255, 30, 56, 1), -1px -1px 0px rgba(0,0,0,1)" }}>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 text-white text-kinetic uppercase tracking-normal drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" style={{ textShadow: "3px 3px 0px rgba(255, 30, 56, 1), -1px -1px 0px rgba(0,0,0,1)" }}>
               Great Mage
             </h1>
 
@@ -177,15 +177,15 @@ export default function EntryPage() {
         </div>
 
         {/* Content Section: Overview */}
-        <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--accent-red)] opacity-5 blur-3xl group-hover:opacity-20 transition-opacity duration-700 pointer-events-none" />
           
           <div className="mb-4 relative z-10">
-            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Overview</h2>
-            <ul className="space-y-4">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
+            <ul className="space-y-6">
               {overviewItems.map((item, i) => (
-                <li key={i} className="flex items-start gap-3 text-gray-300">
-                  <span className="text-[var(--accent-red)] mt-1">•</span>
+                <li key={i} className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                  <span className="text-[var(--accent-red)] mt-1.5">•</span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -194,13 +194,13 @@ export default function EntryPage() {
         </div>
 
         {/* Content Section: How to Obtain */}
-        <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
           <div className="mb-4 relative z-10">
-            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">How to Get Great Mage</h2>
-            <ul className="space-y-4">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">How to Get Great Mage</h2>
+            <ul className="space-y-6">
               {obtainmentSteps.map((step, i) => (
-                <li key={i} className="flex items-start gap-3 text-gray-300">
-                  <span className="text-[var(--accent-red)] mt-1">•</span>
+                <li key={i} className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
+                  <span className="text-[var(--accent-red)] mt-1.5">•</span>
                   <span>{step}</span>
                 </li>
               ))}
@@ -209,7 +209,7 @@ export default function EntryPage() {
         </div>
 
         {/* Content Section: Required materials */}
-        <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Required Materials and Gates</h2>
             
@@ -283,7 +283,7 @@ export default function EntryPage() {
 
         {/* Content Section: Moveset */}
         {moveset.length > 0 && (
-          <div className="panel-action clip-diagonal p-8 mb-8 relative overflow-hidden group">
+          <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
             <div className="mb-4 relative z-10">
               <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Moveset</h2>
               

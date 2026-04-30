@@ -155,10 +155,10 @@ export default function Home() {
         <nav className="w-full flex justify-between items-center px-4 sm:px-8 py-3 sm:py-5 border-b border-[var(--border-action)] bg-[var(--bg-dark)]/90 backdrop-blur-xl sticky top-0 z-40 shadow-[0_10px_30px_rgba(0,0,0,0.8)] flex-wrap gap-4">
           <Link href="/" className="flex items-center gap-3 sm:gap-4 group">
             <div className="w-10 h-10 sm:w-14 sm:h-14 bg-gradient-to-br from-[var(--accent-red)] to-[#500000] flex items-center justify-center clip-button border border-[var(--accent-red)] group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(255,30,56,0.4)]">
-              <span className="text-white font-black text-lg sm:text-2xl italic tracking-tighter">SP</span>
+              <span className="text-white font-black text-lg sm:text-2xl italic tracking-normal">SP</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-lg sm:text-2xl font-black text-white text-kinetic tracking-wider">Sailor Piece Wiki</span>
+              <span className="text-lg sm:text-2xl font-black text-white text-kinetic tracking-[0.08em]">Sailor Piece Wiki</span>
               <span className="text-[8px] sm:text-[10px] text-[var(--accent-gold)] uppercase tracking-[0.1em] sm:tracking-[0.2em] font-black w-max">{t.subtitle}</span>
             </div>
           </Link>
@@ -233,7 +233,7 @@ export default function Home() {
                     <BookOpen className="w-3 h-3 sm:w-4 sm:h-4 text-[var(--accent-gold)] animate-pulse icon-glow-gold" /> {t.guideHub}
                  </div>
               </div>
-              <h1 className="text-5xl sm:text-6xl md:text-[6.5rem] lg:text-[7.5rem] leading-[1] md:leading-[0.9] text-white text-kinetic text-shadow-red mb-6 sm:mb-8 font-black">
+              <h1 className="text-5xl sm:text-6xl md:text-[6.5rem] lg:text-[7.5rem] leading-[1.1] md:leading-[1] text-white text-kinetic text-shadow-red mb-6 sm:mb-8 font-black">
                 Sailor Piece <br className="hidden md:block" /><span className="text-[var(--accent-gold)] text-shadow-gold md:ml-0 ml-2">{t.ignited}</span>
               </h1>
               <p className="text-gray-300 w-full md:max-w-2xl text-base sm:text-lg font-medium md:font-semibold leading-relaxed mb-8 sm:mb-6 border-l-4 border-[var(--accent-red)] pl-4 sm:pl-6 bg-gradient-to-r from-[var(--accent-red)]/10 to-transparent py-4 text-justify md:text-left mx-auto md:mx-0">

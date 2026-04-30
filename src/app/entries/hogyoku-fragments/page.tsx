@@ -32,7 +32,7 @@ export default function Page() {
             Wiki Entry
           </div>
 
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 text-white text-kinetic uppercase tracking-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" style={{ textShadow: "3px 3px 0px rgba(255, 30, 56, 1), -1px -1px 0px rgba(0,0,0,1)" }}>
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 text-white text-kinetic uppercase tracking-normal drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" style={{ textShadow: "3px 3px 0px rgba(255, 30, 56, 1), -1px -1px 0px rgba(0,0,0,1)" }}>
             Hogyoku Fragments
           </h1>
 
@@ -74,25 +74,25 @@ export default function Page() {
           <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--accent-red)] opacity-5 blur-3xl group-hover:opacity-20 transition-opacity duration-700 pointer-events-none" />
           
           <div className="mb-8 relative z-10">
-            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Overview</h2>
-            <ul className="space-y-4">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
+            <ul className="space-y-6">
               
-                <li className="flex items-start gap-3 text-gray-300">
+                <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
                   <span className="text-blue-400 mt-1">•</span>
                   <span>The Hogyoku Fragment route starts from the Hogyoku Quest NPC on Hollow Island.</span>
                 </li>
 
-                <li className="flex items-start gap-3 text-gray-300">
+                <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
                   <span className="text-blue-400 mt-1">•</span>
                   <span>Players need to be around level 8,500 before the Hogyoku Quest NPC will start the route.</span>
                 </li>
 
-                <li className="flex items-start gap-3 text-gray-300">
+                <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
                   <span className="text-blue-400 mt-1">•</span>
                   <span>You need all 6 Hogyoku Fragments to unlock the Soul Society (Hogyoku route) portal.</span>
                 </li>
 
-                <li className="flex items-start gap-3 text-gray-300">
+                <li className="flex items-start gap-4 text-gray-300 leading-relaxed text-lg">
                   <span className="text-blue-400 mt-1">•</span>
                   <span>This route is one of the key gates behind the True Aizen or True Manipulator progression line, and players should collect the fragments in order.</span>
                 </li>
