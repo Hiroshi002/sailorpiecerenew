@@ -50,34 +50,40 @@ const bossDrops = [
 const moveset = [
   {
     "key": "M1",
-    "description": "Standard combo slashes with water-ripple effects.",
-    "videoSrc": "",
+    "description": "Basic combo or default attack note.",
+    "videoSrc": "/uploads/dragon-goddess-m1.webm",
     "poster": ""
   },
   {
     "key": "Z",
-    "description": "Dragon's Breath - Lunges forward with a concentrated blast of energy.",
-    "videoSrc": "",
+    "description": "No description provided.",
+    "videoSrc": "/uploads/dragon-goddess-z.webm",
     "poster": ""
   },
   {
     "key": "X",
-    "description": "Tidal Wave - Slams the blade down to create a massive area-of-effect wave.",
-    "videoSrc": "",
+    "description": "No description provided.",
+    "videoSrc": "/uploads/dragon-goddess-x.webm",
     "poster": ""
   },
   {
     "key": "C",
-    "description": "Goddess's Grace - A defensive spin that parries incoming attacks and counters.",
-    "videoSrc": "",
+    "description": "No description provided.",
+    "videoSrc": "/uploads/dragon-goddess-c.webm",
     "poster": ""
   },
   {
     "key": "V",
-    "description": "Ancient Roar - Summons a spectral dragon that devastates the surroundings.",
-    "videoSrc": "",
+    "description": "No description provided.",
+    "videoSrc": "/uploads/dragon-goddess-v.webm",
     "poster": ""
-  }
+  },
+  {
+    "key": "F",
+    "description": "No description provided.",
+    "videoSrc": "/uploads/dragon-goddess-f.webm",
+    "poster": ""
+  },
 ];
 
 const relatedPages = [

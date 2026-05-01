@@ -58,37 +58,37 @@ const moveset = [
   {
     "key": "M1",
     "description": "Basic combo or default attack note.",
-    "videoSrc": "",
+    "videoSrc": "/uploads/great-mage-m1.webm",
     "poster": ""
   },
   {
     "key": "Z",
-    "description": "Unleashes a rapid magical blast forward.",
-    "videoSrc": "",
+    "description": "No description provided.",
+    "videoSrc": "/uploads/great-mage-z.webm",
     "poster": ""
   },
   {
     "key": "X",
-    "description": "Creates a magical explosion around the user.",
-    "videoSrc": "",
+    "description": "No description provided.",
+    "videoSrc": "/uploads/great-mage-x.webm",
     "poster": ""
   },
   {
     "key": "C",
-    "description": "Fires a concentrated beam of magic energy.",
-    "videoSrc": "",
+    "description": "No description provided.",
+    "videoSrc": "/uploads/great-mage-c.webm",
     "poster": ""
   },
   {
     "key": "V",
-    "description": "Summons multiple magical projectiles from above.",
-    "videoSrc": "",
+    "description": "No description provided.",
+    "videoSrc": "/uploads/great-mage-v.webm",
     "poster": ""
   },
   {
     "key": "F",
-    "description": "Final mastery move - needs dedicated live check.",
-    "videoSrc": "",
+    "description": "No description provided.",
+    "videoSrc": "/uploads/great-mage-f.webm",
     "poster": ""
   }
 ];

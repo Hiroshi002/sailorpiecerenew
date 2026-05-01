@@ -40,20 +40,47 @@ const DICT = {
       { id: "theworld", title: "The World", cat: "สไตล์ต่อสู้ / ระดับ S+", img: "/images/icons/melee-theworld.webp", href: "/entries/the-world-style/" },
     ],
     navItems: [
-      "Sea 2", "หมัด/สไตล์ต่อสู้", "ดาบ", "ผลปีศาจ", "เผ่าพันธุ์", "Traits", "แคลน", "พลังพิเศษ", 
-      "อาร์ติแฟกต์", "เครื่องประดับ", "คอสเมติก", "บิลด์อาวุธ", "วัสดุคราฟต์", "รูน (Runes)", 
-      "ฉายา", "พาสซีฟ", "Enchantments", "ออร่า", "สายเลือด", "เรลิก", 
-      "ตารางเทรด", "โค้ดทั้งหมด", "ฮาคิ", "บอส", "กิลด์", "Boss Rush", 
-      "กันฐาน (Defense)", "หอคอยอนันต์", "ผังต้นไม้สกิล", "ดันเจี้ยน", "พรบารมี", "เส้นทางผู้เล่น"
+      { label: "Sea 2", href: "/entries/sea-2" },
+      { label: "หมัด", href: "/entries/combat-style" },
+      { label: "ดาบ", href: "/entries/weapons-overview" },
+      { label: "ผลปีศาจ", href: "/entries/fruits-overview" },
+      { label: "เผ่าพันธุ์", href: "/entries/races-overview" },
+      { label: "Traits", href: "/entries/traits-overview" },
+      { label: "แคลน", href: "/entries/clans-overview" },
+      { label: "พลัง", href: "/entries/powers-overview" },
+      { label: "อาร์ติแฟกต์", href: "/entries/artifacts-overview" },
+      { label: "เครื่องประดับ", href: "/entries/accessories-overview" },
+      { label: "คอสเมติก", href: "/entries/cosmetics-overview" },
+      { label: "บิลด์อาวุธ", href: "/entries/best-builds-overview" },
+      { label: "วัสดุคราฟต์", href: "/entries/materials-overview" },
+      { label: "รูน (Runes)", href: "/entries/runes-overview" },
+      { label: "ฉายา", href: "/entries/titles-overview" },
+      { label: "พาสซีฟ", href: "/entries/spec-passives" },
+      { label: "Enchantments", href: "/entries/enchanting-accessories" },
+      { label: "ออร่า", href: "/entries/auras-overview" },
+      { label: "สายเลือด", href: "/entries/bloodlines-system" },
+      { label: "เรลิก", href: "/entries/relics-overview" },
+      { label: "ตารางเทรด", href: "/entries/trade-values" },
+      { label: "โค้ดทั้งหมด", href: "/entries/codes-overview" },
+      { label: "ฮาคิ", href: "/entries/haki-overview" },
+      { label: "บอส", href: "/entries/bosses-guide" },
+      { label: "กิลด์", href: "/entries/guilds-overview" },
+      { label: "Boss Rush", href: "/entries/boss-rush" },
+      { label: "กันคริลตัล (Crystal Defense)", href: "/entries/crystal-defense" },
+      { label: "หอคอย", href: "/entries/infinite-tower" },
+      { label: "ผังสกิล", href: "/entries/skill-tree" },
+      { label: "ดันเจี้ยน", href: "/entries/dungeons-overview" },
+      { label: "พรบารมี", href: "/entries/blessings-system" },
+      { label: "เส้นทางผู้เล่น", href: "/entries/progression-guide" }
     ],
     browseItems: [
-      { title: "สารบัญวิกิ", desc: "รวมหน้าเพจและหมวดหมู่ทั้งหมดที่คุณค้นหาได้ในที่เดียว ง่ายต่อการเข้าถึง" },
-      { title: "แผนที่และเกาะทั้งหมด", desc: "ดูจุดเกิดของบอส, เควสต์, NPC, และจุดอัปเกรดในแต่ละเกาะแบบเจาะลึก" },
-      { title: "คู่มือลง Sea 2", desc: "เส้นทางการหา Ancient Fragments, จุดเกิดสัตว์ทะเล, และการเดินทางไปโลกสองแบบละเอียดยิบ" },
-      { title: "ลิงก์เว็บหลัก", desc: "กดไปหน้าเกมเพจ Roblox หลัก, ดิสคอร์ดพูดคุย, และอัปเดตแบบเรียลไทม์" },
-      { title: "ระบบคำนวณ", desc: "ศูนย์รวมเครื่องมือคำนวณดาเมจ, วิเคราะห์พาสซีฟและบิลด์อาวุธที่เหมาะกับคุณ" },
-      { title: "เครื่องมือเช็คความคืบหน้า", desc: "บันทึกความคืบหน้าหอคอยอนันต์, Skill Tree, และสถานะเลเวลของคุณเอง" },
-      { title: "เกี่ยวกับวิกินี้", desc: "ทำความรู้จักกับที่มาของวิกิ, การตรวจสอบข้อมูล, และทีมนักพัฒนาแฟนเมด" }
+      { title: "สารบัญวิกิ", desc: "รวมหน้าเพจและหมวดหมู่ทั้งหมดที่คุณค้นหาได้ในที่เดียว ง่ายต่อการเข้าถึง", href: "/directory" },
+      { title: "แผนที่และเกาะทั้งหมด", desc: "ดูจุดเกิดของบอส, เควสต์, NPC, และจุดอัปเกรดในแต่ละเกาะแบบเจาะลึก", href: "/islands" },
+      { title: "คู่มือลง Sea 2", desc: "เส้นทางการหา Ancient Fragments, จุดเกิดสัตว์ทะเล, และการเดินทางไปโลกสองแบบละเอียดยิบ", href: "/sea-2" },
+      { title: "ลิงก์เว็บหลัก", desc: "กดไปหน้าเกมเพจ Roblox หลัก, ดิสคอร์ดพูดคุย, และอัปเดตแบบเรียลไทม์", href: "/entries/official-links" },
+      { title: "ระบบคำนวณ", desc: "ศูนย์รวมเครื่องมือคำนวณดาเมจ, วิเคราะห์พาสซีฟและบิลด์อาวุธที่เหมาะกับคุณ", href: "/calculator" },
+      { title: "เครื่องมือเช็คความคืบหน้า", desc: "บันทึกความคืบหน้าหอคอยอนันต์, Skill Tree, และสถานะเลเวลของคุณเอง", href: "/progress-trackers" },
+      { title: "เกี่ยวกับวิกินี้", desc: "ทำความรู้จักกับที่มาของวิกิ, การตรวจสอบข้อมูล, และทีมนักพัฒนาแฟนเมด", href: "/about" }
     ],
     about1: {
       tag: "ข้อมูลในบล็อกนี้มีอะไรบ้าง?",
@@ -98,21 +125,48 @@ const DICT = {
       { id: "theworld", title: "The World", cat: "Melee / S+ Tier", img: "/images/icons/melee-theworld.webp", href: "/entries/the-world-style/" },
     ],
     navItems: [
-      "Sea 2", "Melees", "Weapons", "Fruits", "Races", "Traits", "Clans", "Powers", 
-      "Artifacts", "Accessories", "Cosmetics", "Builds", "Materials", "Runes", 
-      "Titles", "Spec Passives", "Enchantments", "Auras", "Bloodlines", "Relics", 
-      "Trade Values", "Codes", "Haki", "Bosses", "Guilds", "Boss Rush", 
-      "Crystal Defense", "Infinite Tower", "Skill Tree", "Dungeons", "Blessings", "Progression"
+      { label: "Sea 2", href: "/sea-2" },
+      { label: "Melees", href: "/melees" },
+      { label: "Weapons", href: "/weapons" },
+      { label: "Fruits", href: "/entries/powers-overview" },
+      { label: "Races", href: "/entries/races-overview" },
+      { label: "Traits", href: "/entries/traits-overview" },
+      { label: "Clans", href: "/entries/clans-overview" },
+      { label: "Powers", href: "/entries/powers-overview" },
+      { label: "Artifacts", href: "/entries/artifacts-overview" },
+      { label: "Accessories", href: "/entries/accessories-overview" },
+      { label: "Cosmetics", href: "/entries/cosmetics-overview" },
+      { label: "Builds", href: "/entries/best-builds-overview" },
+      { label: "Materials", href: "/entries/materials-overview" },
+      { label: "Runes", href: "/entries/runes-overview" },
+      { label: "Titles", href: "/entries/titles-overview" },
+      { label: "Spec Passives", href: "/entries/spec-passives" },
+      { label: "Enchantments", href: "/entries/enchanting-accessories" },
+      { label: "Auras", href: "/entries/auras-overview" },
+      { label: "Bloodlines", href: "/entries/bloodlines-system" },
+      { label: "Relics", href: "/entries/relics-overview" },
+      { label: "Trade Values", href: "/entries/trade-values" },
+      { label: "Codes", href: "/entries/codes-overview" },
+      { label: "Haki", href: "/entries/haki-overview" },
+      { label: "Bosses", href: "/entries/bosses-guide" },
+      { label: "Guilds", href: "/entries/guilds-overview" },
+      { label: "Boss Rush", href: "/entries/boss-rush" },
+      { label: "Crystal Defense", href: "/entries/crystal-defense" },
+      { label: "Infinite Tower", href: "/entries/infinite-tower" },
+      { label: "Skill Tree", href: "/entries/skill-tree" },
+      { label: "Dungeons", href: "/entries/dungeons-overview" },
+      { label: "Blessings", href: "/entries/blessings-system" },
+      { label: "Progression", href: "/entries/progression-guide" }
     ],
     browseItems: [
-      { title: "Wiki Directory", desc: "Browse every category hub, overview page, and published entry from one clean index." },
-      { title: "All Islands and Map", desc: "Open the interactive island hub for NPCs, bosses, progression stage, and related pages." },
-      { title: "Sea 2 Guide", desc: "Open the Ancient Fragments Sea 2 locations guide for Lost Fragments, Cartographer access, Sea 2 islands, sea beasts, and the new update rollout." },
-      { title: "Official Links", desc: "Jump straight to the Roblox game page, Discord, Trello, and current trading tools." },
-      { title: "Sailor Piece Calculator", desc: "Open the tool hub for power compares, passive compares, and the build planner." },
-      { title: "Progress Trackers", desc: "Track Boss Rush, Infinite Tower, Crystal Defense, Skill Tree, and your long-term endgame account checklist." },
-      { title: "About This Wiki", desc: "See what the site covers, how pages are checked, and how the project is structured." },
-      { title: "Recent Changes", desc: "Open the changelog to see the newest page updates, corrections, and feature additions." }
+      { title: "Wiki Directory", desc: "Browse every category hub, overview page, and published entry from one clean index.", href: "/directory" },
+      { title: "All Islands and Map", desc: "Open the interactive island hub for NPCs, bosses, progression stage, and related pages.", href: "/islands" },
+      { title: "Sea 2 Guide", desc: "Open the Ancient Fragments Sea 2 locations guide for Lost Fragments, Cartographer access, Sea 2 islands, sea beasts, and the new update rollout.", href: "/sea-2" },
+      { title: "Official Links", desc: "Jump straight to the Roblox game page, Discord, Trello, and current trading tools.", href: "/official-links" },
+      { title: "Sailor Piece Calculator", desc: "Open the tool hub for power compares, passive compares, and the build planner.", href: "/calculator" },
+      { title: "Progress Trackers", desc: "Track Boss Rush, Infinite Tower, Crystal Defense, Skill Tree, and your long-term endgame account checklist.", href: "/progress-trackers" },
+      { title: "About This Wiki", desc: "See what the site covers, how pages are checked, and how the project is structured.", href: "/about" },
+      { title: "Recent Changes", desc: "Open the changelog to see the newest page updates, corrections, and feature additions.", href: "/changelog" }
     ],
     about1: {
       tag: "What You Can Find Here",
@@ -137,8 +191,8 @@ export default function Home() {
   // Derive searchable data dynamically across categories
   const allSearchable = [
     ...t.quickItems.map((i: { title: string; href: string }) => ({ title: i.title, type: t.qaTitle, link: i.href })),
-    ...t.navItems.map((i: string) => ({ title: i, type: t.navTitle, link: `/${i.toLowerCase().replace(/ /g, "-")}` })),
-    ...t.browseItems.map((i: { title: string }) => ({ title: i.title, type: t.browseTitle, link: "/" }))
+    ...t.navItems.map((i: { label: string; href: string }) => ({ title: i.label, type: t.navTitle, link: i.href })),
+    ...t.browseItems.map((i: { title: string; href: string }) => ({ title: i.title, type: t.browseTitle, link: i.href }))
   ];
 
   const searchResults = allSearchable.filter(item => 
@@ -295,14 +349,11 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4">
-             {t.navItems.map((item, i) => {
-                const slug = DICT.en.navItems[i].toLowerCase().replace(/ /g, "-");
-               return (
-                  // <Link key={i} href={`/entries/${slug}`} className="panel-action clip-button py-3 sm:py-4 px-2 flex justify-center items-center text-center group hover:bg-[var(--accent-red)]/20"></Link>
-                <Link key={i} href={`/${slug}`} className="panel-action clip-button py-3 sm:py-4 px-2 flex justify-center items-center text-center group hover:bg-[var(--accent-red)]/20">
-                   <span className="font-bold text-gray-300 group-hover:text-white tracking-wider text-[12px] transition-colors">{item}</span>
+             {t.navItems.map((item, i) => (
+                <Link key={i} href={item.href} className="panel-action clip-button py-3 sm:py-4 px-2 flex justify-center items-center text-center group hover:bg-[var(--accent-red)]/20">
+                   <span className="font-bold text-gray-300 group-hover:text-white tracking-wider text-[12px] transition-colors">{item.label}</span>
                 </Link>
-             )})}
+             ))}
           </div>
         </section>
 
@@ -315,7 +366,7 @@ export default function Home() {
                </div>
                <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-4">
                   {t.browseItems.map((item, i) => (
-                     <Link key={i} href="/" className="panel-action clip-diagonal p-5 sm:p-6 group hover:translate-x-2 sm:hover:translate-x-4 border-l-4 border-l-[var(--accent-gold)] block">
+                     <Link key={i} href={item.href} className="panel-action clip-diagonal p-5 sm:p-6 group hover:translate-x-2 sm:hover:translate-x-4 border-l-4 border-l-[var(--accent-gold)] block">
                         <h4 className="text-white font-black italic text-base sm:text-lg tracking-wider mb-2 group-hover:text-[var(--accent-gold)] transition-colors">{item.title}</h4>
                         <p className="text-[12px] sm:text-[14px] text-gray-400 line-clamp-3 lg:line-clamp-none">{item.desc}</p>
                      </Link>

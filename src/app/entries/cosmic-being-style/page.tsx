@@ -307,12 +307,12 @@ export default function Page() {
             <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Moveset</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <VideoMovesetCard move={{ key: "M1", description: "Basic combo or default attack note.", cooldown: "0s CD" }} />
-              <VideoMovesetCard move={{ key: "Z", description: "No description provided." }} />
-              <VideoMovesetCard move={{ key: "X", description: "No description provided." }} />
-              <VideoMovesetCard move={{ key: "C", description: "No description provided." }} />
-              <VideoMovesetCard move={{ key: "V", description: "No description provided." }} />
-              <VideoMovesetCard move={{ key: "F", description: "Use this row for the mastery, awakening, or final move if the style has one." }} />
+              <VideoMovesetCard move={{ key: "M1", videoSrc: "/uploads/cosmic-being-m1.webm", poster: "/uploads/cosmic-being-m1.webp", description: "Basic combo or default attack note.", cooldown: "0s CD" }} />
+              <VideoMovesetCard move={{ key: "Z", videoSrc: "/uploads/cosmic-being-z.webm", poster: "/uploads/cosmic-being-z.webp", description: "No description provided." }} />
+              <VideoMovesetCard move={{ key: "X", videoSrc: "/uploads/cosmic-being-x.webm", poster: "/uploads/cosmic-being-x.webp", description: "No description provided." }} />
+              <VideoMovesetCard move={{ key: "C", videoSrc: "/uploads/cosmic-being-c.webm", poster: "/uploads/cosmic-being-c.webp", description: "No description provided." }} />
+              <VideoMovesetCard move={{ key: "V", videoSrc: "/uploads/cosmic-being-v.webm", poster: "/uploads/cosmic-being-v.webp", description: "No description provided." }} />
+              <VideoMovesetCard move={{ key: "F", videoSrc: "/uploads/cosmic-being-f.webm", poster: "/uploads/cosmic-being-f.webp", description: "Use this row for the mastery, awakening, or final move if the style has one." }} />
             </div>
           </div>
         </div>

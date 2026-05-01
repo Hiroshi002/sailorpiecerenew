@@ -39,12 +39,12 @@ const metaItems = [
 ];
 
 const moveset = [
-  { key: "M1", videoSrc: "", poster: "", description: "Basic combo string, still being checked live." },
-  { key: "Z", videoSrc: "", poster: "", description: "Move animation and exact effect are still being checked live." },
-  { key: "X", videoSrc: "", poster: "", description: "Move animation and exact effect are still being checked live." },
-  { key: "C", videoSrc: "", poster: "", description: "Move animation and exact effect are still being checked live." },
-  { key: "V", videoSrc: "", poster: "", description: "Move animation and exact effect are still being checked live." },
-  { key: "F", videoSrc: "", poster: "", description: "Any finisher, mastery move, or special route is still being checked live." },
+  { key: "M1", videoSrc: "/uploads/anti-magic-m1.webm", poster: "", description: "Basic combo string, still being checked live." },
+  { key: "Z", videoSrc: "/uploads/anti-magic-z.webm", poster: "", description: "No description provided." },
+  { key: "X", videoSrc: "/uploads/anti-magic-x.webm", poster: "", description: "No description provided." },
+  { key: "C", videoSrc: "/uploads/anti-magic-c.webm", poster: "", description: "No description provided." },
+  { key: "V", videoSrc: "/uploads/anti-magic-v.webm", poster: "", description: "No description provided." },
+  { key: "F", videoSrc: "/uploads/anti-magic-f.webm", poster: "", description: "No description provided." },
 ];
 
 const routeDetails = [
