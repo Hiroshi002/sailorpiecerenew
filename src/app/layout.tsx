@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
 import { Inter, Josefin_Sans } from "next/font/google";
 import "./globals.css";
-import MouseGlow from "./MouseGlow";
-import Particles from "./Particles";
 import LoadingScreen from "./LoadingScreen";
+import VisualEffects from "./VisualEffects";
 
 const inter = Inter({ 
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
 });
 
 const josefin = Josefin_Sans({
   subsets: ["latin"],
   variable: "--font-josefin",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -31,8 +32,7 @@ export default function RootLayout({
         <div className="bg-vignette" />
         <div className="bg-glow" />
         <LoadingScreen />
-        <MouseGlow />
-        <Particles />
+        <VisualEffects />
         {children}
       </body>
     </html>

@@ -5,181 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Footer from "@/components/Footer";
 import { Search, Code, Globe, BookOpen } from "lucide-react";
-
-// Localization Dictionaries
-const DICT = {
-  th: {
-    searchPlaceholder: "ค้นหาวิกิ...",
-    subtitle: "ปลดปล่อยพลังแห่งท้องทะเล",
-    home: "หน้าแรก",
-    codes: "โค้ดล่าสุด",
-    guideHub: "ศูนย์รวมคู่มือฉบับแฟนเมด",
-    ignited: "ทะยานสู่จุดสูงสุด",
-    heroDesc: "วิกิเกม Sailor Piece ฉบับรวมคู่มือสมบูรณ์แบบ แนะนำแนวทางการเล่นแบบเจาะลึก ทั้งไกด์สำหรับมุ่งหน้าไป Sea 2, เส้นทางหาชิ้นส่วน Ancient Fragments, และแนวทางการคราฟอาวุธสุดโกงอย่าง Great Mage หรือ Cosmic Garou!",
-    stats: {
-      pages: "หน้าข้อมูล",
-      categories: "หมวดหมู่",
-      searchable: "คำค้นหา",
-      updated: "อัปเดตล่าสุด"
-    },
-    date: "27 เม.ย. 2026",
-    qaSubtitle: "หน้ายอดฮิตช่วงท้ายเกม",
-    qaTitle: "เมนูลัด",
-    qaDesc: "เข้าถึงหน้าข้อมูลอาวุธและสไตล์การต่อสู้ระดับท็อปเทียร์ด้วยคลิกเดียว",
-    navTitle: "หมวดหมู่ทั้งหมด",
-    navDesc: "เจาะลึกทุกระบบสายการเล่น ไอเทมดรอปบอส และแผนที่จุดฟาร์ม",
-    browseTitle: "เริ่มใช้งานวิกิ",
-    aboutTitle: "เกี่ยวกับวิกินี้",
-    fastAccess: "เนื้อหาที่น่าสนใจ",
-    quickItems: [
-      { id: "anti", title: "Anti Magic", cat: "ดาบ / ระดับ S+", img: "/images/hero/antimagic.webp", href: "/entries/anti-magic/" },
-      { id: "atomic", title: "Atomic", cat: "ดาบ / ระดับ S+", img: "/images/icons/weapon-atomic.webp", href: "/entries/atomic/" },
-      { id: "great", title: "Great Mage", cat: "ดาบ / ระดับ S+", img: "/images/icons/weapon-greatmage.webp", href: "/entries/great-mage-style/" },
-      { id: "dragon", title: "Dragon Goddess", cat: "ดาบ / ระดับ S+", img: "/images/icons/weapon-dragongoddess.webp", href: "/entries/dragon-goddess/" },
-      { id: "cosmic", title: "Cosmic Being", cat: "สไตล์ต่อสู้ / ระดับ S+", img: "/images/icons/melee-cosmicbeing.webp", href: "/entries/cosmic-being-style/" },
-      { id: "theworld", title: "The World", cat: "สไตล์ต่อสู้ / ระดับ S+", img: "/images/icons/melee-theworld.webp", href: "/entries/the-world-style/" },
-    ],
-    navItems: [
-      { label: "Sea 2", href: "/entries/sea-2" },
-      { label: "หมัด", href: "/entries/combat-style" },
-      { label: "ดาบ", href: "/entries/weapons-overview" },
-      { label: "ผลปีศาจ", href: "/entries/fruits-overview" },
-      { label: "เผ่าพันธุ์", href: "/entries/races-overview" },
-      { label: "Traits", href: "/entries/traits-overview" },
-      { label: "แคลน", href: "/entries/clans-overview" },
-      { label: "พลัง", href: "/entries/powers-overview" },
-      { label: "อาร์ติแฟกต์", href: "/entries/artifacts-overview" },
-      { label: "เครื่องประดับ", href: "/entries/accessories-overview" },
-      { label: "คอสเมติก", href: "/entries/cosmetics-overview" },
-      { label: "บิลด์อาวุธ", href: "/entries/best-builds-overview" },
-      { label: "วัสดุคราฟต์", href: "/entries/materials-overview" },
-      { label: "รูน (Runes)", href: "/entries/runes-overview" },
-      { label: "ฉายา", href: "/entries/titles-overview" },
-      { label: "พาสซีฟ", href: "/entries/spec-passives" },
-      { label: "Enchantments", href: "/entries/enchanting-accessories" },
-      { label: "ออร่า", href: "/entries/auras-overview" },
-      { label: "สายเลือด", href: "/entries/bloodlines-system" },
-      { label: "เรลิก", href: "/entries/relics-overview" },
-      { label: "ตารางเทรด", href: "/entries/trade-values" },
-      { label: "โค้ดทั้งหมด", href: "/entries/codes-overview" },
-      { label: "ฮาคิ", href: "/entries/haki-overview" },
-      { label: "บอส", href: "/entries/bosses-guide" },
-      { label: "กิลด์", href: "/entries/guilds-overview" },
-      { label: "Boss Rush", href: "/entries/boss-rush" },
-      { label: "กันคริลตัล (Crystal Defense)", href: "/entries/crystal-defense" },
-      { label: "หอคอย", href: "/entries/infinite-tower" },
-      { label: "ผังสกิล", href: "/entries/skill-tree" },
-      { label: "ดันเจี้ยน", href: "/entries/dungeons-overview" },
-      { label: "พรบารมี", href: "/entries/blessings-system" },
-      { label: "เส้นทางผู้เล่น", href: "/entries/progression-guide" }
-    ],
-    browseItems: [
-      { title: "สารบัญวิกิ", desc: "รวมหน้าเพจและหมวดหมู่ทั้งหมดที่คุณค้นหาได้ในที่เดียว ง่ายต่อการเข้าถึง", href: "/directory" },
-      { title: "แผนที่และเกาะทั้งหมด", desc: "ดูจุดเกิดของบอส, เควสต์, NPC, และจุดอัปเกรดในแต่ละเกาะแบบเจาะลึก", href: "/islands" },
-      { title: "คู่มือลง Sea 2", desc: "เส้นทางการหา Ancient Fragments, จุดเกิดสัตว์ทะเล, และการเดินทางไปโลกสองแบบละเอียดยิบ", href: "/sea-2" },
-      { title: "ลิงก์เว็บหลัก", desc: "กดไปหน้าเกมเพจ Roblox หลัก, ดิสคอร์ดพูดคุย, และอัปเดตแบบเรียลไทม์", href: "/entries/official-links" },
-      { title: "ระบบคำนวณ", desc: "ศูนย์รวมเครื่องมือคำนวณดาเมจ, วิเคราะห์พาสซีฟและบิลด์อาวุธที่เหมาะกับคุณ", href: "/calculator" },
-      { title: "เครื่องมือเช็คความคืบหน้า", desc: "บันทึกความคืบหน้าหอคอยอนันต์, Skill Tree, และสถานะเลเวลของคุณเอง", href: "/progress-trackers" },
-      { title: "เกี่ยวกับวิกินี้", desc: "ทำความรู้จักกับที่มาของวิกิ, การตรวจสอบข้อมูล, และทีมนักพัฒนาแฟนเมด", href: "/about" }
-    ],
-    about1: {
-      tag: "ข้อมูลในบล็อกนี้มีอะไรบ้าง?",
-      title: "เจาะลึกระบบสเตตัส, คู่มือการฟาร์มบอส, และข้อมูลสาย End-game",
-      desc: "วิกินี้ถูกทำขึ้นเพื่ออธิบายและวิเคราะห์ระบบของเกาะต่างๆ ระดับความยาก การผสมไอเทม เพื่อลดปัญหาการเดินหลงทางสำหรับผู้เล่นใหม่และช่วยแนะนำของฟาร์มในช่วงท้ายเกม ไม่ต้องงมข้อมูลเองอีกต่อไป"
-    },
-    about2: {
-      tag: "ออกแบบมาสำหรับทุกคน",
-      title: "รองรับมือถือ แท็บเล็ต อ่านง่าย ไว้วางแผนการฟาร์มล่วงหน้า",
-      desc: "ช่องค้นหา หรือ Search หมวดหมู่ด้านบน จะช่วยดึงคุณเข้าสู่บทหน้าคู่มือหรือหน้าเนื้อหาได้อย่างรวดเร็ว ในหน้าคู่มือต่างๆ ยังมีการระบุจุดเชื่อมต่อไปยังวัสดุหรือชิ้นส่วนประกอบไอเทมอีกด้วย!"
-    }
-  },
-  en: {
-    searchPlaceholder: "Search entries...",
-    subtitle: "Unleash the Grand Sea",
-    home: "Home",
-    codes: "Active Codes",
-    guideHub: "Fan-made Guide Hub",
-    ignited: "Ignited",
-    heroDesc: "Fan-made Sailor Piece wiki with Sea 2 guides, Ancient Fragments routes, Great Mage and Cosmic Garou update coverage, sea beast farming, builds, boss routes, and unlock requirements.",
-    stats: {
-      pages: "Content Pages",
-      categories: "Categories",
-      searchable: "Searchable",
-      updated: "Last Updated"
-    },
-    date: "27 Apr 2026",
-    qaSubtitle: "Popular Endgame Pages",
-    qaTitle: "Quick Access",
-    qaDesc: "Open the most-visited late-game weapon and fighting style pages in one click.",
-    navTitle: "Navigation Hub",
-    navDesc: "Explore all categories and systems within Sailor Piece.",
-    browseTitle: "Browse the Wiki",
-    aboutTitle: "About This Wiki",
-    fastAccess: "S+ TIER",
-    quickItems: [
-      { id: "anti", title: "Anti Magic", cat: "Weapons / S+ Tier", img: "/images/hero/antimagic.webp", href: "/entries/anti-magic/" },
-      { id: "atomic", title: "Atomic", cat: "Weapons / S+ Tier", img: "/images/icons/weapon-atomic.webp", href: "/entries/atomic/" },
-      { id: "great", title: "Great Mage", cat: "Weapons / S+ Tier", img: "/images/icons/weapon-greatmage.webp", href: "/entries/great-mage-style/" },
-      { id: "dragon", title: "Dragon Goddess", cat: "Weapons / S+ Tier", img: "/images/icons/weapon-dragongoddess.webp", href: "/entries/dragon-goddess/" },
-      { id: "cosmic", title: "Cosmic Being", cat: "Melee / S+ Tier", img: "/images/icons/melee-cosmicbeing.webp", href: "/entries/cosmic-being-style/" },
-      { id: "theworld", title: "The World", cat: "Melee / S+ Tier", img: "/images/icons/melee-theworld.webp", href: "/entries/the-world-style/" },
-    ],
-    navItems: [
-      { label: "Sea 2", href: "/sea-2" },
-      { label: "Melees", href: "/melees" },
-      { label: "Weapons", href: "/weapons" },
-      { label: "Fruits", href: "/entries/powers-overview" },
-      { label: "Races", href: "/entries/races-overview" },
-      { label: "Traits", href: "/entries/traits-overview" },
-      { label: "Clans", href: "/entries/clans-overview" },
-      { label: "Powers", href: "/entries/powers-overview" },
-      { label: "Artifacts", href: "/entries/artifacts-overview" },
-      { label: "Accessories", href: "/entries/accessories-overview" },
-      { label: "Cosmetics", href: "/entries/cosmetics-overview" },
-      { label: "Builds", href: "/entries/best-builds-overview" },
-      { label: "Materials", href: "/entries/materials-overview" },
-      { label: "Runes", href: "/entries/runes-overview" },
-      { label: "Titles", href: "/entries/titles-overview" },
-      { label: "Spec Passives", href: "/entries/spec-passives" },
-      { label: "Enchantments", href: "/entries/enchanting-accessories" },
-      { label: "Auras", href: "/entries/auras-overview" },
-      { label: "Bloodlines", href: "/entries/bloodlines-system" },
-      { label: "Relics", href: "/entries/relics-overview" },
-      { label: "Trade Values", href: "/entries/trade-values" },
-      { label: "Codes", href: "/entries/codes-overview" },
-      { label: "Haki", href: "/entries/haki-overview" },
-      { label: "Bosses", href: "/entries/bosses-guide" },
-      { label: "Guilds", href: "/entries/guilds-overview" },
-      { label: "Boss Rush", href: "/entries/boss-rush" },
-      { label: "Crystal Defense", href: "/entries/crystal-defense" },
-      { label: "Infinite Tower", href: "/entries/infinite-tower" },
-      { label: "Skill Tree", href: "/entries/skill-tree" },
-      { label: "Dungeons", href: "/entries/dungeons-overview" },
-      { label: "Blessings", href: "/entries/blessings-system" },
-      { label: "Progression", href: "/entries/progression-guide" }
-    ],
-    browseItems: [
-      { title: "Wiki Directory", desc: "Browse every category hub, overview page, and published entry from one clean index.", href: "/directory" },
-      { title: "All Islands and Map", desc: "Open the interactive island hub for NPCs, bosses, progression stage, and related pages.", href: "/islands" },
-      { title: "Sea 2 Guide", desc: "Open the Ancient Fragments Sea 2 locations guide for Lost Fragments, Cartographer access, Sea 2 islands, sea beasts, and the new update rollout.", href: "/sea-2" },
-      { title: "Official Links", desc: "Jump straight to the Roblox game page, Discord, Trello, and current trading tools.", href: "/official-links" },
-      { title: "Sailor Piece Calculator", desc: "Open the tool hub for power compares, passive compares, and the build planner.", href: "/calculator" },
-      { title: "Progress Trackers", desc: "Track Boss Rush, Infinite Tower, Crystal Defense, Skill Tree, and your long-term endgame account checklist.", href: "/progress-trackers" },
-      { title: "About This Wiki", desc: "See what the site covers, how pages are checked, and how the project is structured.", href: "/about" },
-      { title: "Recent Changes", desc: "Open the changelog to see the newest page updates, corrections, and feature additions.", href: "/changelog" }
-    ],
-    about1: {
-      tag: "What You Can Find Here",
-      title: "Progression, Systems, and Endgame Help",
-      desc: "This wiki covers Sailor Piece progression, items, bosses, materials, and late-game systems. Everything is split into focused guides so you can find what you need quickly without digging through one giant page."
-    },
-    about2: {
-      tag: "How Players Use It",
-      title: "Find Pages Fast and Plan Ahead",
-      desc: "Use search when you already know the item or route you want, or browse categories when you want to compare options. Many pages also link directly to the materials, bosses, and upgrades connected to them."
-    }
-  }
-};
+import { DICT } from "@/lib/dictionaries";
 
 export default function Home() {
   const [lang, setLang] = useState<"th" | "en">("en");
@@ -277,7 +103,16 @@ export default function Home() {
         {/* Hero Section */}
         <section className="w-full max-w-[1400px] px-4 sm:px-6 mt-8 sm:mt-16 z-10 relative">
           <div className="panel-action clip-diagonal p-8 sm:p-12 lg:p-20 relative overflow-hidden flex flex-col md:flex-row gap-8 lg:gap-12 items-center">
-            <div className="absolute top-0 right-0 w-full md:w-3/5 h-1/2 md:h-full bg-[url('/images/hero/hero-bg.jpg')] bg-cover bg-center md:bg-left-top mix-blend-luminosity brightness-[0.6] md:brightness-75" style={{ WebkitMaskImage: "linear-gradient(to right, transparent, black 60%)" }}></div>
+            <div className="absolute top-0 right-0 w-full md:w-3/5 h-1/2 md:h-full mix-blend-luminosity brightness-[0.6] md:brightness-75" style={{ WebkitMaskImage: "linear-gradient(to right, transparent, black 60%)" }}>
+              <Image 
+                src="/images/hero/hero-bg.jpg" 
+                alt="Hero Background" 
+                fill 
+                priority 
+                className="object-cover object-center md:object-left-top"
+                sizes="(max-width: 768px) 100vw, 60vw"
+              />
+            </div>
             <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[var(--bg-dark)] via-[var(--bg-dark)]/95 to-transparent pointer-events-none"></div>
             <div className="absolute -left-[10%] -top-[10%] md:-left-[20%] md:-top-[20%] w-[100%] md:w-[60%] h-[140%] bg-[var(--accent-red)] opacity-[0.03] md:opacity-5 blur-[80px] md:blur-[120px] pointer-events-none rounded-full"></div>
 
@@ -326,7 +161,14 @@ export default function Home() {
             {t.quickItems.map((item, i) => (
               <Link key={i} href={item.href} className="group panel-action clip-diagonal !p-0 flex flex-col relative overflow-hidden bg-gradient-to-b from-black to-[var(--bg-panel)]">
                 <div className="w-full h-40 sm:h-48 relative border-b-2 border-[var(--border-action)] bg-[#111]">
-                  <Image src={item.img} alt={item.title} fill className="object-cover opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 mix-blend-screen" />
+                  <Image 
+                    src={item.img} 
+                    alt={item.title} 
+                    fill 
+                    className="object-cover opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 mix-blend-screen" 
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    priority={i < 2}
+                  />
                   <div className="absolute top-4 sm:top-5 right-4 sm:right-5 bg-[var(--accent-red)] text-white font-black italic px-3 py-1 sm:px-4 sm:py-1 text-xs sm:text-sm clip-button border-2 border-[var(--accent-red)] drop-shadow-[0_0_10px_rgba(255,30,56,0.8)] z-10">
                     {t.fastAccess}
                   </div>
@@ -342,7 +184,7 @@ export default function Home() {
         </section>
 
         {/* Global Navigation Hub */}
-        <section className="w-full max-w-[1400px] px-4 sm:px-6 mt-16 sm:mt-20 z-10">
+        <section className="w-full max-w-[1400px] px-4 sm:px-6 mt-16 sm:mt-20 z-10" style={{ contentVisibility: "auto", containIntrinsicSize: "0 400px" }}>
           <div className="mb-6 sm:mb-8 pb-4 border-b-2 border-[var(--accent-red)] text-center md:text-left">
             <h2 className="text-3xl sm:text-4xl text-white text-kinetic text-shadow-red uppercase tracking-wide font-black">{t.navTitle}</h2>
             <p className="text-gray-400 font-medium text-sm sm:text-base mt-1">{t.navDesc}</p>
@@ -358,7 +200,7 @@ export default function Home() {
         </section>
 
         {/* Browse the Wiki & About */}
-        <section className="w-full max-w-[1400px] px-4 sm:px-6 mt-16 sm:mt-20 z-10 mb-16 sm:mb-24 flex flex-col lg:flex-row gap-10 sm:gap-12">
+        <section className="w-full max-w-[1400px] px-4 sm:px-6 mt-16 sm:mt-20 z-10 mb-16 sm:mb-24 flex flex-col lg:flex-row gap-10 sm:gap-12" style={{ contentVisibility: "auto", containIntrinsicSize: "0 600px" }}>
             
             <div className="flex-1">
                <div className="mb-6 sm:mb-8 pb-4 border-b-2 border-[var(--accent-gold)] text-center md:text-left">

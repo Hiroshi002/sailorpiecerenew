@@ -51,13 +51,13 @@ export default function Footer() {
           {/* Links Grid */}
           <nav className="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-20 w-full max-w-4xl mx-auto border-y border-[var(--border-subtle)] py-8">
             {footerLinks.map((link, i) => (
-              <a 
+              <Link 
                 key={i} 
                 href={link.href} 
                 className="text-xs font-black uppercase tracking-[0.2em] text-gray-400 hover:text-[var(--accent-gold)] transition-all transform hover:-translate-y-1 hover:scale-110"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
