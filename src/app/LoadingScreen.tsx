@@ -1,27 +1,47 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Compass } from "lucide-react";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function LoadingScreen() {
+  const { siteConfig } = useLanguage();
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
   const [fade, setFade] = useState(false);
 
   useEffect(() => {
+    // Check if page is already loaded
+    if (document.readyState === 'complete') {
+      setProgress(100);
+      setFade(true);
+      setTimeout(() => setLoading(false), 500);
+      return;
+    }
+
     const timer = setInterval(() => {
       setProgress((oldProgress) => {
         if (oldProgress >= 100) {
           clearInterval(timer);
           setFade(true);
-          setTimeout(() => setLoading(false), 800);
+          setTimeout(() => setLoading(false), 600);
           return 100;
         }
-        const diff = Math.random() * 15;
+        // Faster progress if it's taking too long
+        const diff = oldProgress > 80 ? Math.random() * 5 : Math.random() * 20;
         return Math.min(oldProgress + diff, 100);
       });
-    }, 120);
+    }, 100);
 
-    return () => clearInterval(timer);
+    const handleLoad = () => {
+      setProgress(100);
+    };
+
+    window.addEventListener('load', handleLoad);
+
+    return () => {
+      clearInterval(timer);
+      window.removeEventListener('load', handleLoad);
+    };
   }, []);
 
   if (!loading) return null;
@@ -45,7 +65,7 @@ export default function LoadingScreen() {
         
         {/* Title */}
         <h1 className="text-3xl sm:text-4xl tracking-[0.3em] font-black italic text-white uppercase mb-2 text-shadow-red animate-pulse">
-           Sailor Piece
+           {siteConfig.shortName || siteConfig.name}
         </h1>
         <div className="text-[10px] sm:text-xs text-[var(--accent-gold)] tracking-[0.5em] uppercase font-bold mb-10">
            Loading Archives

@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Sailor Piece Accessories | Stats, E10 Enchants, Best Pieces",
-  description: "Sailor Piece accessories guide with stats, obtainment routes, enchant ladders, and E0 to E10 comparison tables.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Sailor Piece Accessories | ${siteConfig.name}`,
+    description: "Sailor Piece accessories guide with stats, obtainment routes, enchant ladders, and E0 to E10 comparison tables.",
+    openGraph: {
+      title: `Sailor Piece Accessories | ${siteConfig.name}`,
+      description: "Sailor Piece accessories guide with stats, obtainment routes, enchant ladders, and E0 to E10 comparison tables.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Sailor Piece Accessories | ${siteConfig.name}`,
+      description: "Sailor Piece accessories guide with stats, obtainment routes, enchant ladders, and E0 to E10 comparison tables.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {
@@ -21,11 +40,72 @@ const metaItems = [
   },
   {
     "label": "Best current DPS pick",
-    "value": "Demon Wing"
+    "value": "Dual Outfit"
   },
   {
     "label": "Best shop piece",
-    "value": "Clover Outfit"
+    "value": "Dual Outfit (Raid Shop)"
+  }
+];
+
+const facts = [
+  "Accessories are separate from cosmetics and auras and usually come from bosses, shops, or special quest rewards.",
+  "Most strong accessories add a mix of defense, damage, and damage reduction.",
+  "Late-game accessories matter even more because they can be enchanted at Shibuya Station.",
+  "Crystal Defense now adds Demon Wing as a boss-drop accessory and Clover Outfit as a Crystal Coin shop accessory on Punch Island.",
+  "The current update adds Dual Outfit, Sun Outfit, and Spirit Outfit as newly captured outfit accessories with E0 and E10 stat lines."
+];
+
+const accessories = [
+  {
+    name: "Dual Outfit",
+    rarity: "Mythical",
+    stats: "130% Defense, 110% Damage, 15% Damage Reduction",
+    source: "Raid Shop for 500 Raid Coins; Minotaur Raid direct drop",
+    color: "text-red-400"
+  },
+  {
+    name: "Sun Outfit",
+    rarity: "Mythical",
+    stats: "125% Defense, 105% Damage, 15% Damage Reduction",
+    source: "Sun God world boss on Slayer Island",
+    color: "text-red-400"
+  },
+  {
+    name: "Demon Wing",
+    rarity: "Mythical",
+    stats: "125% Defense, 102% Damage, 15% Damage Reduction",
+    source: "Crystal Defense boss every 5 waves",
+    color: "text-red-400"
+  },
+  {
+    name: "Spirit Outfit",
+    rarity: "Mythical",
+    stats: "120% Defense, 100% Damage, 15% Damage Reduction",
+    source: "Spirit Warrior/Goku boss on Blue Planet",
+    color: "text-red-400"
+  }
+];
+
+const enchantComparison = [
+  { name: "Dual Outfit", e0: "130/110/15", e10: "180/150/35" },
+  { name: "Sun Outfit", e0: "125/105/15", e10: "175/145/35" },
+  { name: "Demon Wing", e0: "125/102/15", e10: "175/142/35" },
+  { name: "Spirit Outfit", e0: "120/100/15", e10: "170/140/35" }
+];
+
+const faq = [
+  {
+    question: "What do accessories do in Sailor Piece?",
+    answer: "Accessories add major offensive and defensive stats and become much stronger when enchanted from E0 to E10."
+  },
+  {
+    question: "Does the accessories page compare different enchant levels?",
+    answer: "Yes. The accessories page includes comparison support so players can compare pieces at E0 through E10."
+  },
+  {
+    question: "What is the best accessory in Sailor Piece?",
+    answer: "The best accessory depends on the current build path, but Dual Outfit now leads the strongest captured broad stat line on the site at E10."
   }
 ];
 
@@ -123,10 +203,93 @@ export default function EntryPage() {
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
             <ul className="space-y-6">
-              
+              {facts.map((fact, i) => (
+                <li key={i} className="flex items-start gap-4 text-gray-300">
+                  <span className="mt-2 w-2 h-2 rounded-full bg-[var(--accent-red)] shrink-0 shadow-[0_0_8px_rgba(255,30,56,0.6)]" />
+                  <span className="text-lg leading-relaxed">{fact}</span>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
+
+        {/* Current Accessory List */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Current Accessory List</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-white/20 text-gray-400 font-mono text-sm uppercase">
+                    <th className="py-4 px-4">Accessory</th>
+                    <th className="py-4 px-4">Rarity</th>
+                    <th className="py-4 px-4">Stats</th>
+                    <th className="py-4 px-4">How to get</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  {accessories.map((acc, i) => (
+                    <tr key={i} className="hover:bg-white/5 transition-colors">
+                      <td className="py-3 px-4 font-bold text-white">{acc.name}</td>
+                      <td className="py-3 px-4">
+                        <span className={`px-2 py-0.5 rounded bg-red-500/20 text-red-400 text-xs font-bold uppercase`}>
+                          {acc.rarity}
+                        </span>
+                      </td>
+                      <td className="py-3 px-4 text-gray-300 text-sm">{acc.stats}</td>
+                      <td className="py-3 px-4 text-gray-400 text-xs">{acc.source}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        {/* Enchant Comparison */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Accessory Enchant Comparison (E0 vs E10)</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-white/20 text-gray-400 font-mono text-sm uppercase">
+                    <th className="py-4 px-4">Accessory</th>
+                    <th className="py-4 px-4 text-center text-blue-400">E0 (Base)</th>
+                    <th className="py-4 px-4 text-center text-[var(--accent-red)]">E10 (Max)</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  {enchantComparison.map((item, i) => (
+                    <tr key={i} className="hover:bg-white/5 transition-colors">
+                      <td className="py-3 px-4 font-bold text-white">{item.name}</td>
+                      <td className="py-3 px-4 text-center text-blue-300 font-mono">{item.e0}</td>
+                      <td className="py-3 px-4 text-center text-red-300 font-mono font-bold">{item.e10}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-4 text-xs text-gray-500 italic">* Format: Defense / Damage / Damage Reduction</p>
+          </div>
+        </div>
+
+        {/* FAQ Section */}
+        {faq.length > 0 && (
+          <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+            <div className="mb-4 relative z-10">
+              <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">FAQ</h2>
+              <div className="space-y-6">
+                {faq.map((item, i) => (
+                  <div key={i} className="bg-white/5 p-6 rounded-xl border border-white/10">
+                    <h3 className="text-lg font-bold text-[var(--accent-red)] mb-2 uppercase tracking-tight">{item.question}</h3>
+                    <p className="text-gray-300 leading-relaxed">{item.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Content Section: Route Details */}
         {routeDetails.length > 0 && (

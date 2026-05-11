@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Blessings System | Sailor Piece Wiki",
-  description: "Shibuya Station upgrade system for swords and specs, with shared B1 to B10 materials and stat gains.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Blessings System | ${siteConfig.name}`,
+    description: "Shibuya Station upgrade system for swords and specs, with shared B1 to B10 materials and stat gains.",
+    openGraph: {
+      title: `Blessings System | ${siteConfig.name}`,
+      description: "Shibuya Station upgrade system for swords and specs, with shared B1 to B10 materials and stat gains.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Blessings System | ${siteConfig.name}`,
+      description: "Shibuya Station upgrade system for swords and specs, with shared B1 to B10 materials and stat gains.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {
@@ -26,7 +45,47 @@ const metaItems = [
   {
     "label": "Max level",
     "value": "B10"
+  },
+  {
+    "label": "Total Dmg Buff",
+    "value": "+25%"
   }
+];
+
+const facts = [
+  "Blessings apply only to swords and fighting styles, not fruits or accessories.",
+  "Every sword and spec uses the same blessing ladder from B1 to B10.",
+  "A full B10 blessing adds +25% Damage, +5% Crit Chance, and +8% Crit Damage to that item.",
+  "If you swap weapons, the blessing remains on the original item; it does not transfer.",
+  "Adamantite is the main bottleneck for B6 to B10 upgrades."
+];
+
+const howToSteps = [
+  "Travel to Shibuya Station and go left from the portal.",
+  "Find the Blessing NPC standing near the buildings.",
+  "Equip the sword or spec you want to upgrade.",
+  "Interact with the NPC and provide the required materials."
+];
+
+const blessingLevels = [
+  { lv: "B1", mats: "25 Wood", buff: "+3% Damage" },
+  { lv: "B2", mats: "35 Wood, 10 Iron", buff: "+2% Damage" },
+  { lv: "B3", mats: "50 Wood, 20 Iron, 10 Obsidian", buff: "+3% Damage" },
+  { lv: "B4", mats: "75 Wood, 35 Iron, 20 Obsidian, 2 Mythril", buff: "+2% Damage" },
+  { lv: "B5", mats: "100 Wood, 50 Iron, 25 Obsidian, 10 Mythril", buff: "+3% Damage" },
+  { lv: "B6", mats: "125 Wood, 65 Iron, 35 Obsidian, 15 Mythril, 3 Adamantite", buff: "+2% Dmg, +1% Crit, +2% CD" },
+  { lv: "B7", mats: "150 Wood, 80 Iron, 50 Obsidian, 30 Mythril, 5 Adamantite", buff: "+3% Dmg, +1% Crit, +1% CD" },
+  { lv: "B8", mats: "175 Wood, 90 Iron, 65 Obsidian, 35 Mythril, 7 Adamantite", buff: "+2% Dmg, +1% Crit, +2% CD" },
+  { lv: "B9", mats: "200 Wood, 100 Iron, 75 Obsidian, 35 Mythril, 10 Adamantite", buff: "+3% Dmg, +1% Crit, +1% CD" },
+  { lv: "B10", mats: "250 Wood, 125 Iron, 85 Obsidian, 40 Mythril, 15 Adamantite", buff: "+2% Dmg, +1% Crit, +2% CD" }
+];
+
+const materialNotes = [
+  { mat: "Wood", source: "Any enemy (Starter Island+)" },
+  { mat: "Iron", source: "Jungle Island and above" },
+  { mat: "Obsidian", source: "Desert Island and above" },
+  { mat: "Mythril", source: "Desert Island and above" },
+  { mat: "Adamantite", source: "Snow, Shibuya, Hollow Island" }
 ];
 
 const moveset: any[] = [];
@@ -118,8 +177,72 @@ export default function EntryPage() {
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
             <ul className="space-y-6">
-              
+              {facts.map((fact, i) => (
+                <li key={i} className="flex items-start gap-4 text-gray-300 group/item transition-colors hover:text-white">
+                  <span className="mt-1.5 w-2 h-2 rounded-full bg-[var(--accent-red)] shadow-[0_0_10px_rgba(255,30,56,0.5)] shrink-0" />
+                  <span className="text-lg leading-relaxed">{fact}</span>
+                </li>
+              ))}
             </ul>
+          </div>
+        </div>
+
+        {/* How to Bless */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">How to Bless Items</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {howToSteps.map((step, i) => (
+                <div key={i} className="bg-black/40 border border-white/10 p-4 rounded-xl flex gap-4 items-center">
+                  <div className="w-8 h-8 rounded-full bg-[var(--accent-red)] flex items-center justify-center text-white font-black shrink-0 shadow-[0_0_10px_rgba(255,30,56,0.3)]">
+                    {i + 1}
+                  </div>
+                  <span className="text-gray-300 text-sm">{step}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Blessing Levels */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group border-2 border-orange-500/30">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4 text-orange-400">Blessing Ladder (B1-B10)</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-white/20 text-gray-400 font-mono text-xs uppercase">
+                    <th className="py-4 px-4">Level</th>
+                    <th className="py-4 px-4">Required Materials</th>
+                    <th className="py-4 px-4 text-right">Buff Gained</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  {blessingLevels.map((level, i) => (
+                    <tr key={i} className="hover:bg-white/5 transition-colors group/row text-sm">
+                      <td className="py-4 px-4 font-black text-[var(--accent-red)] uppercase">{level.lv}</td>
+                      <td className="py-4 px-4 text-gray-400 font-mono text-xs">{level.mats}</td>
+                      <td className="py-4 px-4 text-right font-bold text-white">{level.buff}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        {/* Material Farming */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Material Farming Notes</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+              {materialNotes.map((note, i) => (
+                <div key={i} className="bg-white/5 border border-white/10 p-4 rounded-xl">
+                  <div className="text-sm font-black text-white mb-1 uppercase">{note.mat}</div>
+                  <div className="text-[10px] text-gray-500 italic">{note.source}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

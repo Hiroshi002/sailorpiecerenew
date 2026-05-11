@@ -1,18 +1,31 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-export const metadata: Metadata = {
-  title: "About | Sailor Piece Wiki",
-  description: "What this fan-made Sailor Piece wiki is for and how the site is put together.",
-  icons: {
-    icon: [
-      { url: "/siteicon.png", sizes: "96x96", type: "image/png" },
-      { url: "/favicon.svg", type: "image/svg+xml" },
-    ],
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `About | ${siteConfig.name}`,
+    description: "What this fan-made Sailor Piece wiki is for and how the site is put together.",
+    openGraph: {
+      title: `About | ${siteConfig.name}`,
+      description: "What this fan-made Sailor Piece wiki is for and how the site is put together.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `About | ${siteConfig.name}`,
+      description: "What this fan-made Sailor Piece wiki is for and how the site is put together.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const facts = [
   "Sailor Piece Wiki is a fan-made community wiki built to help players find clear progression info without digging through scattered posts and guides.",
@@ -68,7 +81,6 @@ const faqItems = [
 export default function About() {
   return (
     <>
-      <div className="fixed inset-0 pointer-events-none z-50 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.3)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%] opacity-20" style={{ WebkitMaskImage: "linear-gradient(to bottom, black 70%, transparent)" }}></div>
       <main className="min-h-screen flex flex-col items-center justify-start pb-16 md:pb-24 border-l-2 md:border-l-4 border-r-2 md:border-r-4 border-[var(--accent-red)] mx-auto max-w-[1920px] shadow-[inset_0_0_40px_rgba(255,30,56,0.1)] md:shadow-[inset_0_0_80px_rgba(255,30,56,0.15)] relative font-sans">
         <Header />
 

@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Sailor Piece Materials | Guild Key, Dominion Brand, Relic Part Drop Chances",
-  description: "Sailor Piece materials guide with NPC material drop chances, including Guild Key drop chance, Dominion Brand drop chance, Relic Part drop chances, chest contents, and rare item sources.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Sailor Piece Materials | ${siteConfig.name}`,
+    description: "Sailor Piece materials guide with NPC material drop chances, including Guild Key drop chance, Dominion Brand drop chance, Relic Part drop chances, chest contents, and rare item sources.",
+    openGraph: {
+      title: `Sailor Piece Materials | ${siteConfig.name}`,
+      description: "Sailor Piece materials guide with NPC material drop chances, including Guild Key drop chance, Dominion Brand drop chance, Relic Part drop chances, chest contents, and rare item sources.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Sailor Piece Materials | ${siteConfig.name}`,
+      description: "Sailor Piece materials guide with NPC material drop chances, including Guild Key drop chance, Dominion Brand drop chance, Relic Part drop chances, chest contents, and rare item sources.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {
@@ -29,50 +48,91 @@ const metaItems = [
   }
 ];
 
-const moveset: any[] = [];
+const facts = [
+  "Most basic crafting materials come from normal mob farming, while the best upgrade materials are tied to bosses, dungeons, or endgame islands.",
+  "Boss materials usually matter twice: once for the base weapon or melee unlock, and again for later F move or evolution routes.",
+  "Power Shards, Passive Shards, Boss Keys, Dungeon Keys, and Tokens act like progression currencies even when they are listed as items.",
+  "Chest contents and chest reward odds listed on this page are treated as fixed base values and are not affected by luck.",
+  "This page also tracks the current Guild Key drop chance range, Dominion Brand drop chance, and Relic Part #1 to #8 drop chances from the published Sea 2 NPC routes.",
+  "Blue Planet Raid Shop prices are now captured in Raid Coins, including chests, rerolls, keys, Dual Outfit, Celestial Aura, Aura Crate, and Cosmetic Crate."
+];
 
-const routeDetails: any[] = [];
+const materialCategories = [
+  {
+    title: "Common and Uncommon Materials",
+    rarity: "common",
+    items: [
+      { name: "Wood", source: "Any enemy in the game", use: "Starter crafting and low-end recipes" },
+      { name: "Iron", source: "Jungle Island enemies and above", use: "Mid-game crafting routes" },
+      { name: "Obsidian", source: "Desert Island enemies and above", use: "Crafting and early blessing materials" },
+      { name: "Mythril", source: "Desert Island enemies and above", use: "Blessing your sword and higher-end crafting" },
+      { name: "Adamantite", source: "Snow/Hollow enemies (<1%)", use: "High-end melee upgrades and late-game recipes" }
+    ]
+  },
+  {
+    title: "Rare Materials",
+    rarity: "rare",
+    items: [
+      { name: "Energy Core", source: "Yuji Boss (25%)", use: "Yuji fighting style route" },
+      { name: "Heart", source: "Cupid Striker / Madoka Boss", use: "Madoka fighting style route" },
+      { name: "Broken Sword", source: "Sword enemies (0.335% - 4%)", use: "Divine Grail and Babylon Key routes" },
+      { name: "Worthiness Fragment", source: "Hollow enemies (1.23%)", use: "Manipulator Sword questline" }
+    ]
+  },
+  {
+    title: "Epic Materials",
+    rarity: "epic",
+    items: [
+      { name: "Abyss Edge", source: "Solo Hunter / Jinwoo (17.5%)", use: "Base Jinwoo sword unlock" },
+      { name: "Void Fragment", source: "Gojo Boss (20%)", use: "Gojo fighting style and ascension" },
+      { name: "Cursed Finger", source: "Sukuna Boss (20%)", use: "Sukuna fighting style" },
+      { name: "Awakened Cursed Finger", source: "Strongest in History (15-25%)", use: "Sukuna evolution route" },
+      { name: "Battle Shard", source: "Ice Queen Boss (16%)", use: "Ice Queen sword purchase" },
+      { name: "Flash Impact", source: "Yuji Boss (9%)", use: "Yuji fighting style" },
+      { name: "Sage Pulse", source: "Rimuru Boss (13.5-22.5%)", use: "Rimuru sword route" },
+      { name: "Mirage Pendant", source: "Aizen Boss (20%)", use: "Manipulator Sword purchase" },
+      { name: "Magic Shard", source: "Atomic Boss (8.75-12.5%)", use: "Atomic sword evolution" },
+      { name: "Demon Remnant", source: "Moon Slayer Boss (8.91%)", use: "Moon Slayer style unlock" }
+    ]
+  },
+  {
+    title: "Progression & Currencies",
+    rarity: "legendary",
+    items: [
+      { name: "Power Shard", source: "All NPC mobs", use: "Power rerolls on Lawless Island" },
+      { name: "Boss Key", source: "Quest NPC rewards", use: "Summoning bosses on Boss Island" },
+      { name: "Dungeon Key", source: "Boss and chest drops", use: "Entering dungeons" },
+      { name: "Boss Ticket", source: "Defeated bosses", use: "Boss Ticket Exchange shop" },
+      { name: "Raid Coin", source: "Raid clears", use: "Raid Shop (Blue Planet)" }
+    ]
+  }
+];
 
 const relatedPages = [
   {
     "href": "/entries/weapons-overview/index",
     "title": "Weapons and Swords",
-    "summary": "Current sword roster and progression routes, from starter sellers to late-game upgrade chains and shared upgrade systems."
+    "summary": "Current sword roster and progression routes, from starter sellers to late-game upgrade chains."
   },
   {
     "href": "/entries/specs-overview/index",
     "title": "Melees and Fighting Styles",
-    "summary": "Current melee roster in Sailor Piece and the shared way fighting styles scale into late-game content."
+    "summary": "Current melee roster in Sailor Piece and the shared way fighting styles scale."
   },
   {
     "href": "/entries/blessings-system/index",
     "title": "Blessings System",
-    "summary": "Shibuya Station upgrade system for swords and specs, with shared B1 to B10 materials and stat gains."
+    "summary": "Shibuya Station upgrade system for swords and specs."
   },
   {
     "href": "/entries/spec-passives-overview/index",
     "title": "Spec Passives",
-    "summary": "Judgement Island passive system that adds a rerolled buff layer onto your swords and fighting styles."
+    "summary": "Judgement Island passive system that adds a rerolled buff layer."
   },
   {
-    "href": "/entries/normal-enemy-drop-charts/index",
-    "title": "Normal Enemy Drop Charts",
-    "summary": "Published normal-enemy drop tables for rerolls, chests, keys, and newer Sea 2 route materials, including Guild Key drop chance, Dominion Brand drop chance, and Relic Part drop chances, organized into readable charts instead of one giant screenshot dump."
-  },
-  {
-    "href": "/entries/haki-guide/index",
-    "title": "Haki",
-    "summary": "Armament, Observation, and Conqueror Haki effects, scaling, trainer locations, unlock routes, leveling, and Haki color rerolls."
-  },
-  {
-    "href": "/entries/boss-rush/index",
-    "title": "Boss Rush",
-    "summary": "Sailor Island boss gauntlet with 15 waves, Rush Keys, Rush Coins, Escanor drops, and permanent Rush upgrades."
-  },
-  {
-    "href": "/entries/infinite-tower/index",
-    "title": "Infinite Tower",
-    "summary": "Tower Island endgame mode with scaling floors, stacking debuffs, direct floor rewards, Tower Tokens, and a backup shop."
+    "href": "/entries/runes-overview/index",
+    "title": "Runes",
+    "summary": "Rune Dungeon and Infinite Tower rune system, leveling, and strongest routes."
   }
 ];
 
@@ -142,58 +202,51 @@ export default function EntryPage() {
           
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
-            <ul className="space-y-6">
-              
+            <ul className="space-y-4">
+              {facts.map((fact, i) => (
+                <li key={i} className="flex items-start gap-3 text-gray-300">
+                  <span className="mt-1.5 w-2 h-2 rounded-full bg-[var(--accent-red)] shrink-0 shadow-[0_0_10px_rgba(255,30,56,0.5)]" />
+                  <span>{fact}</span>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
-        {/* Content Section: Route Details */}
-        {routeDetails.length > 0 && (
-          <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
-            <div className="mb-4 relative z-10">
-              <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Route Details</h2>
+        {/* Material Categories */}
+        <div className="space-y-10 mb-12">
+          {materialCategories.map((category, i) => (
+            <div key={i} className="panel-action clip-diagonal p-8 relative overflow-hidden group">
+              <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4 flex items-center gap-4">
+                {category.title}
+                <span className={`text-[10px] px-2 py-0.5 rounded border border-white/10 font-mono uppercase tracking-widest rarity-${category.rarity}`}>
+                  {category.rarity}
+                </span>
+              </h2>
               
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                   <thead>
                     <tr className="border-b border-white/20 text-gray-400 font-mono text-sm uppercase">
-                      <th className="py-4 px-4">Field</th>
-                      <th className="py-4 px-4">Details</th>
+                      <th className="py-4 px-4">Material</th>
+                      <th className="py-4 px-4">Farming Source</th>
+                      <th className="py-4 px-4">Use Case</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-white/5">
-                    {routeDetails.map((row, i) => (
-                      <tr key={i} className="hover:bg-white/5 transition-colors">
-                        <td className="py-3 px-4 font-semibold text-blue-400">{row.field}</td>
-                        <td className="py-3 px-4 text-white">
-                          {row.link ? (
-                            <Link href={row.link} className="text-blue-300 hover:text-blue-200 underline decoration-white/30 underline-offset-4">{row.details}</Link>
-                          ) : row.details}
-                        </td>
+                    {category.items.map((item, j) => (
+                      <tr key={j} className="hover:bg-white/5 transition-colors">
+                        <td className="py-4 px-4 font-bold text-white">{item.name}</td>
+                        <td className="py-4 px-4 text-[var(--accent-red)] text-sm font-semibold">{item.source}</td>
+                        <td className="py-4 px-4 text-gray-400 text-sm italic">{item.use}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
             </div>
-          </div>
-        )}
-
-        {/* Content Section: Moveset */}
-        {moveset.length > 0 && (
-          <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
-            <div className="mb-4 relative z-10">
-              <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Moveset</h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {moveset.map((move, i) => (
-                  <VideoMovesetCard key={i} move={move} />
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
+          ))}
+        </div>
         
         {/* Related Pages */}
         {relatedPages.length > 0 && (

@@ -1,4 +1,5 @@
 "use client";
+import { getSiteConfig } from "@/config/site";
 import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -50,7 +51,7 @@ export default function Contact() {
                   <div>
                     <h3 className="font-black text-white text-kinetic tracking-wider text-sm sm:text-base mb-1 group-hover:text-[var(--accent-gold)] transition-colors">Discord Support</h3>
                     <p className="text-gray-400 text-xs sm:text-sm mb-4">Message our lead editor directly on Discord.</p>
-                    <code className="bg-black border border-[var(--border-action)] px-4 py-2 clip-button text-[var(--accent-red)] font-black text-xs shadow-[0_0_10px_rgba(255,30,56,0.3)]">@awesomedu</code>
+                    <code className="bg-black border border-[var(--border-action)] px-4 py-2 clip-button text-[var(--accent-red)] font-black text-xs shadow-[0_0_10px_rgba(255,30,56,0.3)]">@marain0240</code>
                   </div>
                 </div>
 
@@ -62,7 +63,8 @@ export default function Contact() {
                     <h3 className="font-black text-white text-kinetic tracking-wider text-sm sm:text-base mb-1 group-hover:text-[var(--accent-gold)] transition-colors">Community Server</h3>
                     <p className="text-gray-400 text-xs sm:text-sm mb-4">Join our Discord community for real-time help.</p>
                     <a href="https://discord.gg/WPyCztYAJv" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-gold)] font-black text-xs hover:underline tracking-widest break-all">
-                      DISCORD.GG/WPYCZTYAJV
+                      {/* DISCORD.GG/WPYCZTYAJV */}
+                      COMIMG SOON
                     </a>
                   </div>
                 </div>

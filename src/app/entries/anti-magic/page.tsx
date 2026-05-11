@@ -4,32 +4,30 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
+import { getSiteConfig } from "@/config/site";
 
-export const metadata: Metadata = {
-  title: "Anti Magic | Sailor Piece New Sword Page",
-  description: "Anti Magic Sailor Piece guide with the Asta alias, Crystal Defense route, 1 Crystal Key entry, the 5,000 Crystal Coin shop fallback, and the estimated 100%-luck drop range.",
-  icons: {
-    icon: [
-      { url: "/siteicon.png", sizes: "96x96", type: "image/png" },
-      { url: "/favicon.svg", type: "image/svg+xml" },
-    ],
-  },
-  openGraph: {
-    title: "Anti Magic | Sailor Piece New Sword Page",
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Anti Magic | ${siteConfig.name}`,
     description: "Anti Magic Sailor Piece guide with the Asta alias, Crystal Defense route, 1 Crystal Key entry, the 5,000 Crystal Coin shop fallback, and the estimated 100%-luck drop range.",
-    url: "https://sailorpiecewiki.com/entries/anti-magic",
-    siteName: "Sailor Piece Wiki",
-    images: [{ url: "/images/site/sailorpiece-wiki-cover-v2.webp", width: 1200, height: 630, alt: "Sailor Piece Wiki branded cover image using the live game thumbnail" }],
-    locale: "en_US",
-    type: "article",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Anti Magic | Sailor Piece New Sword Page",
-    description: "Anti Magic Sailor Piece guide with the Asta alias, Crystal Defense route, 1 Crystal Key entry, the 5,000 Crystal Coin shop fallback, and the estimated 100%-luck drop range.",
-    images: ["/images/site/sailorpiece-wiki-cover-v2.webp"],
-  },
-};
+    openGraph: {
+      title: `Anti Magic | ${siteConfig.name}`,
+      description: "Anti Magic Sailor Piece guide with the Asta alias, Crystal Defense route, 1 Crystal Key entry, the 5,000 Crystal Coin shop fallback, and the estimated 100%-luck drop range.",
+      url: `${siteConfig.url}/entries/anti-magic`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "en_US",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Anti Magic | ${siteConfig.name}`,
+      description: "Anti Magic Sailor Piece guide with the Asta alias, Crystal Defense route, 1 Crystal Key entry, the 5,000 Crystal Coin shop fallback, and the estimated 100%-luck drop range.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   { label: "Mode", value: "Crystal Defense" },
@@ -69,12 +67,6 @@ export default function AntiMagic() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-start pb-16 md:pb-24 border-l-2 md:border-l-4 border-r-2 md:border-r-4 border-[var(--accent-red)] mx-auto max-w-[1920px] shadow-[inset_0_0_40px_rgba(255,30,56,0.1)] md:shadow-[inset_0_0_80px_rgba(255,30,56,0.15)] relative font-sans bg-slate-950">
       
-      {/* GLOBAL BACKGROUND ELEMENTS */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute inset-0 bg-vignette opacity-80" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,30,56,0.1),transparent_70%)]" />
-      </div>
-
       <Header />
 
       <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10 block">

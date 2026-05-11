@@ -1,173 +1,278 @@
-// Localization Dictionaries for Home Page
-export const DICT = {
-  th: {
-    searchPlaceholder: "ค้นหาวิกิ...",
-    subtitle: "ปลดปล่อยพลังแห่งท้องทะเล",
-    home: "หน้าแรก",
-    codes: "โค้ดล่าสุด",
-    guideHub: "ศูนย์รวมคู่มือฉบับแฟนเมด",
-    ignited: "ทะยานสู่จุดสูงสุด",
-    heroDesc: "วิกิเกม Sailor Piece ฉบับรวมคู่มือสมบูรณ์แบบ แนะนำแนวทางการเล่นแบบเจาะลึก ทั้งไกด์สำหรับมุ่งหน้าไป Sea 2, เส้นทางหาชิ้นส่วน Ancient Fragments, และแนวทางการคราฟอาวุธสุดโกงอย่าง Great Mage หรือ Cosmic Garou!",
-    stats: {
-      pages: "หน้าข้อมูล",
-      categories: "หมวดหมู่",
-      searchable: "คำค้นหา",
-      updated: "อัปเดตล่าสุด"
-    },
-    date: "27 เม.ย. 2026",
-    qaSubtitle: "หน้ายอดฮิตช่วงท้ายเกม",
-    qaTitle: "เมนูลัด",
-    qaDesc: "เข้าถึงหน้าข้อมูลอาวุธและสไตล์การต่อสู้ระดับท็อปเทียร์ด้วยคลิกเดียว",
-    navTitle: "หมวดหมู่ทั้งหมด",
-    navDesc: "เจาะลึกทุกระบบสายการเล่น ไอเทมดรอปบอส และแผนที่จุดฟาร์ม",
-    browseTitle: "เริ่มใช้งานวิกิ",
-    aboutTitle: "เกี่ยวกับวิกินี้",
-    fastAccess: "เนื้อหาที่น่าสนใจ",
-    quickItems: [
-      { id: "anti", title: "Anti Magic", cat: "ดาบ / ระดับ S+", img: "/images/hero/antimagic.webp", href: "/entries/anti-magic/" },
-      { id: "atomic", title: "Atomic", cat: "ดาบ / ระดับ S+", img: "/images/icons/weapon-atomic.webp", href: "/entries/atomic/" },
-      { id: "great", title: "Great Mage", cat: "ดาบ / ระดับ S+", img: "/images/icons/weapon-greatmage.webp", href: "/entries/great-mage-style/" },
-      { id: "dragon", title: "Dragon Goddess", cat: "ดาบ / ระดับ S+", img: "/images/icons/weapon-dragongoddess.webp", href: "/entries/dragon-goddess/" },
-      { id: "cosmic", title: "Cosmic Being", cat: "สไตล์ต่อสู้ / ระดับ S+", img: "/images/icons/melee-cosmicbeing.webp", href: "/entries/cosmic-being-style/" },
-      { id: "theworld", title: "The World", cat: "สไตล์ต่อสู้ / ระดับ S+", img: "/images/icons/melee-theworld.webp", href: "/entries/the-world-style/" },
-    ],
-    navItems: [
-      { label: "Sea 2", href: "/entries/sea-2" },
-      { label: "หมัด", href: "/entries/combat-style" },
-      { label: "ดาบ", href: "/entries/weapons-overview" },
-      { label: "ผลปีศาจ", href: "/entries/fruits-overview" },
-      { label: "เผ่าพันธุ์", href: "/entries/races-overview" },
-      { label: "Traits", href: "/entries/traits-overview" },
-      { label: "แคลน", href: "/entries/clans-overview" },
-      { label: "พลัง", href: "/entries/powers-overview" },
-      { label: "อาร์ติแฟกต์", href: "/entries/artifacts-overview" },
-      { label: "เครื่องประดับ", href: "/entries/accessories-overview" },
-      { label: "คอสเมติก", href: "/entries/cosmetics-overview" },
-      { label: "บิลด์อาวุธ", href: "/entries/best-builds-overview" },
-      { label: "วัสดุคราฟต์", href: "/entries/materials-overview" },
-      { label: "รูน (Runes)", href: "/entries/runes-overview" },
-      { label: "ฉายา", href: "/entries/titles-overview" },
-      { label: "พาสซีฟ", href: "/entries/spec-passives" },
-      { label: "Enchantments", href: "/entries/enchanting-accessories" },
-      { label: "ออร่า", href: "/entries/auras-overview" },
-      { label: "สายเลือด", href: "/entries/bloodlines-system" },
-      { label: "เรลิก", href: "/entries/relics-overview" },
-      { label: "ตารางเทรด", href: "/entries/trade-values" },
-      { label: "โค้ดทั้งหมด", href: "/entries/codes-overview" },
-      { label: "ฮาคิ", href: "/entries/haki-overview" },
-      { label: "บอส", href: "/entries/bosses-guide" },
-      { label: "กิลด์", href: "/entries/guilds-overview" },
-      { label: "Boss Rush", href: "/entries/boss-rush" },
-      { label: "กันคริลตัล (Crystal Defense)", href: "/entries/crystal-defense" },
-      { label: "หอคอย", href: "/entries/infinite-tower" },
-      { label: "ผังสกิล", href: "/entries/skill-tree" },
-      { label: "ดันเจี้ยน", href: "/entries/dungeons-overview" },
-      { label: "พรบารมี", href: "/entries/blessings-system" },
-      { label: "เส้นทางผู้เล่น", href: "/entries/progression-guide" }
-    ],
-    browseItems: [
-      { title: "สารบัญวิกิ", desc: "รวมหน้าเพจและหมวดหมู่ทั้งหมดที่คุณค้นหาได้ในที่เดียว ง่ายต่อการเข้าถึง", href: "/directory" },
-      { title: "แผนที่และเกาะทั้งหมด", desc: "ดูจุดเกิดของบอส, เควสต์, NPC, และจุดอัปเกรดในแต่ละเกาะแบบเจาะลึก", href: "/islands" },
-      { title: "คู่มือลง Sea 2", desc: "เส้นทางการหา Ancient Fragments, จุดเกิดสัตว์ทะเล, และการเดินทางไปโลกสองแบบละเอียดยิบ", href: "/sea-2" },
-      { title: "ลิงก์เว็บหลัก", desc: "กดไปหน้าเกมเพจ Roblox หลัก, ดิสคอร์ดพูดคุย, และอัปเดตแบบเรียลไทม์", href: "/entries/official-links" },
-      { title: "ระบบคำนวณ", desc: "ศูนย์รวมเครื่องมือคำนวณดาเมจ, วิเคราะห์พาสซีฟและบิลด์อาวุธที่เหมาะกับคุณ", href: "/calculator" },
-      { title: "เครื่องมือเช็คความคืบหน้า", desc: "บันทึกความคืบหน้าหอคอยอนันต์, Skill Tree, และสถานะเลเวลของคุณเอง", href: "/progress-trackers" },
-      { title: "เกี่ยวกับวิกินี้", desc: "ทำความรู้จักกับที่มาของวิกิ, การตรวจสอบข้อมูล, และทีมนักพัฒนาแฟนเมด", href: "/about" }
-    ],
-    about1: {
-      tag: "ข้อมูลในบล็อกนี้มีอะไรบ้าง?",
-      title: "เจาะลึกระบบสเตตัส, คู่มือการฟาร์มบอส, และข้อมูลสาย End-game",
-      desc: "วิกินี้ถูกทำขึ้นเพื่ออธิบายและวิเคราะห์ระบบของเกาะต่างๆ ระดับความยาก การผสมไอเทม เพื่อลดปัญหาการเดินหลงทางสำหรับผู้เล่นใหม่และช่วยแนะนำของฟาร์มในช่วงท้ายเกม ไม่ต้องงมข้อมูลเองอีกต่อไป"
-    },
-    about2: {
-      tag: "ออกแบบมาสำหรับทุกคน",
-      title: "รองรับมือถือ แท็บเล็ต อ่านง่าย ไว้วางแผนการฟาร์มล่วงหน้า",
-      desc: "ช่องค้นหา หรือ Search หมวดหมู่ด้านบน จะช่วยดึงคุณเข้าสู่บทหน้าคู่มือหรือหน้าเนื้อหาได้อย่างรวดเร็ว ในหน้าคู่มือต่างๆ ยังมีการระบุจุดเชื่อมต่อไปยังวัสดุหรือชิ้นส่วนประกอบไอเทมอีกด้วย!"
+import { getSiteConfig } from "@/config/site";
+import { getGameData } from "@/config/game-data";
+import { getUIConfig } from "@/config/ui";
+
+/**
+ * Localization Dictionaries
+ * 
+ * This function now generates the dictionary dynamically to ensure
+ * fresh data from JSON configs during development and runtime.
+ */
+
+export const getDictionary = () => {
+  const siteConfig = getSiteConfig();
+  const gameData = getGameData();
+  const uiConfig = getUIConfig();
+
+  // Calculate dynamic stats
+  let pageCount = 0;
+  try {
+    if (typeof window === 'undefined') {
+      const fs = require('fs');
+      const path = require('path');
+      const entriesPath = path.join(process.cwd(), 'src', 'app', 'entries');
+      if (fs.existsSync(entriesPath)) {
+        const getFiles = (dir: string) => {
+          const files = fs.readdirSync(dir);
+          files.forEach((file: string) => {
+            const name = path.join(dir, file);
+            if (fs.statSync(name).isDirectory()) {
+              getFiles(name);
+            } else if (file === 'page.tsx') {
+              pageCount++;
+            }
+          });
+        };
+        getFiles(entriesPath);
+        // Count top-level pages in src/app
+        const appPath = path.join(process.cwd(), 'src', 'app');
+        const appFiles = fs.readdirSync(appPath);
+        appFiles.forEach((file: string) => {
+          const fullPath = path.join(appPath, file);
+          if (fs.statSync(fullPath).isDirectory() && file !== 'entries' && file !== 'api') {
+            if (fs.existsSync(path.join(fullPath, 'page.tsx'))) {
+              pageCount++;
+            }
+          }
+        });
+        // Add root page.tsx
+        pageCount++;
+      }
     }
-  },
-  en: {
-    searchPlaceholder: "Search entries...",
-    subtitle: "Unleash the Grand Sea",
-    home: "Home",
-    codes: "Active Codes",
-    guideHub: "Ultimate Fan-made Guide Hub",
-    ignited: "Ignite Your Journey",
-    heroDesc: "The ultimate Sailor Piece Wiki. Comprehensive guides for Sea 2 progression, Ancient Fragments farming, and crafting legendary weapons like Great Mage and Cosmic Garou.",
-    stats: {
-      pages: "Total Pages",
-      categories: "Categories",
-      searchable: "Searchable Items",
-      updated: "Last Updated"
-    },
-    date: "May 2026",
-    qaSubtitle: "Trending End-game Content",
-    qaTitle: "Quick Access",
-    qaDesc: "Access top-tier weapons and combat styles with a single click.",
-    navTitle: "All Categories",
-    navDesc: "Explore every system, boss drop, and farming location.",
-    browseTitle: "Browse Wiki",
-    aboutTitle: "About This Wiki",
-    fastAccess: "Featured Content",
-    quickItems: [
-      { id: "anti", title: "Anti Magic", cat: "Sword / S+ Tier", img: "/images/hero/antimagic.webp", href: "/entries/anti-magic/" },
-      { id: "atomic", title: "Atomic", cat: "Sword / S+ Tier", img: "/images/icons/weapon-atomic.webp", href: "/entries/atomic/" },
-      { id: "great", title: "Great Mage", cat: "Sword / S+ Tier", img: "/images/icons/weapon-greatmage.webp", href: "/entries/great-mage-style/" },
-      { id: "dragon", title: "Dragon Goddess", cat: "Sword / S+ Tier", img: "/images/icons/weapon-dragongoddess.webp", href: "/entries/dragon-goddess/" },
-      { id: "cosmic", title: "Cosmic Being", cat: "Melee / S+ Tier", img: "/images/icons/melee-cosmicbeing.webp", href: "/entries/cosmic-being-style/" },
-      { id: "theworld", title: "The World", cat: "Melee / S+ Tier", img: "/images/icons/melee-theworld.webp", href: "/entries/the-world-style/" },
-    ],
-    navItems: [
-      { label: "Sea 2", href: "/entries/sea-2" },
-      { label: "Melee", href: "/entries/combat-style" },
-      { label: "Swords", href: "/entries/weapons-overview" },
-      { label: "Fruits", href: "/entries/fruits-overview" },
-      { label: "Races", href: "/entries/races-overview" },
-      { label: "Traits", href: "/entries/traits-overview" },
-      { label: "Clans", href: "/entries/clans-overview" },
-      { label: "Powers", href: "/entries/powers-overview" },
-      { label: "Artifacts", href: "/entries/artifacts-overview" },
-      { label: "Accessories", href: "/entries/accessories-overview" },
-      { label: "Cosmetics", href: "/entries/cosmetics-overview" },
-      { label: "Best Builds", href: "/entries/best-builds-overview" },
-      { label: "Materials", href: "/entries/materials-overview" },
-      { label: "Runes", href: "/entries/runes-overview" },
-      { label: "Titles", href: "/entries/titles-overview" },
-      { label: "Spec Passives", href: "/entries/spec-passives" },
-      { label: "Enchantments", href: "/entries/enchanting-accessories" },
-      { label: "Auras", href: "/entries/auras-overview" },
-      { label: "Bloodlines", href: "/entries/bloodlines-system" },
-      { label: "Relics", href: "/entries/relics-overview" },
-      { label: "Trade Values", href: "/entries/trade-values" },
-      { label: "All Codes", href: "/entries/codes-overview" },
-      { label: "Haki", href: "/entries/haki-overview" },
-      { label: "Bosses", href: "/entries/bosses-guide" },
-      { label: "Guilds", href: "/entries/guilds-overview" },
-      { label: "Boss Rush", href: "/entries/boss-rush" },
-      { label: "Crystal Defense", href: "/entries/crystal-defense" },
-      { label: "Tower", href: "/entries/infinite-tower" },
-      { label: "Skill Tree", href: "/entries/skill-tree" },
-      { label: "Dungeons", href: "/entries/dungeons-overview" },
-      { label: "Blessings", href: "/entries/blessings-system" },
-      { label: "Progression", href: "/entries/progression-guide" }
-    ],
-    browseItems: [
-      { title: "Wiki Directory", desc: "A complete list of all pages and categories for easy navigation.", href: "/directory" },
-      { title: "Islands & Maps", desc: "In-depth details on boss spawns, quests, and NPCs for every island.", href: "/islands" },
-      { title: "Sea 2 Guide", desc: "Everything about Sea 2: Ancient Fragments, Sea Beasts, and progression.", href: "/sea-2" },
-      { title: "Official Links", desc: "Links to the Roblox game page, Discord, and real-time updates.", href: "/entries/official-links" },
-      { title: "Calculators", desc: "Damage tools, passive analysis, and build optimizers.", href: "/calculator" },
-      { title: "Progress Trackers", desc: "Track your Infinite Tower level, Skill Tree, and character stats.", href: "/progress-trackers" },
-      { title: "About Us", desc: "Learn about the wiki's history, data verification, and the fan-made dev team.", href: "/about" }
-    ],
-    about1: {
-      tag: "What's in this wiki?",
-      title: "Stats Breakdown, Boss Guides, and End-game Analysis",
-      desc: "This wiki is built to explain island systems, difficulty levels, and item crafting to help new players and end-game farmers alike."
-    },
-    about2: {
-      tag: "Designed for Everyone",
-      title: "Mobile Friendly, Fast, and Optimized for Planning",
-      desc: "Our search engine and category navigation get you to the guides you need instantly, with clear links to related materials and components."
-    }
+  } catch (e) {
+    pageCount = 116; // Fallback
   }
+
+  const categoryCount = gameData.navigation.navItems.length;
+  
+  // Calculate a truly comprehensive searchable count
+  let searchableCount = pageCount; // Start with all pages
+  
+  // Add all Melee styles
+  gameData.melees.forEach((tier: any) => {
+    searchableCount += tier.items.length;
+  });
+  
+  // Add all Swords
+  gameData.swords.forEach((tier: any) => {
+    searchableCount += tier.items.length;
+  });
+  
+  // Add all High-value Bosses
+  searchableCount += gameData.bosses.highValue.length;
+  
+  // Add all unique drops from bosses
+  const allDrops = new Set();
+  gameData.bosses.highValue.forEach((boss: any) => {
+    boss.drops.forEach((drop: string) => allDrops.add(drop));
+  });
+  searchableCount += allDrops.size;
+
+  // Add entries if they exist in gameData
+  if (gameData.entries) {
+    gameData.entries.forEach((tier: any) => {
+      searchableCount += tier.items.length;
+    });
+  }
+
+  // Add navigation items that might not be pages
+  searchableCount += gameData.navigation.navItems.length;
+  searchableCount += gameData.navigation.featured.length;
+  searchableCount += gameData.navigation.browseItems.length;
+
+  // Build a comprehensive search list for the Header
+  const searchListTH: any[] = [];
+  const searchListEN: any[] = [];
+
+  // 1. Add Melees
+  gameData.melees.forEach((tier: any) => {
+    tier.items.forEach((item: any) => {
+      searchListTH.push({ title: item.title, type: "หมัด", href: `/entries/${item.slug}` });
+      searchListEN.push({ title: item.title, type: "Melee", href: `/entries/${item.slug}` });
+    });
+  });
+
+  // 2. Add Swords
+  gameData.swords.forEach((tier: any) => {
+    tier.items.forEach((item: any) => {
+      searchListTH.push({ title: item.title, type: "ดาบ", href: `/entries/${item.slug}` });
+      searchListEN.push({ title: item.title, type: "Sword", href: `/entries/${item.slug}` });
+    });
+  });
+
+  // 3. Add Bosses
+  gameData.bosses.highValue.forEach((boss: any) => {
+    searchListTH.push({ title: boss.name, type: "บอส", href: "/entries/bosses-guide" });
+    searchListEN.push({ title: boss.name, type: "Boss", href: "/entries/bosses-guide" });
+    
+    // Add Locations as searchable
+    searchListTH.push({ title: `${boss.name} - ${boss.location}`, type: "สถานที่บอส", href: "/entries/bosses-guide" });
+    searchListEN.push({ title: `${boss.name} - ${boss.location}`, type: "Boss Location", href: "/entries/bosses-guide" });
+
+    // Add Drops
+    boss.drops.forEach((drop: string) => {
+      searchListTH.push({ title: drop, type: "ไอเทมดรอป", href: "/entries/bosses-guide" });
+      searchListEN.push({ title: drop, type: "Drop Item", href: "/entries/bosses-guide" });
+    });
+  });
+
+  // 4. Add Constants/Meta info
+  searchListTH.push({ title: `Max Level: ${gameData.constants.maxLevel}`, type: "ข้อมูลระบบ", href: "/" });
+  searchListEN.push({ title: `Max Level: ${gameData.constants.maxLevel}`, type: "System Info", href: "/" });
+  searchListTH.push({ title: `Max Stat: ${gameData.constants.maxStat}`, type: "ข้อมูลระบบ", href: "/" });
+  searchListEN.push({ title: `Max Stat: ${gameData.constants.maxStat}`, type: "System Info", href: "/" });
+
+  // 5. Add all pages from entries directory with deep indexing
+  try {
+    if (typeof window === 'undefined') {
+      const fs = require('fs');
+      const path = require('path');
+      const entriesPath = path.join(process.cwd(), 'src', 'app', 'entries');
+      if (fs.existsSync(entriesPath)) {
+        const addPages = (dir: string) => {
+          const files = fs.readdirSync(dir);
+          files.forEach((file: string) => {
+            const name = path.join(dir, file);
+            if (fs.statSync(name).isDirectory()) {
+              const pageFile = path.join(name, 'page.tsx');
+              if (fs.existsSync(pageFile)) {
+                const title = file.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+                
+                // Primary Page Entry
+                searchListTH.push({ title, type: "หน้าคู่มือ", href: `/entries/${file}` });
+                searchListEN.push({ title, type: "Guide Page", href: `/entries/${file}` });
+                
+                // Deep Indexing: Add keywords/aliases for search coverage
+                searchListTH.push({ title: `${title} Guide`, type: "วิธีหา / คู่มือ", href: `/entries/${file}` });
+                searchListEN.push({ title: `${title} Guide`, type: "How to get / Guide", href: `/entries/${file}` });
+                
+                searchListTH.push({ title: `${title} Location`, type: "สถานที่พบ", href: `/entries/${file}` });
+                searchListEN.push({ title: `${title} Location`, type: "Location", href: `/entries/${file}` });
+                
+                searchListTH.push({ title: `${title} Stats`, type: "สถิติ / พลัง", href: `/entries/${file}` });
+                searchListEN.push({ title: `${title} Stats`, type: "Stats / Power", href: `/entries/${file}` });
+              }
+              addPages(name);
+            }
+          });
+        };
+        addPages(entriesPath);
+      }
+    }
+  } catch (e) {}
+
+  const dynamicStats = {
+    pagesCount: pageCount.toString(),
+    categoriesCount: categoryCount.toString(),
+    searchableCount: searchListTH.length.toString(),
+  };
+
+  return {
+    th: {
+      // Basic UI Strings from uiConfig
+      ...uiConfig.th.hero,
+      stats: {
+        ...uiConfig.th.stats,
+        ...dynamicStats,
+        updated: uiConfig.th.stats.updated,
+        date: uiConfig.th.stats.date
+      },
+      searchList: searchListTH,
+      searchPlaceholder: uiConfig.th.search.placeholder,
+      home: uiConfig.th.navigation.home,
+      codes: uiConfig.th.navigation.codes,
+      qaSubtitle: uiConfig.th.navigation.quickAccessDesc,
+      qaTitle: uiConfig.th.navigation.quickAccess,
+      qaDesc: uiConfig.th.navigation.quickAccessDesc,
+      navTitle: uiConfig.th.navigation.allCategories,
+      navDesc: uiConfig.th.navigation.allCategoriesDesc,
+      browseTitle: uiConfig.th.navigation.browseTitle,
+      aboutTitle: uiConfig.th.about.sectionTitle,
+      fastAccess: uiConfig.th.navigation.fastAccessTag,
+      date: uiConfig.th.stats.date,
+
+      // Dynamic Game Data mapping
+      quickItems: gameData.navigation.featured.map(item => ({ 
+        id: item.id, title: item.title_th, cat: item.cat_th, img: item.img, href: item.href 
+      })),
+      navItems: gameData.navigation.navItems.map(item => ({ label: item.label_th, href: item.href })),
+      browseItems: gameData.navigation.browseItems.map(item => ({ title: item.title_th, desc: item.desc_th, href: item.href })),
+
+      // About Section
+      about1: {
+        tag: uiConfig.th.about.card1.tag,
+        title: uiConfig.th.about.card1.title,
+        desc: uiConfig.th.about.card1.description
+      },
+      about2: {
+        tag: uiConfig.th.about.card2.tag,
+        title: uiConfig.th.about.card2.title,
+        desc: uiConfig.th.about.card2.description
+      },
+
+      // Footer
+      footer: uiConfig.th.footer,
+
+      // Directory
+      directory: uiConfig.th.directory
+    },
+    en: {
+      // Basic UI Strings from uiConfig
+      ...uiConfig.en.hero,
+      stats: {
+        ...uiConfig.en.stats,
+        ...dynamicStats,
+        updated: uiConfig.en.stats.updated,
+        date: uiConfig.en.stats.date
+      },
+      searchList: searchListEN,
+      searchPlaceholder: uiConfig.en.search.placeholder,
+      home: uiConfig.en.navigation.home,
+      codes: uiConfig.en.navigation.codes,
+      qaSubtitle: uiConfig.en.navigation.quickAccessDesc,
+      qaTitle: uiConfig.en.navigation.quickAccess,
+      qaDesc: uiConfig.en.navigation.quickAccessDesc,
+      navTitle: uiConfig.en.navigation.allCategories,
+      navDesc: uiConfig.en.navigation.allCategoriesDesc,
+      browseTitle: uiConfig.en.navigation.browseTitle,
+      aboutTitle: uiConfig.en.about.sectionTitle,
+      fastAccess: uiConfig.en.navigation.fastAccessTag,
+      date: uiConfig.en.stats.date,
+
+      // Dynamic Game Data mapping
+      quickItems: gameData.navigation.featured.map(item => ({ 
+        id: item.id, title: item.title_en, cat: item.cat_en, img: item.img, href: item.href 
+      })),
+      navItems: gameData.navigation.navItems.map(item => ({ label: item.label_en, href: item.href })),
+      browseItems: gameData.navigation.browseItems.map(item => ({ title: item.title_en, desc: item.desc_en, href: item.href })),
+
+      // About Section
+      about1: {
+        tag: uiConfig.en.about.card1.tag,
+        title: uiConfig.en.about.card1.title,
+        desc: uiConfig.en.about.card1.description
+      },
+      about2: {
+        tag: uiConfig.en.about.card2.tag,
+        title: uiConfig.en.about.card2.title,
+        desc: uiConfig.en.about.card2.description
+      },
+
+      // Footer
+      footer: uiConfig.en.footer,
+
+      // Directory
+      directory: uiConfig.en.directory
+    }
+  };
 };

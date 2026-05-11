@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "How to Get Abyssal Empress in Sailor Piece",
-  description: "Abyssal Empress guide for Sailor Piece with obtainment steps, NPC location, materials, questline, mastery, and evolution path notes.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `How to Get Abyssal Empress in Sailor Piece | ${siteConfig.name}`,
+    description: "Abyssal Empress guide for Sailor Piece with obtainment steps, NPC location, materials, questline, mastery, and evolution path notes.",
+    openGraph: {
+      title: `How to Get Abyssal Empress in Sailor Piece | ${siteConfig.name}`,
+      description: "Abyssal Empress guide for Sailor Piece with obtainment steps, NPC location, materials, questline, mastery, and evolution path notes.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `How to Get Abyssal Empress in Sailor Piece | ${siteConfig.name}`,
+      description: "Abyssal Empress guide for Sailor Piece with obtainment steps, NPC location, materials, questline, mastery, and evolution path notes.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {
@@ -27,6 +46,12 @@ const metaItems = [
     "label": "Moves",
     "value": "Z, X, C, V, F"
   }
+];
+
+const facts = [
+  "Abyssal Empress can be purchased from the Tower Shop on Tower Island for 4,000 Tower Tokens.",
+  "The sword can also drop from Infinite Tower bosses, but the wiki still treats that route as very low chance.",
+  "Abyssal Empress does not need an older sword evolution path and is instead a straight Infinite Tower grind.",
 ];
 
 const moveset = [
@@ -68,7 +93,12 @@ const moveset = [
   }
 ];
 
-const routeDetails: { field: string; details: string; link?: string }[] = [];
+const routeDetails = [
+  { field: "Tower Tokens", details: "4,000", link: "/entries/material-sourcing#material-tower-token" },
+  { field: "Tower Key", details: "Needed to keep opening the Infinite Tower portal", link: "/entries/material-sourcing#material-tower-key" },
+  { field: "Level gate", details: "Level 8,500 or higher for the Infinite Tower route" },
+  { field: "Questline", details: "None published" },
+];
 
 const relatedPages = [
   {
@@ -143,8 +173,8 @@ export default function EntryPage() {
           
           <div className="w-full md:w-1/3 shrink-0 rounded-2xl overflow-hidden border-2 border-white/10 shadow-[0_0_30px_rgba(255,30,56,0.2)] bg-black relative aspect-square">
             <Image 
-              src="/images/site/sailorpiece-wiki-cover-v2.webp" 
-              alt="Abyssal Empress Hero Image Placeholder" 
+              src="/images/hero/weapon-abyssalempress.webp" 
+              alt="Abyssal Empress Hero Image" 
               fill
               className="object-contain p-4 opacity-90 transition-opacity duration-500 hover:opacity-100"
               sizes="(max-width: 768px) 100vw, 33vw"
@@ -160,7 +190,14 @@ export default function EntryPage() {
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
             <ul className="space-y-6">
-              
+              {facts.map((fact, i) => (
+                <li key={i} className="flex gap-4 group/item">
+                  <div className="text-[var(--accent-red)] font-black text-xl italic group-hover/item:scale-125 transition-transform duration-300">0{i+1}</div>
+                  <p className="text-gray-300 text-lg leading-relaxed font-medium border-b border-white/5 pb-4 w-full group-hover/item:text-white transition-colors">
+                    {fact}
+                  </p>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

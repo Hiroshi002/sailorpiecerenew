@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Skill Tree | Sailor Piece Wiki",
-  description: "Slime Island stat tree that unlocks at level 7,000 and uses Skill Points earned by defeating NPCs.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Skill Tree | ${siteConfig.name}`,
+    description: "Slime Island stat tree that unlocks at level 7,000 and uses Skill Points earned by defeating NPCs.",
+    openGraph: {
+      title: `Skill Tree | ${siteConfig.name}`,
+      description: "Slime Island stat tree that unlocks at level 7,000 and uses Skill Points earned by defeating NPCs.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Skill Tree | ${siteConfig.name}`,
+      description: "Slime Island stat tree that unlocks at level 7,000 and uses Skill Points earned by defeating NPCs.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {
@@ -24,9 +43,43 @@ const metaItems = [
     "value": "Slime Island"
   },
   {
-    "label": "Skill Point rate",
-    "value": "1 point per 250 NPC kills"
+    "label": "SP Rate",
+    "value": "1 per 250 NPC kills"
+  },
+  {
+    "label": "Total SP to max",
+    "value": "324 SP"
   }
+];
+
+const facts = [
+  "The Skill Tree unlocks on Slime Island at level 7,000 by paying 1,000 Gems.",
+  "Skill Points (SP) are earned by defeating NPCs, with a rate of 1 SP per 250 kills.",
+  "Mob farming is significantly more efficient than boss farming for earning SP.",
+  "The current tree features five main branches: Damage, HP, Crit Damage, Crit Chance, and Luck.",
+  "Fully maxing the tree requires 324 SP, equivalent to roughly 81,000 NPC kills."
+];
+
+const branches = [
+  { name: "Damage %", lv1: "3", lv2: "6", lv3: "10", lv4: "15", lv5: "25", max: "+25% Damage" },
+  { name: "HP %", lv1: "2", lv2: "5", lv3: "8", lv4: "13", lv5: "20", max: "+25% HP" },
+  { name: "Crit Damage", lv1: "2", lv2: "4", lv3: "7", lv4: "10", lv5: "15", max: "+15% Crit Dmg" },
+  { name: "Crit Chance", lv1: "2", lv2: "4", lv3: "7", lv4: "10", lv5: "15", max: "+5% Crit Chance" },
+  { name: "Luck", lv1: "5", lv2: "15", lv3: "30", lv4: "50", lv5: "75", max: "+15% Luck" }
+];
+
+const unlockSteps = [
+  "Reach level 7,000 or higher.",
+  "Travel to Slime Island and locate the small huts on the right side.",
+  "Speak with the Skill Tree NPC and pay the 1,000 Gem unlock fee.",
+  "Start farming high-density mobs to accumulate Skill Points."
+];
+
+const upgradePriority = [
+  { branch: "Damage %", priority: "High", reason: "Directly boosts wave clear speed and boss DPS." },
+  { branch: "Crit Damage/Chance", priority: "Medium", reason: "Scales well once base damage is established." },
+  { branch: "Luck", priority: "Medium", reason: "Crucial for long-term farming but expensive to max." },
+  { branch: "HP %", priority: "Low", reason: "Mainly for survivability in Tower and Hard Dungeons." }
 ];
 
 const moveset: any[] = [];
@@ -133,8 +186,77 @@ export default function EntryPage() {
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
             <ul className="space-y-6">
-              
+              {facts.map((fact, i) => (
+                <li key={i} className="flex items-start gap-4 text-gray-300 group/item transition-colors hover:text-white">
+                  <span className="mt-1.5 w-2 h-2 rounded-full bg-[var(--accent-red)] shadow-[0_0_10px_rgba(255,30,56,0.5)] shrink-0" />
+                  <span className="text-lg leading-relaxed">{fact}</span>
+                </li>
+              ))}
             </ul>
+          </div>
+        </div>
+
+        {/* Skill Tree Branches */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group border-2 border-blue-500/30">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4 text-blue-400">Skill Tree Branches</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-white/20 text-gray-400 font-mono text-xs uppercase">
+                    <th className="py-4 px-4">Branch</th>
+                    <th className="py-4 px-4">Lv 1</th>
+                    <th className="py-4 px-4">Lv 2</th>
+                    <th className="py-4 px-4">Lv 3</th>
+                    <th className="py-4 px-4">Lv 4</th>
+                    <th className="py-4 px-4">Lv 5</th>
+                    <th className="py-4 px-4 text-right">Max Gain</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  {branches.map((b, i) => (
+                    <tr key={i} className="hover:bg-white/5 transition-colors group/row text-sm font-mono">
+                      <td className="py-4 px-4 font-bold text-white uppercase font-sans">{b.name}</td>
+                      <td className="py-4 px-4 text-gray-400">{b.lv1} SP</td>
+                      <td className="py-4 px-4 text-gray-400">{b.lv2} SP</td>
+                      <td className="py-4 px-4 text-gray-400">{b.lv3} SP</td>
+                      <td className="py-4 px-4 text-gray-400">{b.lv4} SP</td>
+                      <td className="py-4 px-4 text-gray-400">{b.lv5} SP</td>
+                      <td className="py-4 px-4 text-right font-black text-[var(--accent-red)]">{b.max}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        {/* Unlock Steps & Priority */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+          <div className="panel-action clip-diagonal p-8 relative overflow-hidden group">
+            <h2 className="text-2xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">How to Unlock</h2>
+            <div className="space-y-4">
+              {unlockSteps.map((step, i) => (
+                <div key={i} className="flex gap-4 items-center bg-black/40 p-4 rounded-xl border border-white/5">
+                  <span className="w-8 h-8 rounded-full bg-[var(--accent-red)] flex items-center justify-center text-white font-black shrink-0">{i + 1}</span>
+                  <span className="text-gray-300 text-sm">{step}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="panel-action clip-diagonal p-8 relative overflow-hidden group">
+            <h2 className="text-2xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Upgrade Priority</h2>
+            <div className="space-y-4">
+              {upgradePriority.map((p, i) => (
+                <div key={i} className="text-sm">
+                  <div className="flex justify-between mb-1">
+                    <span className="text-white font-black uppercase">{p.branch}</span>
+                    <span className={`font-bold ${p.priority === 'High' ? 'text-red-400' : 'text-blue-400'}`}>{p.priority}</span>
+                  </div>
+                  <div className="text-[10px] text-gray-500 italic">{p.reason}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

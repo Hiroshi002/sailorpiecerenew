@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Cosmetics and Crates | Sailor Piece Wiki",
-  description: "Stat cosmetics obtained from Cosmetic Crates, with the current rarity ladder and equip flow.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Cosmetics and Crates | ${siteConfig.name}`,
+    description: "Stat cosmetics obtained from Cosmetic Crates, with the current rarity ladder and equip flow.",
+    openGraph: {
+      title: `Cosmetics and Crates | ${siteConfig.name}`,
+      description: "Stat cosmetics obtained from Cosmetic Crates, with the current rarity ladder and equip flow.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Cosmetics and Crates | ${siteConfig.name}`,
+      description: "Stat cosmetics obtained from Cosmetic Crates, with the current rarity ladder and equip flow.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {
@@ -21,12 +40,34 @@ const metaItems = [
   },
   {
     "label": "Equip tab",
-    "value": "Inventory &gt; Cosmetics"
+    "value": "Inventory > Cosmetics"
   },
   {
     "label": "Farm route",
     "value": "Fast Ninja on Punch Island"
   }
+];
+
+const facts = [
+  "Cosmetics in Sailor Piece are stat items, not only visual items.",
+  "Current checked guides list seven cosmetics in the game.",
+  "Cosmetics come from Cosmetic Crates, which can be earned from long grinds, quests, and some live codes."
+];
+
+const cosmetics = [
+  { name: "Avenger Belt", rarity: "Common", stats: "+5% Damage, +7.5% HP", source: "Cosmetic Crate" },
+  { name: "Thunder Cape", rarity: "Uncommon", stats: "+7.5% Damage, +10% HP", source: "Cosmetic Crate" },
+  { name: "Crimson Helmet", rarity: "Rare", stats: "+10% Damage, +12.5% HP", source: "Cosmetic Crate" },
+  { name: "Scarlet Reaper", rarity: "Epic", stats: "+12.5% Damage, +15% HP", source: "Cosmetic Crate" },
+  { name: "Slime Mask", rarity: "Epic", stats: "+12.5% Damage, +15% HP", source: "Cosmetic Crate" },
+  { name: "Commander Cape", rarity: "Legendary", stats: "+15% Damage, +20% HP", source: "Cosmetic Crate" },
+  { name: "Corrupted Wings", rarity: "Legendary", stats: "+15% Damage, +20% HP", source: "Cosmetic Crate" }
+];
+
+const crateRoutes = [
+  { route: "Fast Ninja", rate: "0.0017142%", note: "Best current normal-enemy Cosmetic Crate line." },
+  { route: "Strong Bandit", rate: "0.0016342%", note: "Best Bizarre Island cosmetic-crate fallback." },
+  { route: "Strong Fighter", rate: "0.0014342%", note: "Strong Starter Island Sea 2 backup." }
 ];
 
 const moveset: any[] = [];
@@ -113,8 +154,79 @@ export default function EntryPage() {
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
             <ul className="space-y-6">
-              
+              {facts.map((fact, i) => (
+                <li key={i} className="flex items-start gap-4 text-gray-300">
+                  <span className="mt-2 w-2 h-2 rounded-full bg-[var(--accent-red)] shrink-0 shadow-[0_0_8px_rgba(255,30,56,0.6)]" />
+                  <span className="text-lg leading-relaxed">{fact}</span>
+                </li>
+              ))}
             </ul>
+          </div>
+        </div>
+
+        {/* Current Cosmetic List */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Current Cosmetic List</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-white/20 text-gray-400 font-mono text-sm uppercase">
+                    <th className="py-4 px-4">Cosmetic</th>
+                    <th className="py-4 px-4">Rarity</th>
+                    <th className="py-4 px-4">Stats</th>
+                    <th className="py-4 px-4">Source</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  {cosmetics.map((cos, i) => (
+                    <tr key={i} className="hover:bg-white/5 transition-colors">
+                      <td className="py-3 px-4 font-bold text-white">{cos.name}</td>
+                      <td className="py-3 px-4">
+                        <span className={`px-2 py-0.5 rounded text-xs font-bold uppercase ${
+                          cos.rarity === 'Common' ? 'bg-gray-500/20 text-gray-400' :
+                          cos.rarity === 'Uncommon' ? 'bg-green-500/20 text-green-400' :
+                          cos.rarity === 'Rare' ? 'bg-blue-500/20 text-blue-400' :
+                          cos.rarity === 'Epic' ? 'bg-purple-500/20 text-purple-400' :
+                          'bg-yellow-500/20 text-yellow-400'
+                        }`}>
+                          {cos.rarity}
+                        </span>
+                      </td>
+                      <td className="py-3 px-4 text-gray-300 text-sm">{cos.stats}</td>
+                      <td className="py-3 px-4 text-gray-400 text-xs">{cos.source}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        {/* How to Get Cosmetic Crates */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">How to Get Cosmetic Crates</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-white/20 text-gray-400 font-mono text-sm uppercase">
+                    <th className="py-4 px-4">Route</th>
+                    <th className="py-4 px-4">Crate Rate</th>
+                    <th className="py-4 px-4">Why players use it</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  {crateRoutes.map((route, i) => (
+                    <tr key={i} className="hover:bg-white/5 transition-colors">
+                      <td className="py-3 px-4 font-bold text-blue-400">{route.route}</td>
+                      <td className="py-3 px-4 text-white font-mono">{route.rate}</td>
+                      <td className="py-3 px-4 text-gray-300 text-sm">{route.note}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 

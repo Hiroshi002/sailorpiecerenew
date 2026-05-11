@@ -1,18 +1,32 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import { Award, Star, ShieldCheck, Zap } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Titles | Sailor Piece Wiki",
-  description: "Damage, farming, and event titles with unlock routes and loadout uses.",
-  openGraph: {
-    title: "Titles | Sailor Piece Wiki",
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Titles | ${siteConfig.name}`,
     description: "Damage, farming, and event titles with unlock routes and loadout uses.",
-    images: [{ url: "/images/site/sailorpiece-wiki-cover-v2.webp" }],
-  },
-};
+    openGraph: {
+      title: `Titles | ${siteConfig.name}`,
+      description: "Damage, farming, and event titles with unlock routes and loadout uses.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Titles | ${siteConfig.name}`,
+      description: "Damage, farming, and event titles with unlock routes and loadout uses.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const titleEntries = [
   {

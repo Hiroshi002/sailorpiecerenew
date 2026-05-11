@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,36 +6,80 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Sailor Piece Guild Key Drop Chance | Guilds, Sources, Create Cost",
-  description: "Sea 2 guilds guide for Sailor Piece with the Guild Key drop chance, Guild Key sources, create-guild requirements, and current guild upgrade stats.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Sailor Piece Guild Key Drop Chance | ${siteConfig.name}`,
+    description: "Sea 2 guilds guide for Sailor Piece with the Guild Key drop chance, Guild Key sources, create-guild requirements, and current guild upgrade stats.",
+    openGraph: {
+      title: `Sailor Piece Guild Key Drop Chance | ${siteConfig.name}`,
+      description: "Sea 2 guilds guide for Sailor Piece with the Guild Key drop chance, Guild Key sources, create-guild requirements, and current guild upgrade stats.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Sailor Piece Guild Key Drop Chance | ${siteConfig.name}`,
+      description: "Sea 2 guilds guide for Sailor Piece with the Guild Key drop chance, Guild Key sources, create-guild requirements, and current guild upgrade stats.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
-  {
-    "label": "Status",
-    "value": "Create and join menu confirmed from current in-game screenshot"
-  },
   {
     "label": "Sea",
     "value": "Sea 2"
   },
   {
-    "label": "Main item",
-    "value": "Guild Key"
-  },
-  {
-    "label": "Level gate",
+    "label": "Level Gate",
     "value": "10,000"
   },
   {
-    "label": "Sourcing note",
-    "value": "Current Sea 2 range: 0.00019342% on Delinquent up to 0.011% on Sea Serpent and Kraken"
+    "label": "Main Item",
+    "value": "Guild Key"
   },
   {
-    "label": "Tracked upgrades",
-    "value": "6 confirmed guild upgrade lines"
+    "label": "Upgrade Lines",
+    "value": "6 Confirmed"
   }
+];
+
+const facts = [
+  "Guilds are a core Sea 2 system for group progression and leaderboard rewards.",
+  "Creating a guild requires Level 10,000 and 1 Guild Key.",
+  "Guild Keys drop from various Sea 2 mobs and bosses with very low chances.",
+  "The guild upgrade board currently features 6 upgrade lines with caps up to Level 10.",
+  "Recent updates added 4 exclusive guild leaderboard auras as seasonal rewards."
+];
+
+const creationReqs = [
+  { field: "Minimum Level", value: "10,000" },
+  { field: "Item Required", value: "1 Guild Key" },
+  { field: "Creation Cost", value: "1 Guild Key" },
+  { field: "Name Limit", value: "50 Characters" }
+];
+
+const guildKeyDrops = [
+  { npc: "Delinquent", island: "Starter Sea 2", chance: "0.00019342%" },
+  { npc: "Strong Fighter", island: "Starter Sea 2", chance: "0.00019742%" },
+  { npc: "Strong Bandit", island: "Bizarre Island", chance: "0.00024742%" },
+  { npc: "Fast Ninja", island: "Punch Island", chance: "0.00026342%" },
+  { npc: "Cosmic Being", island: "Boss Island", chance: "0.01%" },
+  { npc: "Sea Serpent", island: "Open Sea", chance: "0.011%" },
+  { npc: "Kraken", island: "Open Sea", chance: "0.011%" }
+];
+
+const upgrades = [
+  { name: "Damage %", lv1Cost: "50", cap: "Lv 5", bonus: "+2% per level" },
+  { name: "Crit Damage", lv1Cost: "35", cap: "Lv 5", bonus: "+2% per level" },
+  { name: "Crit Chance", lv1Cost: "35", cap: "Lv 5", bonus: "+1% per level" },
+  { name: "HP %", lv1Cost: "35", cap: "Lv 5", bonus: "+2% per level" },
+  { name: "Luck", lv1Cost: "65", cap: "Lv 5", bonus: "+2% per level" },
+  { name: "Member Capacity", lv1Cost: "150 (Lv 2)", cap: "Lv 10", bonus: "+5 slots per level" }
 ];
 
 const moveset: any[] = [];
@@ -126,8 +171,80 @@ export default function EntryPage() {
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
             <ul className="space-y-6">
-              
+              {facts.map((fact, i) => (
+                <li key={i} className="flex items-start gap-4 text-gray-300 group/item transition-colors hover:text-white">
+                  <span className="mt-1.5 w-2 h-2 rounded-full bg-[var(--accent-red)] shadow-[0_0_10px_rgba(255,30,56,0.5)] shrink-0" />
+                  <span className="text-lg leading-relaxed">{fact}</span>
+                </li>
+              ))}
             </ul>
+          </div>
+        </div>
+
+        {/* Creation Requirements */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Guild Creation</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {creationReqs.map((req, i) => (
+                <div key={i} className="bg-black/40 border border-white/10 p-4 rounded-xl text-center">
+                  <div className="text-[10px] text-gray-500 uppercase font-mono mb-1">{req.field}</div>
+                  <div className="text-sm font-black text-white">{req.value}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Guild Key Drops */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Guild Key Drop Rates</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-white/20 text-gray-400 font-mono text-sm uppercase">
+                    <th className="py-4 px-4">NPC / Boss</th>
+                    <th className="py-4 px-4">Island</th>
+                    <th className="py-4 px-4 text-right">Drop Chance</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  {guildKeyDrops.map((drop, i) => (
+                    <tr key={i} className="hover:bg-white/5 transition-colors group/row">
+                      <td className="py-4 px-4 font-bold text-white group-hover/row:text-[var(--accent-red)] transition-colors">{drop.npc}</td>
+                      <td className="py-4 px-4 text-gray-400 text-sm italic">{drop.island}</td>
+                      <td className="py-4 px-4 text-right font-black text-[var(--accent-red)] font-mono">{drop.chance}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        {/* Guild Upgrades */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Guild Upgrades</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {upgrades.map((up, i) => (
+                <div key={i} className="bg-white/5 border border-white/10 p-5 rounded-xl hover:border-blue-500/50 transition-all">
+                  <div className="flex justify-between items-center mb-3">
+                    <h3 className="text-lg font-black text-white uppercase">{up.name}</h3>
+                    <span className="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded font-bold border border-blue-500/30">{up.cap}</span>
+                  </div>
+                  <div className="flex justify-between text-xs mb-2">
+                    <span className="text-gray-500 uppercase font-mono">Lv 1 Cost</span>
+                    <span className="text-white font-bold">{up.lv1Cost}</span>
+                  </div>
+                  <div className="flex justify-between text-xs">
+                    <span className="text-gray-500 uppercase font-mono">Bonus</span>
+                    <span className="text-[var(--accent-red)] font-bold">{up.bonus}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

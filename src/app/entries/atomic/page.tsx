@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,31 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "How to Get Atomic in Sailor Piece",
-  description: "Atomic guide for Sailor Piece with obtainment steps, NPC location, materials, questline, mastery, and evolution path notes.",
-  icons: {
-    icon: [
-      { url: "/siteicon.png", sizes: "96x96", type: "image/png" },
-      { url: "/favicon.svg", type: "image/svg+xml" },
-    ],
-  },
-  openGraph: {
-    title: "How to Get Atomic in Sailor Piece",
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `How to Get Atomic in Sailor Piece | ${siteConfig.name}`,
     description: "Atomic guide for Sailor Piece with obtainment steps, NPC location, materials, questline, mastery, and evolution path notes.",
-    url: "https://sailorpiecewiki.com/entries/atomic",
-    siteName: "Sailor Piece Wiki",
-    images: [{ url: "/images/site/sailorpiece-wiki-cover-v2.webp", width: 1200, height: 630, alt: "Sailor Piece Wiki branded cover image using the live game thumbnail" }],
-    locale: "en_US",
-    type: "article",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "How to Get Atomic in Sailor Piece",
-    description: "Atomic guide for Sailor Piece with obtainment steps, NPC location, materials, questline, mastery, and evolution path notes.",
-    images: ["/images/site/sailorpiece-wiki-cover-v2.webp"],
-  },
-};
+    openGraph: {
+      title: `How to Get Atomic in Sailor Piece | ${siteConfig.name}`,
+      description: "Atomic guide for Sailor Piece with obtainment steps, NPC location, materials, questline, mastery, and evolution path notes.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `How to Get Atomic in Sailor Piece | ${siteConfig.name}`,
+      description: "Atomic guide for Sailor Piece with obtainment steps, NPC location, materials, questline, mastery, and evolution path notes.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   { label: "NPC", value: "Atomic NPC" },

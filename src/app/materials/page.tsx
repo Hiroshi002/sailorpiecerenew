@@ -1,18 +1,32 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import { Package, ShieldCheck, FileText, Key, Box, Settings } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Materials | Sailor Piece Wiki",
-  description: "Crafting and upgrade materials grouped by rarity, farming source, and what they are used for.",
-  openGraph: {
-    title: "Materials | Sailor Piece Wiki",
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Materials | ${siteConfig.name}`,
     description: "Crafting and upgrade materials grouped by rarity, farming source, and what they are used for.",
-    images: [{ url: "/images/site/sailorpiece-wiki-cover-v2.webp" }],
-  },
-};
+    openGraph: {
+      title: `Materials | ${siteConfig.name}`,
+      description: "Crafting and upgrade materials grouped by rarity, farming source, and what they are used for.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Materials | ${siteConfig.name}`,
+      description: "Crafting and upgrade materials grouped by rarity, farming source, and what they are used for.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const materialEntries = [
   {

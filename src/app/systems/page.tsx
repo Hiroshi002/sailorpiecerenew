@@ -1,18 +1,32 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import { Settings, Shield, Swords, MapPin, Sparkles, BookOpen, UserPlus, Users, Gem, Box } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Systems | Sailor Piece Wiki",
-  description: "Core mechanics like haki, blessings, enchanting, dungeons, boss rush, infinite tower, and other progression systems.",
-  openGraph: {
-    title: "Systems | Sailor Piece Wiki",
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Systems | ${siteConfig.name}`,
     description: "Core mechanics like haki, blessings, enchanting, dungeons, boss rush, infinite tower, and other progression systems.",
-    images: [{ url: "/images/site/sailorpiece-wiki-cover-v2.webp" }],
-  },
-};
+    openGraph: {
+      title: `Systems | ${siteConfig.name}`,
+      description: "Core mechanics like haki, blessings, enchanting, dungeons, boss rush, infinite tower, and other progression systems.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Systems | ${siteConfig.name}`,
+      description: "Core mechanics like haki, blessings, enchanting, dungeons, boss rush, infinite tower, and other progression systems.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const systemEntries = [
   { title: "Blessings System", count: "Swords and Specs", summary: "Shibuya Station upgrade system for swords and specs, with shared B1 to B10 materials.", href: "/entries/blessings-system", icon: <Sparkles className="w-5 h-5 text-blue-400 icon-glow-blue transition-all" /> },

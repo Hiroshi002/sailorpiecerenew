@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Destroyer Aura | Sailor Piece Crystal Defense Aura",
-  description: "Destroyer Aura Sailor Piece page with the Legendary aura tier, Crystal Defense shop route, Punch Island vendor, and current 2,000 Crystal Coin cost.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Destroyer Aura | ${siteConfig.name}`,
+    description: "Destroyer Aura Sailor Piece page with the Legendary aura tier, Crystal Defense shop route, Punch Island vendor, and current 2,000 Crystal Coin cost.",
+    openGraph: {
+      title: `Destroyer Aura | ${siteConfig.name}`,
+      description: "Destroyer Aura Sailor Piece page with the Legendary aura tier, Crystal Defense shop route, Punch Island vendor, and current 2,000 Crystal Coin cost.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Destroyer Aura | ${siteConfig.name}`,
+      description: "Destroyer Aura Sailor Piece page with the Legendary aura tier, Crystal Defense shop route, Punch Island vendor, and current 2,000 Crystal Coin cost.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {

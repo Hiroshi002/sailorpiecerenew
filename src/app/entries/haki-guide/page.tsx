@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Haki | Sailor Piece Wiki",
-  description: "Armament, Observation, and Conqueror Haki effects, scaling, trainer locations, unlock routes, leveling, and Haki color rerolls.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Haki | ${siteConfig.name}`,
+    description: "Armament, Observation, and Conqueror Haki effects, scaling, trainer locations, unlock routes, leveling, and Haki color rerolls.",
+    openGraph: {
+      title: `Haki | ${siteConfig.name}`,
+      description: "Armament, Observation, and Conqueror Haki effects, scaling, trainer locations, unlock routes, leveling, and Haki color rerolls.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Haki | ${siteConfig.name}`,
+      description: "Armament, Observation, and Conqueror Haki effects, scaling, trainer locations, unlock routes, leveling, and Haki color rerolls.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {
@@ -31,6 +50,58 @@ const metaItems = [
     "label": "Trainer islands",
     "value": "Snow Island, Desert Island, Shibuya Station"
   }
+];
+
+const facts = [
+  "There are three Haki types in Sailor Piece: Armament, Observation, and Conqueror.",
+  "Armament Haki is your direct damage layer, Observation Haki is your dodge layer, and Conqueror Haki is your late-game passive plus active burst layer.",
+  "Armament Haki is consistently published at +25% base damage with +0.5% damage per level.",
+  "Observation Haki starts with 5 dodges and gains +1 dodge every 10 levels, reaching 10 dodges at level 50.",
+  "Haki Color only changes the visual effect on Armament Haki and does not add stats."
+];
+
+const hakiDetails = [
+  { name: "Armament Haki", effect: "Adds a direct damage buff to your current build.", scaling: "Starts at +25% damage and gains +0.5% damage per level.", usage: "Press G to toggle it on and off." },
+  { name: "Observation Haki", effect: "Adds automatic dodges against incoming attacks.", scaling: "Starts with 5 dodges and gains 1 extra dodge every 10 levels.", usage: "Press H to activate the dodge pool." },
+  { name: "Conqueror Haki", effect: "Adds passive damage and an active AoE blast.", scaling: "Currently tracked at +1% damage per level up to level 35/40.", usage: "Press J to trigger the active blast." }
+];
+
+const activationKeys = [
+  { type: "Armament", key: "G", note: "Can be set to auto-use in Settings." },
+  { type: "Observation", key: "H", note: "Can be set to auto-use in Settings." },
+  { type: "Conqueror", key: "J", note: "Manual blast or auto-use if supported." }
+];
+
+const trainers = [
+  { type: "Armament", npc: "Haki Trainer", location: "Snow Island (Edge)", cost: "250k Money + 250 Gems" },
+  { type: "Observation", npc: "Observation Trainer", location: "Desert Island (Balcony)", cost: "250k Money + 300 Gems" },
+  { type: "Conqueror", npc: "Conqueror Trainer", location: "Shibuya Station", cost: "Fragment + Full Questline" }
+];
+
+const armamentQuest = [
+  { step: "Quest 1", requirement: "Kill 150 NPCs using Combat" },
+  { step: "Quest 2", requirement: "Use Combat Z skill 65 times" },
+  { step: "Quest 3", requirement: "Punch 750 times using Combat" }
+];
+
+const conquerorPrereqs = [
+  "Armament Haki level 40",
+  "Observation Haki level 25",
+  "Ascension level 5",
+  "1 Conqueror Fragment"
+];
+
+const levelingInfo = [
+  { type: "Armament", logic: "Kill NPCs while active.", result: "+0.5% dmg per level." },
+  { type: "Observation", logic: "Dodge attacks while active.", result: "+1 dodge every 10 levels." },
+  { type: "Conqueror", logic: "Level on supported builds.", result: "+1% dmg per level." }
+];
+
+const hakiColors = [
+  { part: "Applies to", note: "Armament Haki only" },
+  { part: "Effect", note: "Cosmetic only, no stat gain" },
+  { part: "Source", note: "Rerolls from bosses/codes" },
+  { part: "Chase Color", note: "Rainbow (Rare)" }
 ];
 
 const moveset: any[] = [];
@@ -122,8 +193,112 @@ export default function EntryPage() {
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
             <ul className="space-y-6">
-              
+              {facts.map((fact, i) => (
+                <li key={i} className="flex items-start gap-4 text-gray-300 group/item transition-colors hover:text-white">
+                  <span className="mt-1.5 w-2 h-2 rounded-full bg-[var(--accent-red)] shadow-[0_0_10px_rgba(255,30,56,0.5)] shrink-0" />
+                  <span className="text-lg leading-relaxed">{fact}</span>
+                </li>
+              ))}
             </ul>
+          </div>
+        </div>
+
+        {/* Haki Details */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Haki Types & Effects</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-white/20 text-gray-400 font-mono text-sm uppercase">
+                    <th className="py-4 px-4">Haki</th>
+                    <th className="py-4 px-4">Effect</th>
+                    <th className="py-4 px-4">Scaling</th>
+                    <th className="py-4 px-4 text-right">Usage</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  {hakiDetails.map((haki, i) => (
+                    <tr key={i} className="hover:bg-white/5 transition-colors group/row">
+                      <td className="py-4 px-4 font-bold text-white group-hover/row:text-[var(--accent-red)] transition-colors">{haki.name}</td>
+                      <td className="py-4 px-4 text-gray-300 text-sm">{haki.effect}</td>
+                      <td className="py-4 px-4 text-xs text-gray-400 font-mono italic">{haki.scaling}</td>
+                      <td className="py-4 px-4 text-right font-semibold text-blue-400">{haki.usage}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        {/* Questlines & Requirements */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+          <div className="panel-action clip-diagonal p-8 relative overflow-hidden group">
+            <h2 className="text-2xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Armament Quest</h2>
+            <div className="space-y-4">
+              {armamentQuest.map((q, i) => (
+                <div key={i} className="flex justify-between items-center bg-black/40 p-4 rounded-xl border border-white/5">
+                  <span className="text-[var(--accent-red)] font-bold">{q.step}</span>
+                  <span className="text-gray-300 text-sm">{q.requirement}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="panel-action clip-diagonal p-8 relative overflow-hidden group">
+            <h2 className="text-2xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Conqueror Prereqs</h2>
+            <ul className="space-y-3">
+              {conquerorPrereqs.map((p, i) => (
+                <li key={i} className="flex items-center gap-3 text-gray-300 text-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Trainers & Locations */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Trainers & Locations</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              {trainers.map((t, i) => (
+                <div key={i} className="bg-white/5 border border-white/10 p-6 rounded-xl hover:border-[var(--accent-red)] transition-all">
+                  <div className="text-xs text-gray-400 uppercase font-mono mb-2">{t.type}</div>
+                  <div className="text-lg font-black text-white mb-2">{t.npc}</div>
+                  <div className="text-sm text-blue-400 mb-4">{t.location}</div>
+                  <div className="text-xs text-gray-500 italic">{t.cost}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Leveling & Colors */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+          <div className="panel-action clip-diagonal p-8 relative overflow-hidden group">
+            <h2 className="text-2xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Leveling Logic</h2>
+            <div className="space-y-4">
+              {levelingInfo.map((l, i) => (
+                <div key={i} className="text-sm">
+                  <div className="text-white font-bold mb-1">{l.type}</div>
+                  <div className="text-gray-400 mb-1">{l.logic}</div>
+                  <div className="text-[var(--accent-red)] font-mono">{l.result}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="panel-action clip-diagonal p-8 relative overflow-hidden group">
+            <h2 className="text-2xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Haki Colors</h2>
+            <div className="space-y-3">
+              {hakiColors.map((c, i) => (
+                <div key={i} className="flex justify-between items-center text-sm border-b border-white/5 pb-2">
+                  <span className="text-gray-500 font-mono">{c.part}</span>
+                  <span className="text-gray-200">{c.note}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

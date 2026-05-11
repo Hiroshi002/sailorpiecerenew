@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -15,10 +16,28 @@ import {
   ExternalLink
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Official Links | Sailor Piece Wiki",
-  description: "Official Sailor Piece destinations and community links.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Official Links | ${siteConfig.name}`,
+    description: "Official Sailor Piece destinations and community links.",
+    openGraph: {
+      title: `Official Links | ${siteConfig.name}`,
+      description: "Official Sailor Piece destinations and community links.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Official Links | ${siteConfig.name}`,
+      description: "Official Sailor Piece destinations and community links.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const linkGroups = [
   {

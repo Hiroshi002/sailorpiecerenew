@@ -1,18 +1,32 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import { Scale, ShoppingBag } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Trade Values | Sailor Piece Wiki",
-  description: "Official trading links, dev product prices, CCR anchors, and player market tools.",
-  openGraph: {
-    title: "Trade Values | Sailor Piece Wiki",
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Trade Values | ${siteConfig.name}`,
     description: "Official trading links, dev product prices, CCR anchors, and player market tools.",
-    images: [{ url: "/images/site/sailorpiece-wiki-cover-v2.webp" }],
-  },
-};
+    openGraph: {
+      title: `Trade Values | ${siteConfig.name}`,
+      description: "Official trading links, dev product prices, CCR anchors, and player market tools.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Trade Values | ${siteConfig.name}`,
+      description: "Official trading links, dev product prices, CCR anchors, and player market tools.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const tradeEntries = [
   {

@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Header from '@/components/Header';
@@ -5,35 +6,35 @@ import Footer from '@/components/Footer';
 import Link from 'next/link';
 import VideoMovesetCard from '@/components/VideoMovesetCard';
 
-export const metadata: Metadata = {
-  title: "How to Get The World in Sailor Piece",
-  description: "The World guide for Sailor Piece with trainer location, quest steps, materials, mastery, and F move progression."
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `How to Get The World in Sailor Piece | ${siteConfig.name}`,
+    description: "The World guide for Sailor Piece with trainer location, quest steps, materials, mastery, and F move progression.",
+    openGraph: {
+      title: `How to Get The World in Sailor Piece | ${siteConfig.name}`,
+      description: "The World guide for Sailor Piece with trainer location, quest steps, materials, mastery, and F move progression.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `How to Get The World in Sailor Piece | ${siteConfig.name}`,
+      description: "The World guide for Sailor Piece with trainer location, quest steps, materials, mastery, and F move progression.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 export default function Page() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-start pb-16 md:pb-24 border-l-2 md:border-l-4 border-r-2 md:border-r-4 border-[var(--accent-red)] mx-auto max-w-[1920px] shadow-[inset_0_0_40px_rgba(255,30,56,0.1)] md:shadow-[inset_0_0_80px_rgba(255,30,56,0.15)] relative font-sans bg-slate-950">
-      
-      {/* GLOBAL BACKGROUND ELEMENTS */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute inset-0 bg-vignette opacity-80" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,30,56,0.1),transparent_70%)]" />
-      </div>
-
+    <div className="w-full flex flex-col items-center justify-start pb-16 md:pb-24 relative font-sans">
       <Header />
 
-      <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10 block">
-        
-        {/* Breadcrumb */}
-        <div className="text-sm text-gray-400 mb-6 font-mono opacity-80">
-          <Link href="/" className="hover:text-[var(--accent-red)] transition-colors">Home</Link>
-          <span className="mx-2">/</span>
-          <Link href="/melees" className="hover:text-[var(--accent-red)] transition-colors">Melees</Link>
-          <span className="mx-2">/</span>
-          <span className="text-gray-300">The World</span>
-        </div>
-
-        {/* Hero */}
+      <main className="w-full max-w-[1400px] px-4 sm:px-6 mt-8 sm:mt-12 z-10 relative">
         <div className="mb-12 flex flex-col md:flex-row gap-8 items-start">
           <div className="flex-1">
             <div className="flex flex-wrap gap-2 mb-6">
@@ -48,7 +49,7 @@ export default function Page() {
               </div>
             </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 text-white text-kinetic uppercase tracking-normal drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" style={{ textShadow: "3px 3px 0px rgba(255, 30, 56, 1), -1px -1px 0px rgba(0,0,0,1)" }}>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 text-white text-kinetic uppercase tracking-normal drop-shadow-[0_0_20px_rgba(255,255,255,0.2)] neon-text-red" style={{ textShadow: "3px 3px 0px rgba(255, 30, 56, 1), -1px -1px 0px rgba(0,0,0,1)" }}>
               The World
             </h1>
 
@@ -76,13 +77,14 @@ export default function Page() {
             </div>
           </div>
           
-          <div className="w-full md:w-1/3 shrink-0 rounded-2xl overflow-hidden border-2 border-white/10 shadow-[0_0_30px_rgba(255,30,56,0.2)] bg-black relative aspect-square">
+          <div className="w-full md:w-1/3 shrink-0 rounded-2xl overflow-hidden border-2 border-white/10 shadow-[0_0_30px_rgba(255,30,56,0.2)] bg-black relative aspect-square manga-border clip-diagonal">
             <Image 
               src="/images/hero/melee-theworld.webp" 
               alt="The World hero image" 
               fill
               className="object-cover object-top opacity-90 transition-opacity duration-500 hover:opacity-100"
               sizes="(max-width: 768px) 100vw, 33vw"
+              priority
             />
           </div>
         </div>

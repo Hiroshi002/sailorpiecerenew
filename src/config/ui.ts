@@ -1,0 +1,211 @@
+import { getRuntimeConfig } from "@/lib/config-loader";
+
+const DEFAULT_UI_CONFIG = {
+  th: {
+    hero: {
+      title: "Sailor Wiki",
+      ignited: "ทะยานสู่จุดสูงสุด",
+      guideHub: "ศูนย์รวมคู่มือฉบับแฟนเมด",
+      subtitle: "ปลดปล่อยพลังแห่งท้องทะเล",
+      description: "วิกิเกม Sailor Wiki ฉบับรวมคู่มือสมบูรณ์แบบ แนะนำแนวทางการเล่นแบบเจาะลึก ทั้งไกด์สำหรับมุ่งหน้าไป Sea 2, เส้นทางหาชิ้นส่วน Ancient Fragments, และแนวทางการคราฟอาวุธสุดโกงอย่าง Great Mage หรือ Cosmic Garou!",
+    },
+    search: {
+      placeholder: "ค้นหาวิกิ...",
+      resultsTitle: "🔥 ผลการค้นหา",
+      noResults: "ไม่พบข้อมูลที่คุณค้นหา…",
+      ariaLabel: "ค้นหาข้อมูลในวิกิ",
+    },
+    navigation: {
+      home: "หน้าแรก",
+      codes: "โค้ดล่าสุด",
+      allCategories: "หมวดหมู่ทั้งหมด",
+      allCategoriesDesc: "เจาะลึกทุกระบบสายการเล่น ไอเทมดรอปบอส และแผนที่จุดฟาร์ม",
+      quickAccess: "เมนูลัด",
+      quickAccessDesc: "เข้าถึงหน้าข้อมูลอาวุธและสไตล์การต่อสู้ระดับท็อปเทียร์ด้วยคลิกเดียว",
+      browseTitle: "เริ่มใช้งานวิกิ",
+      fastAccessTag: "เนื้อหาที่น่าสนใจ",
+    },
+    stats: {
+      pages: "หน้าข้อมูล",
+      categories: "หมวดหมู่",
+      searchable: "คำค้นหา",
+      updated: "อัปเดตล่าสุด",
+      date: "10 พ.ค. 2569",
+    },
+    about: {
+      sectionTitle: "เกี่ยวกับวิกินี้",
+      card1: {
+        tag: "ข้อมูลในบล็อกนี้มีอะไรบ้าง?",
+        title: "เจาะลึกระบบสเตตัส, คู่มือการฟาร์มบอส, และข้อมูลสาย End-game",
+        description: "วิกินี้ถูกทำขึ้นเพื่ออธิบายและวิเคราะห์ระบบของเกาะต่างๆ ระดับความยาก การผสมไอเทม เพื่อลดปัญหาการเดินหลงทางสำหรับผู้เล่นใหม่และช่วยแนะนำของฟาร์มในช่วงท้ายเกม ไม่ต้องงมข้อมูลเองอีกต่อไป"
+      },
+      card2: {
+        tag: "ออกแบบมาสำหรับทุกคน",
+        title: "รองรับมือถือ แท็บเล็ต อ่านง่าย ไว้วางแผนการฟาร์มล่วงหน้า",
+        description: "ช่องค้นหา หรือ Search หมวดหมู่ด้านบน จะช่วยดึงคุณเข้าสู่บทหน้าคู่มือหรือหน้าเนื้อหาได้อย่างรวดเร็ว ในหน้าคู่มือต่างๆ ยังมีการระบุจุดเชื่อมต่อไปยังวัสดุหรือชิ้นส่วนประกอบไอเทมอีกด้วย!"
+      }
+    },
+    footer: {
+      about: "เกี่ยวกับ",
+      directory: "สารบัญ",
+      sea2: "Sea 2",
+      official: "ลิงก์หลัก",
+      changelog: "ประวัติการอัปเดต",
+      contact: "ติดต่อ",
+      privacy: "นโยบายความเป็นส่วนตัว",
+      terms: "ข้อตกลงการใช้งาน",
+      copyright: "สงวนลิขสิทธิ์",
+      mythic: "คลังข้อมูลระดับตำนาน • คู่มือการเดินทางฉบับแฟนเมด",
+      charted: "สร้างด้วยใจ",
+      heritage: "มรดกชุมชน"
+    },
+    directory: {
+      title: "สารบัญ",
+      subtitle: "วิกิ",
+      description: "เข้าถึงทุกหมวดหมู่หลัก หน้าศูนย์กลาง และบทความที่เผยแพร่ทั้งหมดจากสารบัญที่รวบรวมไว้ให้คุณ",
+      archives: "คลังข้อมูลทั้งหมด",
+      heroDesc: "สำรวจคอลเลกชันคู่มือ ฐานข้อมูล และเครื่องมือทั้งหมดของเรา",
+      visit: "เข้าชม",
+      groups: [
+        {
+          title: "ทางเข้าหลัก",
+          description: "จุดเริ่มต้นที่สำคัญสำหรับผู้เล่นทุกคน",
+          links: [
+            { title: "หน้าหลักสารานุกรม", desc: "พอร์ทัลหลักพร้อมระบบค้นหาและเทรนด์ยอดนิยม" },
+            { title: "โค้ดของขวัญล่าสุด", desc: "รหัสที่ใช้งานได้จริงและรางวัลต่างๆ" },
+            { title: "เส้นทางพัฒนาผู้เล่น", desc: "เส้นทางที่มีประสิทธิภาพที่สุดสู่ช่วงท้ายเกม" },
+            { title: "โลกที่สอง (Sea 2)", desc: "เงื่อนไขการปลดล็อกและแผนที่บอส" },
+          ]
+        },
+        {
+          title: "หมวดหมู่ฐานข้อมูล",
+          description: "เจาะลึกระบบเกมเฉพาะด้าน",
+          links: [
+            { title: "สไตล์การต่อสู้", desc: "รูปแบบการต่อสู้ ผู้ฝึกสอน และค่าใช้จ่าย" },
+            { title: "คลังแสงอาวุธ", desc: "ดาบ การวิวัฒนาการ และความชำนาญ" },
+            { title: "การสำแดงพลัง", desc: "ผลปีศาจและความสามารถเฉพาะตัว" },
+            { title: "บรรพบุรุษและสายเลือด", desc: "บัฟเผ่าพันธุ์และข้อมูลลักษณะของแคลน" },
+          ]
+        },
+        {
+          title: "ยูทิลิตี้ขั้นสูง",
+          description: "เครื่องมือสำหรับผู้เล่นที่ทุ่มเท",
+          links: [
+            { title: "จุดหาชิ้นส่วนโบราณ", desc: "ตำแหน่งของชิ้นส่วนโบราณทั้ง 20 ชิ้น" },
+            { title: "เครื่องคำนวณการต่อสู้", desc: "การจำลองบิลด์และตัวชี้วัดความเสียหาย" },
+            { title: "จุดหมายปลายทางอย่างเป็นทางการ", desc: "Roblox, Discord และ Trello" },
+            { title: "การวิเคราะห์ระบบ", desc: "การปรับปรุงการพัฒนาและการวินิจฉัยหาสาเหตุ" },
+            { title: "ข้อมูลวิเคราะห์ผู้ใช้", desc: "พฤติกรรมผู้ชมและเทรนด์การค้นหายอดนิยม" },
+            { title: "บันทึกการเปลี่ยนแปลง", desc: "ติดตามการปรับปรุงล่าสุดของเว็บไซต์" },
+          ]
+        }
+      ]
+    }
+  },
+  en: {
+    hero: {
+      title: "Sailor Piece Wiki",
+      ignited: "Ignite Your Journey",
+      guideHub: "Ultimate Fan-made Guide Hub",
+      subtitle: "Unleash the Grand Sea",
+      description: "The ultimate Sailor Piece Wiki. Comprehensive guides for Sea 2 progression, Ancient Fragments farming, and crafting legendary weapons like Great Mage and Cosmic Garou.",
+    },
+    search: {
+      placeholder: "Search entries...",
+      resultsTitle: "🔥 Search Results",
+      noResults: "No matching entries found…",
+      ariaLabel: "Search the wiki",
+    },
+    navigation: {
+      home: "Home",
+      codes: "Active Codes",
+      allCategories: "All Categories",
+      allCategoriesDesc: "Explore every system, boss drop, and farming location.",
+      quickAccess: "Quick Access",
+      quickAccessDesc: "Access top-tier weapons and combat styles with a single click.",
+      browseTitle: "Browse Wiki",
+      fastAccessTag: "Featured Content",
+    },
+    stats: {
+      pages: "Total Pages",
+      categories: "Categories",
+      searchable: "Searchable Items",
+      updated: "Last Updated",
+      date: "10 May 2026",
+    },
+    about: {
+      sectionTitle: "About This Wiki",
+      card1: {
+        tag: "What's in this wiki?",
+        title: "Stats Breakdown, Boss Guides, and End-game Analysis",
+        description: "This wiki is built to explain island systems, difficulty levels, and item crafting to help new players and end-game farmers alike."
+      },
+      card2: {
+        tag: "Designed for Everyone",
+        title: "Mobile Friendly, Fast, and Optimized for Planning",
+        description: "Our search engine and category navigation get you to the guides you need instantly, with clear links to related materials and components."
+      }
+    },
+    footer: {
+      about: "About",
+      directory: "Directory",
+      sea2: "Sea 2",
+      official: "Official Links",
+      changelog: "Changelog",
+      contact: "Contact",
+      privacy: "Privacy Policy",
+      terms: "Terms",
+      copyright: "Copyright",
+      mythic: "Mythic Archives • Fan-Made Voyage Guide",
+      charted: "Charted with Pride",
+      heritage: "Community Heritage"
+    },
+    directory: {
+      title: "Site",
+      subtitle: "Directory",
+      description: "Browse every major category, hub page, and published entry from one refined directory.",
+      archives: "Full Archives",
+      heroDesc: "Navigate through our complete collection of guides, databases, and tools.",
+      visit: "Visit",
+      groups: [
+        {
+          title: "Primary Access",
+          description: "Crucial entry points for all players.",
+          links: [
+            { title: "Encyclopedia Home", desc: "The main portal with search and trending gear." },
+            { title: "Latest Gift Codes", desc: "Verified active codes and rewards." },
+            { title: "Progression Path", desc: "The most efficient route to end-game." },
+            { title: "The Second Sea", desc: "Unlock requirements and boss mapping." },
+          ]
+        },
+        {
+          title: "Database Categories",
+          description: "Deep-dive into specific game systems.",
+          links: [
+            { title: "Combat Styles", desc: "Fighting styles, trainers, and costs." },
+            { title: "Weaponry Archives", desc: "Swords, evolutions, and mastery." },
+            { title: "Power Manifestations", desc: "Devil fruits and unique abilities." },
+            { title: "Ancestry & Lineage", desc: "Race buffs and clan trait data." },
+          ]
+        },
+        {
+          title: "Advanced Utility",
+          description: "Tools for the dedicated player.",
+          links: [
+            { title: "Fragment Locator", desc: "All 20 ancient fragment locations." },
+            { title: "Combat Calculator", desc: "Build simulation and damage metrics." },
+            { title: "Official Destinations", desc: "Roblox, Discord, and Trello." },
+            { title: "System Analysis", desc: "Development rework and root cause diagnostics." },
+            { title: "User Analytics", desc: "Audience behavior and popular search trends." },
+            { title: "Site Changelog", desc: "Track our recent site improvements." },
+          ]
+        }
+      ]
+    }
+  }
+};
+
+// Use a function to get the config to ensure fresh data during dev
+export const getUIConfig = () => getRuntimeConfig("ui", DEFAULT_UI_CONFIG);
+
+export type UIConfig = typeof DEFAULT_UI_CONFIG;

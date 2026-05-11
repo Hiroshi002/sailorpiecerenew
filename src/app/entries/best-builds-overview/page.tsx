@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,107 +6,228 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Sailor Piece Best Builds | Max Damage, Luck, Endgame Caps",
-  description: "Sailor Piece best builds guide with max damage builds, luck builds, theoretical endgame caps, and progression planning.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Sailor Piece Best Builds | ${siteConfig.name}`,
+    description: "Sailor Piece best builds guide with max damage builds, luck builds, theoretical endgame caps, and progression planning.",
+    openGraph: {
+      title: `Sailor Piece Best Builds | ${siteConfig.name}`,
+      description: "Sailor Piece best builds guide with max damage builds, luck builds, theoretical endgame caps, and progression planning.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Sailor Piece Best Builds | ${siteConfig.name}`,
+      description: "Sailor Piece best builds guide with max damage builds, luck builds, theoretical endgame caps, and progression planning.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {
-    "label": "Main goals",
-    "value": "Damage and Luck"
+    "label": "Start here",
+    "value": "Pick one route"
   },
   {
-    "label": "Best overall sword",
-    "value": "Ice Queen / Dragon Goddess"
+    "label": "Sword shell",
+    "value": "Dual Wielder / Sun God / Ice Queen"
   },
   {
-    "label": "Best DPS sword path",
-    "value": "Ice Queen / Dragon Goddess"
-  },
-  {
-    "label": "Best melee path",
+    "label": "Melee shell",
     "value": "The World / Cosmic Being"
   },
   {
-    "label": "Best endgame races",
-    "value": "Luckborn / Warlord"
+    "label": "Farming shell",
+    "value": "Archangel / Primordial"
   },
   {
-    "label": "Best fruit pair",
-    "value": "Light / Quake"
+    "label": "Main systems",
+    "value": "Haki / Skill Tree / Ascension"
+  },
+  {
+    "label": "HP benchmark",
+    "value": "About 250M route-dependent"
   }
 ];
 
-const moveset: any[] = [];
+const facts = [
+  "Start by choosing one build goal: sword damage, melee damage, or luck farming. The staged guide below explains what to chase before the cap tables matter.",
+  "Strong builds are layered across weapons, melees, races, clans, traits, powers, spec passives, titles, accessories, artifacts, runes, and permanent account systems.",
+  "Current endgame targets assume capped Haki, Ascension, Skill Tree, Blessings, Enchants, Tower, Boss Rush, Crystal Defense, Artifacts, and route-specific rerolls.",
+  "Current max-health guidance is closer to roughly 250,000,000 HP on heavy HP routes, so older low-health notes should not be used as cap targets.",
+  "Damage, luck, and utility totals are kept separate because artifact rolls, stat rerolls, gamepasses, and global events can change the visible panel number."
+];
 
-const routeDetails: any[] = [];
+const stagedGuides = [
+  {
+    title: "Stage 1 - Pick your build goal",
+    items: [
+      "Pick Max Sword Damage if your weapon is the skill line carrying most of your clears. Dual Wielder is the current pure DPS king, Sun God is the damage-forward Ice Queen-style option, and Ice Queen remains the broad versatility pick.",
+      "Pick Max Melee Damage if your fighting style is the main damage source. The World and Cosmic Being are the real Sea 2 meta targets, while Spirit Warrior is an A-tier substitute if you are still missing the better routes.",
+      "Pick Max Luck Farming if the account is built around drops, rerolls, tower loops, boss loops, and long farming sessions.",
+      "Do not compare exact cap numbers until the goal is clear. Sword, melee, and luck builds use different best slots, different swaps, and different artifact rolls.",
+      "Use the staged sections first, then use the large tables as reference once you know which route you are actually building."
+    ]
+  },
+  {
+    title: "Stage 2 - Build a playable shell",
+    items: [
+      "Secure one strong main route before chasing every best-in-slot piece. A finished good route usually beats a half-built perfect route.",
+      "For sword accounts, aim toward Dual Wielder, Sun God, Ice Queen, or Dragon Goddess while keeping a useful melee sidecar for coverage.",
+      "For melee accounts, aim toward The World or Cosmic Being while keeping Spirit Warrior as a substitute route rather than the final meta target.",
+      "For luck accounts, keep enough damage to clear quickly. Archangel, Primordial, Celestial Favor, Radiant Rune, and Crystal Luck Relic matter most only when the account can still kill efficiently.",
+      "Use good fallbacks while farming: Sun Outfit or Demon Wing before Dual Outfit, strong legendary artifacts before perfect Sacred Dominion rolls, and practical rerolls before full Z lines."
+    ]
+  },
+  {
+    title: "Stage 3 - Finish account systems",
+    items: [
+      "Treat Haki, Ascension, Skill Tree, Blessings, Enchants, Artifacts, Infinite Tower, Boss Rush, Crystal Defense, and Guild upgrades as the backbone of the build.",
+      "Current cap assumptions include Armament level 100, Observation level 50, Conqueror level 35, Ascension 10, 490 Skill Points, B10 main routes, E10 accessories, max Tower upgrades, max Boss Rush upgrades, and max Crystal Defense upgrades.",
+      "Crystal Defense matters directly now because full upgrades add Damage, Crit Damage, Crit Chance, HP, and Luck to the account.",
+      "Finish the permanent systems before obsessing over the final percent. They improve every route you play and make later item farming easier."
+    ]
+  },
+  {
+    title: "Stage 5 - Start min-max cleanup",
+    items: [
+      "Once the route works, chase the expensive cleanup: Z or SSS stat rerolls, perfect artifact mains and substats, final aura and cosmetic choices, and route-specific titles.",
+      "Use the damage cap, luck cap, and utility tables as math references, not as the first shopping list for a newer account.",
+      "Health rows now use a higher route-dependent benchmark near 250,000,000 HP instead of the older low estimates.",
+      "Luck math includes the base panel total first, then doubles through the 2x Luck gamepass or a 2x global luck event when those boosts are active."
+    ]
+  }
+];
+
+const routeUpgrades = {
+  title: "Stage 4 - Choose route upgrades",
+  headers: ["Goal", "Core route", "Important swaps"],
+  rows: [
+    {
+      goal: "Sword damage",
+      route: "Dual Wielder, Sun God, Ice Queen, or Dragon Goddess at B10, Reaper, Doombringer, Frostbane, Emperor, Primordial Rune, Crystal Damage Relic, Sacred Dominion artifacts",
+      swaps: "Use Archangel when farming value matters, Devil when +1 drops matter, and Sun Outfit or Demon Wing until Dual Outfit is ready."
+    },
+    {
+      goal: "Melee damage",
+      route: "The World or Cosmic Being at B10, with Spirit Warrior as an A-tier substitute; Archangel, Empyrean, Upper or Senzu, Emperor, Primordial Rune, Crystal Damage Relic, Sacred Dominion artifacts",
+      swaps: "Use Archangel as the melee and farming race, Reaper as the raw-damage and execute swap, and Berserker as the easier damage passive fallback."
+    },
+    {
+      goal: "Luck farming",
+      route: "Archangel, Primordial, Devil, Radiant Rune, Crystal Luck Relic, Sacred Dominion artifacts with luck substats, maxed permanent systems",
+      swaps: "Use Cosmic Being for Crystal Defense AFK, and Gilgamesh or Moon Slayer for broader farming patterns."
+    }
+  ]
+};
+
+const sea2RouteNotes = {
+  title: "Sea 2 route notes",
+  headers: ["Route", "Why it matters", "Best fit"],
+  rows: [
+    {
+      route: "Ice Queen",
+      why: "Still one of the cleanest broad PvE sword routes thanks to its damage buildup, strong clear pattern, and Frostbane synergy on sword-focused accounts.",
+      fit: "Best broad sword route for repeated PvE clears and endgame damage buildup"
+    },
+    {
+      route: "Dragon Goddess",
+      why: "The latest reported buff wave pushes this back into the top Sea 2 sword lane, with a stronger all-around damage route instead of only a balanced middle-ground profile.",
+      fit: "S+ Sea 2 sea-beast sword route after repeated buffs"
+    },
+    {
+      route: "Sun God",
+      why: "S+ sword route that plays like Ice Queen with more value pushed into raw damage and slightly less versatility in the overall arsenal.",
+      fit: "S+ sword route with a high damage ceiling"
+    },
+    {
+      route: "The World",
+      why: "The king of Sea 2 AFK melee clears and repeated farm patterns. Its high damage, time-stop niche, and broad AoE coverage keep it at the top of the melee meta.",
+      fit: "Top melee route for AFK clears and time-stop utility"
+    },
+    {
+      route: "Cosmic Being",
+      why: "One of the highest live-damage melee routes after the recent buff wave. Its lack of endlag and fast cooldowns make it the meta pick for active bossing and Crystal Defense.",
+      fit: "Top live-damage melee route for bossing and defense"
+    }
+  ]
+};
+
+const capSetup = {
+  title: "Theoretical top-limit setup",
+  headers: ["Layer", "Top cap target", "Current cap note"],
+  rows: [
+    { layer: "Sword", target: "Dual Wielder, Sun God, Ice Queen, or Dragon Goddess at B10", note: "Dual Wielder is pure DPS king, Sun God is damage-forward S+ option." },
+    { layer: "Melee", target: "The World or Cosmic Being at B10, with Spirit Warrior fallback", note: "The World for AFK, Cosmic Being for live damage." },
+    { layer: "Accessory", target: "Dual Outfit at E10, Sun Outfit or Demon Wing at E10", note: "Dual Outfit leads at +150% Damage." },
+    { layer: "Race", target: "Reaper for sword damage, Archangel for melee/luck", note: "Reaper adds execute and raw sword damage." },
+    { layer: "Clan", target: "Emperor for damage, Devil for farming, Senzu for burst", note: "Emperor's 2.30x Damage is the current meta ceiling." },
+    { layer: "Trait", target: "Godly or SSS Sword/Melee/Luck lines", note: "Focus on Z-tier rerolls for maximum impact." },
+    { layer: "Artifacts", target: "Full Sacred Dominion set with perfect substats", note: "Sacred Dominion provides the strongest offensive set bonuses." }
+  ]
+};
+
+const swordCapTotals = {
+  title: "Sword cap totals",
+  headers: ["Category", "Stat", "Approximate top-limit total"],
+  rows: [
+    { cat: "Offense", stat: "Damage %", total: "About +1,190% to +1,205% direct Damage" },
+    { cat: "Offense", stat: "Sword Damage %", total: "About +40% to +45% rounded" },
+    { cat: "Defense", stat: "Max Health", total: "About 250,000,000 HP route-dependent" },
+    { cat: "Utility", stat: "Luck %", total: "About +386.5% base, or +773% with 2x pass" }
+  ]
+};
+
+const universalChecklist = {
+  title: "Universal max-out checklist",
+  headers: ["Layer", "Target"],
+  rows: [
+    { layer: "Ascension", target: "Ascension 10" },
+    { layer: "Armament Haki", target: "Level 100" },
+    { layer: "Observation Haki", target: "Level 50" },
+    { layer: "Conqueror Haki", target: "Level 35 and active" },
+    { layer: "Skill Tree", target: "490 SP target" },
+    { layer: "Weapon Blessing", target: "B10 main routes" },
+    { layer: "Accessory Enchant", target: "E10 main pieces" }
+  ]
+};
 
 const relatedPages = [
   {
     "href": "/entries/weapons-overview/index",
     "title": "Weapons and Swords",
-    "summary": "Current sword roster and progression routes, from starter sellers to late-game upgrade chains and shared upgrade systems."
+    "summary": "Current sword roster and progression routes, from starter sellers to late-game upgrade chains."
   },
   {
     "href": "/entries/specs-overview/index",
     "title": "Melees and Fighting Styles",
-    "summary": "Current melee roster in Sailor Piece and the shared way fighting styles scale into late-game content."
+    "summary": "Current melee roster in Sailor Piece and the shared way fighting styles scale."
   },
   {
     "href": "/entries/races-overview/index",
     "title": "Races",
-    "summary": "Race rerolls, passive bonuses, and build-defining races used by late-game weapons and specs."
+    "summary": "Race rerolls, passive bonuses, and build-defining races."
   },
   {
     "href": "/entries/clans-overview/index",
     "title": "Clans",
-    "summary": "Clan rerolls, clan passives, and the current late-game clan roster used for melee, sword, and farming builds."
-  },
-  {
-    "href": "/entries/bloodlines-system/index",
-    "title": "Bloodlines",
-    "summary": "Sea 2 Bloodlines system page with the corrected confirmed stat table now tracked for Commoner, Demonblood, Hunter, Nightfall, Stormborn, Dawnbringer, Astral, Vizard, Primordial, and Demonic."
-  },
-  {
-    "href": "/entries/traits-overview/index",
-    "title": "Traits",
-    "summary": "Trait rerolls, full current trait stats, rarity odds, and the current weakest-to-strongest trait order in Sailor Piece."
-  },
-  {
-    "href": "/entries/power-system-overview/index",
-    "title": "Power System",
-    "summary": "Late-game Lawless Island system that rolls build-wide power traits using Power Shards."
-  },
-  {
-    "href": "/entries/spec-passives-overview/index",
-    "title": "Spec Passives",
-    "summary": "Judgement Island passive system that adds a rerolled buff layer onto your swords and fighting styles."
+    "summary": "Clan rerolls, clan passives, and the current late-game clan roster."
   },
   {
     "href": "/entries/artifacts-overview/index",
     "title": "Artifacts",
-    "summary": "Artifact unlocks, ranked set bonuses, stat pools, dust upgrades, and Snow Island milestone progression."
-  },
-  {
-    "href": "/entries/relics-system/index",
-    "title": "Relics",
-    "summary": "Sea 2 Relics system page with the Relic Crafter NPC, the currently confirmed forge recipes, and the tracked Relic Part enemy routes by island, level band, and current drop chances."
-  },
-  {
-    "href": "/entries/accessories-overview/index",
-    "title": "Accessories",
-    "summary": "Boss-drop and shop accessories with current stats, obtainment routes, and the accessory pieces players build around in late game."
-  },
-  {
-    "href": "/entries/../sea-2/index",
-    "title": "Sea 2 Guide",
-    "summary": "Punch Island survival mode with permanent Damage, Crit Damage, Crit Chance, HP, and Luck upgrades that now matter directly for Best Builds caps."
+    "summary": "Artifact unlocks, ranked set bonuses, stat pools, and dust upgrades."
   },
   {
     "href": "/entries/runes-overview/index",
     "title": "Runes",
-    "summary": "Rune Dungeon and Infinite Tower rune system, including current rune tiers, leveling, and the strongest rune routes."
+    "summary": "Rune Dungeon and Infinite Tower rune system, leveling, and the strongest rune routes."
   }
 ];
 
@@ -175,58 +297,132 @@ export default function EntryPage() {
           
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
-            <ul className="space-y-6">
-              
+            <ul className="space-y-4">
+              {facts.map((fact, i) => (
+                <li key={i} className="flex items-start gap-3 text-gray-300">
+                  <span className="mt-1.5 w-2 h-2 rounded-full bg-[var(--accent-red)] shrink-0 shadow-[0_0_10px_rgba(255,30,56,0.5)]" />
+                  <span>{fact}</span>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
-        {/* Content Section: Route Details */}
-        {routeDetails.length > 0 && (
-          <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
-            <div className="mb-4 relative z-10">
-              <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Route Details</h2>
-              
-              <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse">
-                  <thead>
-                    <tr className="border-b border-white/20 text-gray-400 font-mono text-sm uppercase">
-                      <th className="py-4 px-4">Field</th>
-                      <th className="py-4 px-4">Details</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-white/5">
-                    {routeDetails.map((row, i) => (
-                      <tr key={i} className="hover:bg-white/5 transition-colors">
-                        <td className="py-3 px-4 font-semibold text-blue-400">{row.field}</td>
-                        <td className="py-3 px-4 text-white">
-                          {row.link ? (
-                            <Link href={row.link} className="text-blue-300 hover:text-blue-200 underline decoration-white/30 underline-offset-4">{row.details}</Link>
-                          ) : row.details}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Content Section: Moveset */}
-        {moveset.length > 0 && (
-          <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
-            <div className="mb-4 relative z-10">
-              <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Moveset</h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {moveset.map((move, i) => (
-                  <VideoMovesetCard key={i} move={move} />
+        {/* Staged Guides */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+          {stagedGuides.map((guide, i) => (
+            <div key={i} className="panel-action clip-diagonal p-6 relative overflow-hidden group">
+              <h3 className="text-xl font-bold text-white mb-6 uppercase tracking-wider flex items-center gap-3">
+                <span className="text-[var(--accent-red)] font-mono">0{i + 1}</span>
+                {guide.title}
+              </h3>
+              <ul className="space-y-4">
+                {guide.items.map((item, j) => (
+                  <li key={j} className="text-sm text-gray-400 leading-relaxed pl-4 border-l-2 border-white/5 group-hover:border-[var(--accent-red)]/30 transition-colors">
+                    {item}
+                  </li>
                 ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        {/* Route Upgrades Table */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">{routeUpgrades.title}</h2>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="border-b border-white/20 text-gray-400 font-mono text-sm uppercase">
+                  {routeUpgrades.headers.map((header, i) => (
+                    <th key={i} className="py-4 px-4">{header}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/5">
+                {routeUpgrades.rows.map((row, i) => (
+                  <tr key={i} className="hover:bg-white/5 transition-colors">
+                    <td className="py-4 px-4 font-bold text-[var(--accent-red)]">{row.goal}</td>
+                    <td className="py-4 px-4 text-gray-300 text-sm">{row.route}</td>
+                    <td className="py-4 px-4 text-gray-400 text-xs italic">{row.swaps}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Sea 2 Route Notes */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">{sea2RouteNotes.title}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {sea2RouteNotes.rows.map((row, i) => (
+              <div key={i} className="bg-white/5 p-5 rounded-xl border border-white/10 hover:border-[var(--accent-red)]/50 transition-all">
+                <div className="text-[var(--accent-red)] font-black uppercase tracking-widest mb-2">{row.route}</div>
+                <div className="text-sm text-gray-300 mb-3 leading-relaxed">{row.why}</div>
+                <div className="text-xs text-gray-500 font-mono uppercase tracking-tighter">Best Fit: {row.fit}</div>
               </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Cap Setup & Totals */}
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-10">
+          {/* Theoretical Cap Setup */}
+          <div className="panel-action clip-diagonal p-8 relative overflow-hidden group">
+            <h2 className="text-2xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">{capSetup.title}</h2>
+            <div className="space-y-4">
+              {capSetup.rows.map((row, i) => (
+                <div key={i} className="flex flex-col gap-1 border-b border-white/5 pb-3 last:border-0">
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs font-mono text-gray-500 uppercase">{row.layer}</span>
+                    <span className="text-[var(--accent-red)] font-bold text-sm">{row.target}</span>
+                  </div>
+                  <p className="text-xs text-gray-400 italic">{row.note}</p>
+                </div>
+              ))}
             </div>
           </div>
-        )}
+
+          {/* Sword Cap Totals */}
+          <div className="panel-action clip-diagonal p-8 relative overflow-hidden group">
+            <h2 className="text-2xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">{swordCapTotals.title}</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-white/10 text-gray-500 font-mono text-[10px] uppercase">
+                    <th className="py-2 px-2">Stat</th>
+                    <th className="py-2 px-2">Total Cap</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  {swordCapTotals.rows.map((row, i) => (
+                    <tr key={i} className="hover:bg-white/5 transition-colors">
+                      <td className="py-3 px-2">
+                        <div className="text-[10px] text-gray-500 uppercase leading-none mb-1">{row.cat}</div>
+                        <div className="text-sm font-bold text-white">{row.stat}</div>
+                      </td>
+                      <td className="py-3 px-2 text-sm text-[var(--accent-red)] font-mono">{row.total}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        {/* Universal Checklist */}
+        <div className="panel-action clip-diagonal p-8 mb-12 relative overflow-hidden group">
+          <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">{universalChecklist.title}</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {universalChecklist.rows.map((row, i) => (
+              <div key={i} className="bg-black/40 border border-white/10 p-4 rounded-lg flex flex-col items-center text-center group-hover:border-[var(--accent-red)]/20 transition-colors">
+                <div className="text-[10px] text-gray-500 uppercase font-mono mb-2">{row.layer}</div>
+                <div className="text-sm font-black text-white uppercase tracking-tight">{row.target}</div>
+              </div>
+            ))}
+          </div>
+        </div>
         
         {/* Related Pages */}
         {relatedPages.length > 0 && (

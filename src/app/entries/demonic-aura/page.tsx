@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Demonic Aura | Sailor Piece Legendary Aura",
-  description: "Demonic Aura Sailor Piece page with the confirmed Legendary aura tier and current route note.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Demonic Aura | ${siteConfig.name}`,
+    description: "Demonic Aura Sailor Piece page with the confirmed Legendary aura tier and current route note.",
+    openGraph: {
+      title: `Demonic Aura | ${siteConfig.name}`,
+      description: "Demonic Aura Sailor Piece page with the confirmed Legendary aura tier and current route note.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Demonic Aura | ${siteConfig.name}`,
+      description: "Demonic Aura Sailor Piece page with the confirmed Legendary aura tier and current route note.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {

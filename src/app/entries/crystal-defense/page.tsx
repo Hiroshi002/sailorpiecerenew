@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Crystal Defense | Sailor Piece Punch Island Mode",
-  description: "Crystal Defense Sailor Piece page with the back of Punch Island location, 1 Crystal Key entry, boss waves every 5 rounds, shop prices, and upgrade costs.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Crystal Defense | ${siteConfig.name}`,
+    description: "Crystal Defense Sailor Piece page with the back of Punch Island location, 1 Crystal Key entry, boss waves every 5 rounds, shop prices, and upgrade costs.",
+    openGraph: {
+      title: `Crystal Defense | ${siteConfig.name}`,
+      description: "Crystal Defense Sailor Piece page with the back of Punch Island location, 1 Crystal Key entry, boss waves every 5 rounds, shop prices, and upgrade costs.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Crystal Defense | ${siteConfig.name}`,
+      description: "Crystal Defense Sailor Piece page with the back of Punch Island location, 1 Crystal Key entry, boss waves every 5 rounds, shop prices, and upgrade costs.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {
@@ -24,25 +43,56 @@ const metaItems = [
     "value": "Crystal Key"
   },
   {
-    "label": "Key source",
-    "value": "Any Sea 2 NPC"
-  },
-  {
-    "label": "Mode goal",
-    "value": "Protect the crystal from waves of enemies"
-  },
-  {
     "label": "Boss cadence",
     "value": "Random boss every 5 waves"
   },
   {
-    "label": "Best AFK style",
-    "value": "Cosmic Being V from the middle or crystal"
+    "label": "Rare Relics",
+    "value": "Damage (+40%), Luck (+30%)"
   },
   {
-    "label": "Side systems",
-    "value": "Leaderboard, shop, upgrade shop"
+    "label": "Max Upgrades",
+    "value": "43,350 Coins Total"
   }
+];
+
+const facts = [
+  "Crystal Defense is located at the back of Punch Island in Sea 2.",
+  "The mode costs 1 Crystal Key to enter and requires protecting the crystal from enemy waves.",
+  "A random boss spawns every 5 waves, dropping Anti Magic and Demon Wing.",
+  "Crystal Damage Relic (+40%) and Crystal Luck Relic (+30%) are rare chase drops.",
+  "Cosmic Being V is the best AFK setup due to its zero end-lag and instant recast.",
+  "Fully maxing all five permanent upgrades costs a total of 43,350 Crystal Coins."
+];
+
+const rareRelics = [
+  { name: "Crystal Damage Relic", bonus: "+40% Damage", note: "Rare mode-specific chase drop." },
+  { name: "Crystal Luck Relic", bonus: "+30% Luck", note: "Rare mode-specific chase drop." }
+];
+
+const wavePayouts = [
+  { waves: "1-40", min: "2", avg: "3-5", max: "5" },
+  { waves: "41-60", min: "3", avg: "3-5", max: "7" },
+  { waves: "61-80", min: "3", avg: "4-7", max: "7" },
+  { waves: "81-100", min: "4", avg: "5-7", max: "7" },
+  { waves: "101-120", min: "6", avg: "6-7", max: "7" }
+];
+
+const shopItems = [
+  { name: "Anti Magic", cost: "5,000 Coins" },
+  { name: "Clover Outfit", cost: "850 Coins" },
+  { name: "Destroyer Aura", cost: "2,000 Coins" },
+  { name: "Aura Crate", cost: "1,000 Coins" },
+  { name: "Secret Chest", cost: "500 Coins" },
+  { name: "Mythical Chest", cost: "65 Coins" }
+];
+
+const upgradeCosts = [
+  { name: "Damage", total: "8,500", gain: "+5% per Lv" },
+  { name: "Crit Damage", total: "8,500", gain: "+5% per Lv" },
+  { name: "Crit Chance", total: "8,500", gain: "+2% per Lv" },
+  { name: "HP", total: "5,350", gain: "+10% per Lv" },
+  { name: "Luck", total: "12,500", gain: "+5% per Lv" }
 ];
 
 const moveset: any[] = [];
@@ -169,8 +219,90 @@ export default function EntryPage() {
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
             <ul className="space-y-6">
-              
+              {facts.map((fact, i) => (
+                <li key={i} className="flex items-start gap-4 text-gray-300 group/item transition-colors hover:text-white">
+                  <span className="mt-1.5 w-2 h-2 rounded-full bg-[var(--accent-red)] shadow-[0_0_10px_rgba(255,30,56,0.5)] shrink-0" />
+                  <span className="text-lg leading-relaxed">{fact}</span>
+                </li>
+              ))}
             </ul>
+          </div>
+        </div>
+
+        {/* Rare Relics */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group border-2 border-blue-500/30">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4 text-blue-400">Rare Relic Drops</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {rareRelics.map((relic, i) => (
+                <div key={i} className="bg-blue-950/20 border border-blue-500/20 p-6 rounded-xl">
+                  <div className="text-xl font-black text-white mb-1">{relic.name}</div>
+                  <div className="text-3xl font-black text-blue-400 mb-4">{relic.bonus}</div>
+                  <div className="text-xs text-gray-500 italic">{relic.note}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Upgrade Costs */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Permanent Upgrades</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+              {upgradeCosts.map((up, i) => (
+                <div key={i} className="bg-white/5 border border-white/10 p-4 rounded-xl text-center hover:border-[var(--accent-red)] transition-all">
+                  <div className="text-sm font-black text-white mb-1 uppercase">{up.name}</div>
+                  <div className="text-xs text-gray-500 mb-3">{up.gain}</div>
+                  <div className="text-lg font-black text-[var(--accent-red)]">{up.total}</div>
+                  <div className="text-[8px] text-gray-600 uppercase font-mono">Total Coins</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Wave Payouts */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Wave Coin Payouts (2x Drop)</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-white/20 text-gray-400 font-mono text-sm uppercase">
+                    <th className="py-4 px-4">Wave Range</th>
+                    <th className="py-4 px-4">Minimum</th>
+                    <th className="py-4 px-4">Average</th>
+                    <th className="py-4 px-4 text-right">Maximum</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  {wavePayouts.map((row, i) => (
+                    <tr key={i} className="hover:bg-white/5 transition-colors group/row text-sm">
+                      <td className="py-4 px-4 font-bold text-white uppercase">{row.waves}</td>
+                      <td className="py-4 px-4 text-gray-400">{row.min}</td>
+                      <td className="py-4 px-4 font-bold text-blue-400">{row.avg}</td>
+                      <td className="py-4 px-4 text-right font-black text-[var(--accent-red)]">{row.max}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        {/* Merchant Shop */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Defense Merchant Shop</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+              {shopItems.map((item, i) => (
+                <div key={i} className="bg-black/40 border border-white/10 p-4 rounded-xl text-center">
+                  <div className="text-[10px] font-black text-white mb-2 uppercase truncate">{item.name}</div>
+                  <div className="text-sm font-bold text-orange-400">{item.cost}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

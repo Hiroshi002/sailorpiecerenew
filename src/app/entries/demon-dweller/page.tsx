@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Demon Dweller | Sailor Piece Title",
-  description: "Demon Dweller Sailor Piece page with the confirmed +100% Damage title effect and Crystal Defense boss-wave route.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Demon Dweller | ${siteConfig.name}`,
+    description: "Demon Dweller Sailor Piece page with the confirmed +100% Damage title effect and Crystal Defense boss-wave route.",
+    openGraph: {
+      title: `Demon Dweller | ${siteConfig.name}`,
+      description: "Demon Dweller Sailor Piece page with the confirmed +100% Damage title effect and Crystal Defense boss-wave route.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Demon Dweller | ${siteConfig.name}`,
+      description: "Demon Dweller Sailor Piece page with the confirmed +100% Damage title effect and Crystal Defense boss-wave route.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {

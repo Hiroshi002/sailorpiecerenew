@@ -1,138 +1,45 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Image from "next/image";
+import { getGameData } from "@/config/game-data";
 
-export const metadata: Metadata = {
-  title: "Melees / Styles | Sailor Piece Wiki",
-  description:
-    "Sailor Piece melees wiki with fighting styles, trainers, quests, and mastery paths.",
-};
-
-const tiers = [
-  {
-    name: "S+ Tier",
-    class: "tier-s-plus rainbow-fx border-transparent",
-    items: [
-      {
-        slug: "the-world-style",
-        img: "/images/icons/melee-theworld.webp",
-        title: "The World",
-        desc: "Sea 2 fighting style built around The World Boss, with confirmed summon costs.",
-      },
-      {
-        slug: "cosmic-being-style",
-        img: "/images/icons/melee-cosmicbeing.webp",
-        title: "Cosmic Being",
-        desc: "Sea 2 fighting style from the Cosmic Being NPC on Punch Island.",
-      },
-    ],
-  },
-  {
-    name: "S Tier",
-    class: "tier-s text-[var(--accent-gold)] border-[var(--accent-gold)]",
-    items: [
-      {
-        slug: "moon-slayer-style",
-        img: "/images/icons/melee-moonslayer.webp",
-        title: "Moon Slayer",
-        desc: "Boss Island endgame fighting style with fast abilities.",
-      },
-      {
-        slug: "strongest-shinobi-style",
-        img: "/images/icons/melee-strongestshinobi.webp",
-        title: "Strongest Shinobi",
-        desc: "Ninja Island endgame fighting style with a title gate.",
-      },
-      {
-        slug: "anos-style",
-        img: "/images/icons/melee-demonking.webp",
-        title: "Anos",
-        desc: "Academy Island endgame fighting style with clan requirement.",
-      },
-      {
-        slug: "saber-alter-style",
-        img: "/images/icons/melee-corruptedexcalibur.webp",
-        title: "Saber Alter",
-        desc: "Boss Island corruption melee style, also called Corrupted Excalibur.",
-      },
-      {
-        slug: "gilgamesh-style",
-        img: "/images/icons/melee-kingofheroes.webp",
-        title: "Gilgamesh",
-        desc: "Boss Island melee style with excellent farming efficiency.",
-      },
-    ],
-  },
-  {
-    name: "A Tier",
-    class: "tier-a text-purple-400 border-purple-400",
-    items: [
-      {
-        slug: "strongest-of-today-style",
-        img: "/images/icons/melee-strongestoftoday.webp",
-        title: "Strongest of Today",
-        desc: "Shinjuku Island fighting style with a consume step.",
-      },
-      {
-        slug: "madoka-style",
-        img: "/images/icons/melee-lovemaiden.webp",
-        title: "Madoka",
-        desc: "Valentine Island burst-focused fighting style.",
-      },
-      {
-        slug: "qin-shi-style",
-        img: "/images/icons/melee-qinshi.webp",
-        title: "Qin Shi",
-        desc: "Boss Island fighting style with a two-step unlock.",
-      },
-      {
-        slug: "alucard-style",
-        img: "/images/icons/melee-vampireking.webp",
-        title: "Alucard",
-        desc: "Sailor Island sustain-focused fighting style with a Vampire race and Vampire King title gate.",
-      },
-    ],
-  },
-  {
-    name: "B Tier",
-    class: "tier-b text-blue-400 border-blue-400",
-    items: [
-      {
-        slug: "gojo-style",
-        img: "/images/icons/melee-limitlesssorcerer.webp",
-        title: "Gojo",
-        desc: "Shibuya Station fighting style with strong AoE, crowd control, and one of the most practical mid-game unlock routes.",
-      },
-      {
-        slug: "sukuna-style",
-        img: "/images/icons/melee-curseking.webp",
-        title: "Sakuna",
-        desc: "Shibuya Station fighting style with high burst damage and aggressive PvP-focused requirements.",
-      },
-      {
-        slug: "yuji-style",
-        img: "/images/icons/melee-cursedvessel.webp",
-        title: "Yuji",
-        desc: "Shibuya Station combo-focused fighting style with one of the simpler material-only unlock routes.",
-      },
-    ],
-  },
-  {
-    name: "C Tier",
-    class: "tier-c text-green-400 border-green-400",
-    items: [
-      {
-        slug: "combat-style",
-        img: "/images/icons/melee-combat.webp",
-        title: "Combat",
-        desc: "Default starter melee style with basic punches and kicks and no unlock cost.",
-      },
-    ],
-  },
-];
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Melees / Fighting Styles | ${siteConfig.name}`,
+    description: "Sailor Piece fighting styles wiki with trainers, costs, and requirements.",
+    openGraph: {
+      title: `Melees / Fighting Styles | ${siteConfig.name}`,
+      description: "Sailor Piece fighting styles wiki with trainers, costs, and requirements.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Melees / Fighting Styles | ${siteConfig.name}`,
+      description: "Sailor Piece fighting styles wiki with trainers, costs, and requirements.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 export default function MeleesPage() {
+  const gameData = getGameData();
+  const tiers = gameData.melees.map(tier => ({
+    ...tier,
+    name: tier.tier,
+    class: tier.tier === "S+ Tier" ? "tier-s-plus rainbow-fx border-transparent" :
+           tier.tier === "S Tier" ? "tier-s text-[var(--accent-gold)] border-[var(--accent-gold)]" :
+           tier.tier === "A Tier" ? "tier-a text-purple-400 border-purple-400" :
+           tier.tier === "B Tier" ? "tier-b text-blue-400 border-blue-400" :
+           "tier-c text-green-400 border-green-400"
+  }));
+
   return (
     <>
       <div

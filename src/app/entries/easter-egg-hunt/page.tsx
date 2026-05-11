@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Easter Egg Hunt | Sailor Piece Wiki",
-  description: "Sea 1 Easter quest guide with the official 7-egg structure, timed and boss egg spawn rules, and the confirmed completion rewards.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Easter Egg Hunt | ${siteConfig.name}`,
+    description: "Sea 1 Easter quest guide with the official 7-egg structure, timed and boss egg spawn rules, and the confirmed completion rewards.",
+    openGraph: {
+      title: `Easter Egg Hunt | ${siteConfig.name}`,
+      description: "Sea 1 Easter quest guide with the official 7-egg structure, timed and boss egg spawn rules, and the confirmed completion rewards.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Easter Egg Hunt | ${siteConfig.name}`,
+      description: "Sea 1 Easter quest guide with the official 7-egg structure, timed and boss egg spawn rules, and the confirmed completion rewards.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {

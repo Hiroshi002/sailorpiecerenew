@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Infinite Tower | Sailor Piece Wiki",
-  description: "Tower Island endgame mode with scaling floors, stacking debuffs, direct floor rewards, Tower Tokens, and a backup shop.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Infinite Tower | ${siteConfig.name}`,
+    description: "Tower Island endgame mode with scaling floors, stacking debuffs, direct floor rewards, Tower Tokens, and a backup shop.",
+    openGraph: {
+      title: `Infinite Tower | ${siteConfig.name}`,
+      description: "Tower Island endgame mode with scaling floors, stacking debuffs, direct floor rewards, Tower Tokens, and a backup shop.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Infinite Tower | ${siteConfig.name}`,
+      description: "Tower Island endgame mode with scaling floors, stacking debuffs, direct floor rewards, Tower Tokens, and a backup shop.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {
@@ -24,21 +43,62 @@ const metaItems = [
     "value": "Tower Key"
   },
   {
-    "label": "Shop currency",
-    "value": "Tower Tokens"
-  },
-  {
     "label": "Secret runes",
-    "value": "Radiant Rune, Primordial Rune"
+    "value": "Radiant, Primordial"
   },
   {
     "label": "Full upgrade cost",
-    "value": "36,500 Tower Tokens"
+    "value": "36,500 Tokens"
   },
   {
-    "label": "Secret pity ladder",
-    "value": "Radiant 7,500 floors, Primordial 10,000 floors"
+    "label": "Secret Pity",
+    "value": "6k - 7.5k Floors"
   }
+];
+
+const facts = [
+  "Infinite Tower is the main endgame survival mode located on Tower Island.",
+  "Boss checkpoints appear every 5 floors, with debuffs stacking harder after floor 50.",
+  "Radiant Rune (Luck) and Primordial Rune (Damage) are the two secret chase drops.",
+  "Secret runes have a pity tracker: Radiant at 6,000 floors and Primordial at 7,500 floors.",
+  "Fully maxing the permanent upgrade tree requires 36,500 Tower Tokens.",
+  "Gilgamesh V is one of the best AFK moves for clearing waves due to its massive AoE."
+];
+
+const secretRunes = [
+  { name: "Radiant Rune", floor: "High", base: "0.0135%", max: "0.0458%", x2: "0.0911%" },
+  { name: "Primordial Rune", floor: "High", base: "0.0130%", max: "0.0439%", x2: "0.0877%" },
+  { name: "Radiant Rune", floor: "Low", base: "0.0025%", max: "0.0084%", x2: "0.0168%" },
+  { name: "Primordial Rune", floor: "Low", base: "0.0020%", max: "0.0068%", x2: "0.0135%" }
+];
+
+const upgradeTree = [
+  { name: "Damage", bonus: "+25% Total", cost: "7,250", gain: "+5% per Lv" },
+  { name: "Crit Damage", bonus: "+15% Total", cost: "7,250", gain: "+3% per Lv" },
+  { name: "Crit Chance", bonus: "+5% Total", cost: "7,250", gain: "+1% per Lv" },
+  { name: "HP %", bonus: "+25% Total", cost: "7,250", gain: "+5% per Lv" },
+  { name: "Luck", bonus: "+10% Total", cost: "7,500", gain: "+2% per Lv" }
+];
+
+const afkSetup = [
+  "Use a damage build (e.g., Gilgamesh V) for faster wave clears.",
+  "Set 'Auto-Reset' to floor 50-70 depending on build strength.",
+  "Enable 'Auto-Restart' to loop back to floor 1 after the run ends.",
+  "Luck builds are not recommended for deep-floor token farming."
+];
+
+const shopItems = [
+  { name: "Abyssal Empress", cost: "4,000 Tokens" },
+  { name: "Abyssal Outfit", cost: "900 Tokens" },
+  { name: "Purple Flare Aura", cost: "1,200 Tokens" },
+  { name: "Mythical Chest", cost: "75 Tokens" },
+  { name: "Aura Crate", cost: "1,200 Tokens" },
+  { name: "Clan Reroll", cost: "10 Tokens" }
+];
+
+const keySources = [
+  { island: "Lawless Island", enemy: "Arena Fighters", note: "Best AoE farm spot" },
+  { island: "Ninja Island", enemy: "Ninjas", note: "Second main key route" }
 ];
 
 const moveset: any[] = [];
@@ -130,8 +190,103 @@ export default function EntryPage() {
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
             <ul className="space-y-6">
-              
+              {facts.map((fact, i) => (
+                <li key={i} className="flex items-start gap-4 text-gray-300 group/item transition-colors hover:text-white">
+                  <span className="mt-1.5 w-2 h-2 rounded-full bg-[var(--accent-red)] shadow-[0_0_10px_rgba(255,30,56,0.5)] shrink-0" />
+                  <span className="text-lg leading-relaxed">{fact}</span>
+                </li>
+              ))}
             </ul>
+          </div>
+        </div>
+
+        {/* Secret Runes */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group border-2 border-purple-500/30">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4 text-purple-400">Secret Chase Runes</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-white/20 text-gray-400 font-mono text-sm uppercase">
+                    <th className="py-4 px-4">Rune</th>
+                    <th className="py-4 px-4">Floor</th>
+                    <th className="py-4 px-4">Base %</th>
+                    <th className="py-4 px-4">Max %</th>
+                    <th className="py-4 px-4 text-right">2x Drop %</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  {secretRunes.map((rune, i) => (
+                    <tr key={i} className="hover:bg-white/5 transition-colors group/row text-sm">
+                      <td className="py-4 px-4 font-bold text-white uppercase">{rune.name}</td>
+                      <td className="py-4 px-4 text-gray-400">{rune.floor}</td>
+                      <td className="py-4 px-4 font-mono">{rune.base}</td>
+                      <td className="py-4 px-4 font-mono text-blue-400">{rune.max}</td>
+                      <td className="py-4 px-4 text-right font-black text-[var(--accent-red)] font-mono">{rune.x2}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        {/* Upgrade Tree */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Permanent Upgrade Tree</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+              {upgradeTree.map((up, i) => (
+                <div key={i} className="bg-white/5 border border-white/10 p-4 rounded-xl text-center hover:border-[var(--accent-red)] transition-all">
+                  <div className="text-sm font-black text-white mb-1 uppercase">{up.name}</div>
+                  <div className="text-[10px] text-gray-500 mb-2">{up.gain}</div>
+                  <div className="text-lg font-black text-blue-400 mb-1">{up.bonus}</div>
+                  <div className="text-[8px] text-gray-600 uppercase font-mono">Cost: {up.cost}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* AFK Setup & Key Sources */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+          <div className="panel-action clip-diagonal p-8 relative overflow-hidden group">
+            <h2 className="text-2xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">How to AFK Tower</h2>
+            <ul className="space-y-4">
+              {afkSetup.map((step, i) => (
+                <li key={i} className="flex items-start gap-3 text-gray-400 text-sm">
+                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[var(--accent-red)] shrink-0" />
+                  {step}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="panel-action clip-diagonal p-8 relative overflow-hidden group">
+            <h2 className="text-2xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Tower Key Sources</h2>
+            <div className="space-y-4">
+              {keySources.map((s, i) => (
+                <div key={i} className="bg-black/40 p-4 rounded-xl border border-white/5">
+                  <div className="text-white font-bold mb-1">{s.island}</div>
+                  <div className="text-xs text-blue-400 mb-1 uppercase font-mono">{s.enemy}</div>
+                  <div className="text-[10px] text-gray-500 italic">{s.note}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Shop Items */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Tower Backup Shop</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+              {shopItems.map((item, i) => (
+                <div key={i} className="bg-black/40 border border-white/10 p-4 rounded-xl text-center">
+                  <div className="text-[10px] font-black text-white mb-2 uppercase truncate">{item.name}</div>
+                  <div className="text-sm font-bold text-orange-400">{item.cost}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

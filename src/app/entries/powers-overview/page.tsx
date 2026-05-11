@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "All Fruits | Sailor Piece Wiki",
-  description: "Current list of every fruit in Sailor Piece and the shared dealer route used to obtain them.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `All Fruits | ${siteConfig.name}`,
+    description: "Current list of every fruit in Sailor Piece and the shared dealer route used to obtain them.",
+    openGraph: {
+      title: `All Fruits | ${siteConfig.name}`,
+      description: "Current list of every fruit in Sailor Piece and the shared dealer route used to obtain them.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `All Fruits | ${siteConfig.name}`,
+      description: "Current list of every fruit in Sailor Piece and the shared dealer route used to obtain them.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {
@@ -26,6 +45,33 @@ const metaItems = [
   {
     "label": "Gem roll",
     "value": "50 gems"
+  }
+];
+
+const facts = [
+  "There are five current fruits in Sailor Piece: Invisible, Bomb, Flame, Quake, and Light.",
+  "Fruits are obtained from the Coin Fruit Dealer or Gems Fruit Dealer on Sailor Island.",
+  "One roll costs 15,000 coins or 50 gems."
+];
+
+const sections = [
+  {
+    title: "Confirmed fruit list",
+    items: [
+      "Invisible",
+      "Bomb",
+      "Flame",
+      "Quake",
+      "Light"
+    ]
+  },
+  {
+    title: "Shared obtainment route",
+    items: [
+      "Travel to Sailor Island through a purple portal teleport.",
+      "Talk to the Coin Fruit Dealer for a 15,000-coin roll or the Gems Fruit Dealer for a 50-gem roll.",
+      "No unique crafting material is required for the base fruit roll."
+    ]
   }
 ];
 
@@ -138,10 +184,32 @@ export default function EntryPage() {
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
             <ul className="space-y-6">
-              
+              {facts.map((fact, i) => (
+                <li key={i} className="flex items-start gap-4 text-gray-300">
+                  <span className="mt-2 w-2 h-2 rounded-full bg-[var(--accent-red)] shrink-0 shadow-[0_0_8px_rgba(255,30,56,0.6)]" />
+                  <span className="text-lg leading-relaxed">{fact}</span>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
+
+        {/* Dynamic Sections */}
+        {sections.map((section, i) => (
+          <div key={i} className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+            <div className="mb-4 relative z-10">
+              <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">{section.title}</h2>
+              <ul className="space-y-4">
+                {section.items.map((item, j) => (
+                  <li key={j} className="flex items-start gap-3 text-gray-300">
+                    <span className="mt-2 w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0" />
+                    <span className="text-base">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
 
         {/* Content Section: Route Details */}
         {routeDetails.length > 0 && (

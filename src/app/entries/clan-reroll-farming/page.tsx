@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Best Clan Reroll Farm | Fastest CCR Routes in Sailor Piece",
-  description: "Best Clan Reroll farm page for Sailor Piece, covering Infinite Tower floor-drop rerolls, Kraken, Fast Ninja, codes, backup shop routes, and what other public guides currently say.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Best Clan Reroll Farm | ${siteConfig.name}`,
+    description: "Best Clan Reroll farm page for Sailor Piece, covering Infinite Tower floor-drop rerolls, Kraken, Fast Ninja, codes, backup shop routes, and what other public guides currently say.",
+    openGraph: {
+      title: `Best Clan Reroll Farm | ${siteConfig.name}`,
+      description: "Best Clan Reroll farm page for Sailor Piece, covering Infinite Tower floor-drop rerolls, Kraken, Fast Ninja, codes, backup shop routes, and what other public guides currently say.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Best Clan Reroll Farm | ${siteConfig.name}`,
+      description: "Best Clan Reroll farm page for Sailor Piece, covering Infinite Tower floor-drop rerolls, Kraken, Fast Ninja, codes, backup shop routes, and what other public guides currently say.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {

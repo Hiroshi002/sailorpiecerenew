@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Devil Clan | Sailor Piece Clan Passive",
-  description: "Devil clan Sailor Piece page with the confirmed passive stats, Crystal Defense update tie-in, and current top-end sword and farming value.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Devil Clan | ${siteConfig.name}`,
+    description: "Devil clan Sailor Piece page with the confirmed passive stats, Crystal Defense update tie-in, and current top-end sword and farming value.",
+    openGraph: {
+      title: `Devil Clan | ${siteConfig.name}`,
+      description: "Devil clan Sailor Piece page with the confirmed passive stats, Crystal Defense update tie-in, and current top-end sword and farming value.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Devil Clan | ${siteConfig.name}`,
+      description: "Devil clan Sailor Piece page with the confirmed passive stats, Crystal Defense update tie-in, and current top-end sword and farming value.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {

@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Sailor Piece Artifacts | Best Sets, Stats, Dust, Milestones",
-  description: "Sailor Piece artifacts guide with set tiers, 2-set and 4-set bonuses, main stats, substats, dust, and Snow Island milestones.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Sailor Piece Artifacts | ${siteConfig.name}`,
+    description: "Sailor Piece artifacts guide with set tiers, 2-set and 4-set bonuses, main stats, substats, dust, and Snow Island milestones.",
+    openGraph: {
+      title: `Sailor Piece Artifacts | ${siteConfig.name}`,
+      description: "Sailor Piece artifacts guide with set tiers, 2-set and 4-set bonuses, main stats, substats, dust, and Snow Island milestones.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Sailor Piece Artifacts | ${siteConfig.name}`,
+      description: "Sailor Piece artifacts guide with set tiers, 2-set and 4-set bonuses, main stats, substats, dust, and Snow Island milestones.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {
@@ -26,6 +45,84 @@ const metaItems = [
   {
     "label": "Milestone cap",
     "value": "40"
+  }
+];
+
+const facts = [
+  "Artifacts unlock on Snow Island after reaching level 2,500 and paying 500,000 Money plus 500 Gems.",
+  "Each artifact set has four slots: Helmet, Gloves, Body, and Boots.",
+  "Artifacts gain power through main stats, substats, set bonuses, upgrades, and milestone progression.",
+  "Sacred Dominion is the new current-update artifact set dropped by Sea 2 NPCs.",
+  "Sacred Dominion 2-piece bonus gives +15% HP and +20% Damage.",
+  "Sacred Dominion 4-piece bonus gives +22.5% Crit Damage and +15% Crit Chance.",
+  "Sacred Dominion now leads the captured damage artifact path on set bonuses, with Abyssal Crown and Celestial Rupture still strong fallback sets."
+];
+
+const artifactSets = [
+  {
+    set: "Sacred Dominion",
+    tier: "S+",
+    role: "New best captured damage and crit set",
+    bonus2: "+15% HP and +20% Damage",
+    bonus4: "+22.5% Crit Damage and +15% Crit Chance",
+    farm: "Any Sea 2 NPC"
+  },
+  {
+    set: "Abyssal Crown",
+    tier: "S+",
+    role: "Best pure damage set",
+    bonus2: "+20% Crit Damage",
+    bonus4: "+12.5% Crit Chance and +20% Damage",
+    farm: "Ninja and Lawless NPCs, plus all Sea 2 NPCs"
+  },
+  {
+    set: "Celestial Rupture",
+    tier: "S",
+    role: "Best all-round damage and sustain set",
+    bonus2: "+15% Damage and +12.5% Crit Damage",
+    bonus4: "+15% Crit Chance and +1.5% Lifesteal",
+    farm: "Shinjuku, Valentine, Slime, Academy, and Judgement mobs"
+  }
+];
+
+const rarityUsage = [
+  { rarity: "Common", use: "Starter filler only", color: "text-gray-400" },
+  { rarity: "Uncommon", use: "Very early filler while unlocking your first set pieces", color: "text-green-400" },
+  { rarity: "Rare", use: "Short-term bridge pieces when your set bonuses are still incomplete", color: "text-blue-400" },
+  { rarity: "Epic", use: "Solid stepping stone pieces while you farm your long-term set", color: "text-purple-400" },
+  { rarity: "Legendary", use: "Main target for finished endgame sets", color: "text-yellow-400" }
+];
+
+const pieceStats = [
+  { piece: "Helmet", main: "HP or Flat HP", sub: "Crit Chance, Crit Damage, Damage, HP, Flat HP, Damage Reduction, Lifesteal, HP Regeneration" },
+  { piece: "Gloves", main: "Damage only", sub: "Crit Chance, Crit Damage, Damage, HP, Flat HP, Damage Reduction, Lifesteal, HP Regeneration" },
+  { piece: "Body", main: "Any stat in the game", sub: "Crit Chance, Crit Damage, Damage, HP, Flat HP, Damage Reduction, Lifesteal, HP Regeneration" },
+  { piece: "Boots", main: "Crit Chance, Crit Damage, Damage Reduction, or Lifesteal", sub: "Crit Chance, Crit Damage, Damage, HP, Flat HP, Damage Reduction, Lifesteal, HP Regeneration" }
+];
+
+const upgradingRules = [
+  { rule: "Max artifact level", details: "15" },
+  { rule: "Dust to max one artifact", details: "287 Dust" },
+  { rule: "Dust source", details: "Delete unwanted artifacts" },
+  { rule: "Legendary dust value", details: "A Legendary artifact gives 24 Dust when sold" }
+];
+
+const faq = [
+  {
+    question: "What are artifacts in Sailor Piece?",
+    answer: "Artifacts are a four-piece late-game gear system with set bonuses, main stats, substats, upgrades, and milestone progress."
+  },
+  {
+    question: "What is the best artifact set in Sailor Piece?",
+    answer: "Sacred Dominion is the newest top captured damage and crit set, with +15% HP and +20% Damage from its 2-piece bonus plus +22.5% Crit Damage and +15% Crit Chance from its 4-piece bonus."
+  },
+  {
+    question: "Where do you unlock artifacts in Sailor Piece?",
+    answer: "Artifacts unlock on Snow Island once you meet the level gate and pay the unlock cost to the Artifact NPC."
+  },
+  {
+    question: "How do artifact upgrades work?",
+    answer: "Artifacts are upgraded with Dust, and the final strength of a build depends on your set bonuses, piece rarity, levels, main stats, and substats."
   }
 ];
 
@@ -123,10 +220,66 @@ export default function EntryPage() {
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
             <ul className="space-y-6">
-              
+              {facts.map((fact, i) => (
+                <li key={i} className="flex items-start gap-4 text-gray-300">
+                  <span className="mt-2 w-2 h-2 rounded-full bg-[var(--accent-red)] shrink-0 shadow-[0_0_8px_rgba(255,30,56,0.6)]" />
+                  <span className="text-lg leading-relaxed">{fact}</span>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
+
+        {/* Artifact Set Tier List */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Artifact Set Tier List</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-white/20 text-gray-400 font-mono text-sm uppercase">
+                    <th className="py-4 px-4">Set</th>
+                    <th className="py-4 px-4">Tier</th>
+                    <th className="py-4 px-4">Role</th>
+                    <th className="py-4 px-4">Bonuses</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  {artifactSets.map((set, i) => (
+                    <tr key={i} className="hover:bg-white/5 transition-colors">
+                      <td className="py-3 px-4 font-bold text-white">{set.set}</td>
+                      <td className="py-3 px-4">
+                        <span className="px-2 py-0.5 rounded bg-[var(--accent-red)]/20 text-[var(--accent-red)] text-xs font-bold">{set.tier}</span>
+                      </td>
+                      <td className="py-3 px-4 text-gray-300 text-sm">{set.role}</td>
+                      <td className="py-3 px-4 text-gray-400 text-xs">
+                        <div className="text-blue-400">2-pc: {set.bonus2}</div>
+                        <div className="text-purple-400">4-pc: {set.bonus4}</div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        {/* FAQ Section */}
+        {faq.length > 0 && (
+          <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+            <div className="mb-4 relative z-10">
+              <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">FAQ</h2>
+              <div className="space-y-6">
+                {faq.map((item, i) => (
+                  <div key={i} className="bg-white/5 p-6 rounded-xl border border-white/10">
+                    <h3 className="text-lg font-bold text-[var(--accent-red)] mb-2 uppercase tracking-tight">{item.question}</h3>
+                    <p className="text-gray-300 leading-relaxed">{item.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Content Section: Route Details */}
         {routeDetails.length > 0 && (

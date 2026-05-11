@@ -1,11 +1,30 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-export const metadata: Metadata = {
-  title: "Sea 2 Guide | Sailor Piece Wiki",
-  description: "Complete guide to unlocking and exploring Sea 2 in Sailor Piece.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Sea 2 Guide | ${siteConfig.name}`,
+    description: "Complete guide to unlocking and exploring Sea 2 in Sailor Piece.",
+    openGraph: {
+      title: `Sea 2 Guide | ${siteConfig.name}`,
+      description: "Complete guide to unlocking and exploring Sea 2 in Sailor Piece.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Sea 2 Guide | ${siteConfig.name}`,
+      description: "Complete guide to unlocking and exploring Sea 2 in Sailor Piece.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const unlockSteps = [
   { title: "Lost Fragments Quest", desc: "Start the quest on World Island in Sea 1." },

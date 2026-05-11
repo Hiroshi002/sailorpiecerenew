@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Header from '@/components/Header';

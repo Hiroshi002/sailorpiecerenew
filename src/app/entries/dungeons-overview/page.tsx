@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Dungeons | Sailor Piece Wiki",
-  description: "Dungeon unlock steps, key farming, and the current Shadow, Rune, and Double dungeon routes.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Dungeons | ${siteConfig.name}`,
+    description: "Dungeon unlock steps, key farming, and the current Shadow, Rune, and Double dungeon routes.",
+    openGraph: {
+      title: `Dungeons | ${siteConfig.name}`,
+      description: "Dungeon unlock steps, key farming, and the current Shadow, Rune, and Double dungeon routes.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Dungeons | ${siteConfig.name}`,
+      description: "Dungeon unlock steps, key farming, and the current Shadow, Rune, and Double dungeon routes.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {
@@ -27,6 +46,43 @@ const metaItems = [
     "label": "NPC",
     "value": "Dungeon Master on Dungeon Island"
   }
+];
+
+const facts = [
+  "Dungeons unlock at level 5,000 through the Dungeon Master questline on Dungeon Island.",
+  "You must collect six Dungeon Pieces and defeat 25 bosses before the dungeon menu unlocks.",
+  "The current dungeon types are Shadow Dungeon, Rune Dungeon, and Double Dungeon.",
+  "Each dungeon run consumes 1 Dungeon Key, which can be farmed from most world bosses.",
+  "Rune Dungeon is the best source for farming runes to raise your global Rune Level."
+];
+
+const unlockSteps = [
+  "Reach level 5,000 and travel to Dungeon Island.",
+  "Talk to the Dungeon Master NPC and accept the 'Dungeon Discovery' quest.",
+  "Collect all 6 Dungeon Pieces hidden across the starter islands.",
+  "Defeat any 25 bosses to complete the quest and unlock the dungeon menu."
+];
+
+const dungeonPieces = [
+  { id: "#1", island: "Starter Island", location: "Behind the red-roof house on the right side." },
+  { id: "#2", island: "Jungle Island", location: "Base of a rock on the left shoreline." },
+  { id: "#3", island: "Desert Island", location: "Near the big pyramid on the left edge." },
+  { id: "#4", island: "Snow Island", location: "Behind the ice spikes near the Haki trainer." },
+  { id: "#5", island: "Marine Base", location: "Top of the tallest watchtower." },
+  { id: "#6", island: "Dungeon Island", location: "Inside the broken stone pillar near the master." }
+];
+
+const dungeonTypes = [
+  { name: "Shadow Dungeon", waves: "15", bosses: "Waves 5, 10, 15", use: "Farming Shadow materials." },
+  { name: "Rune Dungeon", waves: "15", bosses: "Rune waves", use: "Farming Runes and Rune EXP." },
+  { name: "Double Dungeon", waves: "15", bosses: "Monarch 5, 10, 15", use: "Farming Monarch materials." }
+];
+
+const keyFarming = [
+  { source: "Aizen", note: "Best world boss farm at 30% chance." },
+  { source: "Sukuna / Jinwoo / Ichigo", note: "Strong routes with 20% chance." },
+  { source: "Gojo / Qin Shi", note: "Mid-tier routes at 15% chance." },
+  { source: "Saber", note: "Lower route at 10% chance." }
 ];
 
 const moveset: any[] = [];
@@ -128,8 +184,91 @@ export default function EntryPage() {
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
             <ul className="space-y-6">
-              
+              {facts.map((fact, i) => (
+                <li key={i} className="flex items-start gap-4 text-gray-300 group/item transition-colors hover:text-white">
+                  <span className="mt-1.5 w-2 h-2 rounded-full bg-[var(--accent-red)] shadow-[0_0_10px_rgba(255,30,56,0.5)] shrink-0" />
+                  <span className="text-lg leading-relaxed">{fact}</span>
+                </li>
+              ))}
             </ul>
+          </div>
+        </div>
+
+        {/* How to Unlock */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">How to Unlock Dungeons</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {unlockSteps.map((step, i) => (
+                <div key={i} className="bg-black/40 border border-white/10 p-4 rounded-xl flex gap-4 items-center">
+                  <div className="w-8 h-8 rounded-full bg-[var(--accent-red)] flex items-center justify-center text-white font-black shrink-0 shadow-[0_0_10px_rgba(255,30,56,0.3)]">
+                    {i + 1}
+                  </div>
+                  <span className="text-gray-300 text-sm">{step}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Dungeon Piece Checklist */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group border-2 border-blue-500/30">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4 text-blue-400">Dungeon Piece Locations</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-white/20 text-gray-400 font-mono text-xs uppercase">
+                    <th className="py-4 px-4">Piece</th>
+                    <th className="py-4 px-4">Island</th>
+                    <th className="py-4 px-4 text-right">Location Detail</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  {dungeonPieces.map((piece, i) => (
+                    <tr key={i} className="hover:bg-white/5 transition-colors group/row text-sm">
+                      <td className="py-4 px-4 font-black text-[var(--accent-red)] uppercase">{piece.id}</td>
+                      <td className="py-4 px-4 text-white font-bold">{piece.island}</td>
+                      <td className="py-4 px-4 text-right text-gray-400 italic">{piece.location}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        {/* Dungeon Types */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Current Dungeon Types</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {dungeonTypes.map((type, i) => (
+                <div key={i} className="bg-white/5 border border-white/10 p-5 rounded-xl hover:border-[var(--accent-red)] transition-all">
+                  <h3 className="text-lg font-black text-white mb-2 uppercase">{type.name}</h3>
+                  <div className="flex justify-between text-xs mb-3">
+                    <span className="text-gray-500 font-mono">Waves: {type.waves}</span>
+                    <span className="text-blue-400 font-bold uppercase">{type.bosses}</span>
+                  </div>
+                  <p className="text-xs text-gray-400 border-t border-white/5 pt-3 italic">{type.use}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Key Farming Routes */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Dungeon Key Farming Routes</h2>
+            <div className="space-y-3">
+              {keyFarming.map((route, i) => (
+                <div key={i} className="flex justify-between items-center text-sm border-b border-white/5 pb-2">
+                  <span className="text-white font-bold">{route.source}</span>
+                  <span className="text-[var(--accent-red)] font-mono italic">{route.note}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Sailor Piece Powers | Power List, Stats, Unlock Guide",
-  description: "Sailor Piece powers guide with the power list, passive stat effects, unlock route, and the strongest power picks.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Sailor Piece Powers | ${siteConfig.name}`,
+    description: "Sailor Piece powers guide with the power list, passive stat effects, unlock route, and the strongest power picks.",
+    openGraph: {
+      title: `Sailor Piece Powers | ${siteConfig.name}`,
+      description: "Sailor Piece powers guide with the power list, passive stat effects, unlock route, and the strongest power picks.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Sailor Piece Powers | ${siteConfig.name}`,
+      description: "Sailor Piece powers guide with the power list, passive stat effects, unlock route, and the strongest power picks.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {

@@ -1,18 +1,32 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import { LineChart, Trophy, TowerControl as Tower, Swords, Sparkles, ClipboardCheck } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Sailor Piece Progress Trackers | Sailor Piece Wiki",
-  description: "Shared progress tracker hub for Boss Rush, Infinite Tower, Skill Tree, and endgame account milestones.",
-  openGraph: {
-    title: "Sailor Piece Progress Trackers | Sailor Piece Wiki",
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Sailor Piece Progress Trackers | ${siteConfig.name}`,
     description: "Shared progress tracker hub for Boss Rush, Infinite Tower, Skill Tree, and endgame account milestones.",
-    images: [{ url: "/images/site/sailorpiece-wiki-cover-v2.webp" }],
-  },
-};
+    openGraph: {
+      title: `Sailor Piece Progress Trackers | ${siteConfig.name}`,
+      description: "Shared progress tracker hub for Boss Rush, Infinite Tower, Skill Tree, and endgame account milestones.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Sailor Piece Progress Trackers | ${siteConfig.name}`,
+      description: "Shared progress tracker hub for Boss Rush, Infinite Tower, Skill Tree, and endgame account milestones.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const trackerEntries = [
   {

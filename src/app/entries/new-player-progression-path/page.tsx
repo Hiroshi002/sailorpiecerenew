@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "New Player Progression Path | Sailor Piece Wiki",
-  description: "Start-from-scratch progression route for new accounts, with safer early upgrades, bridge weapons and specs, and the late-game systems worth prioritizing first.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `New Player Progression Path | ${siteConfig.name}`,
+    description: "Start-from-scratch progression route for new accounts, with safer early upgrades, bridge weapons and specs, and the late-game systems worth prioritizing first.",
+    openGraph: {
+      title: `New Player Progression Path | ${siteConfig.name}`,
+      description: "Start-from-scratch progression route for new accounts, with safer early upgrades, bridge weapons and specs, and the late-game systems worth prioritizing first.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `New Player Progression Path | ${siteConfig.name}`,
+      description: "Start-from-scratch progression route for new accounts, with safer early upgrades, bridge weapons and specs, and the late-game systems worth prioritizing first.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {
@@ -26,7 +45,50 @@ const metaItems = [
   {
     "label": "Main pivot",
     "value": "Bridge into late-game systems before chasing niche max builds"
+  },
+  {
+    "label": "Current Cap",
+    "value": "Level 20,000"
   }
+];
+
+const facts = [
+  "This roadmap is a practical guide, not a rigid rulebook. Skip steps if you get lucky drops.",
+  "The level bands are approximate; focus on clearing the next boss and afford the next system.",
+  "Most strong accounts follow: Dark Blade -> Early Haki -> Artifacts -> Ascensions -> Bridge Bosses -> Late Systems.",
+  "Late-game systems include Runes, Spec Passives, Boss Rush, Infinite Tower, and Crystal Defense.",
+  "The current level cap is 20,000, extending the final phase beyond the old Sea 2 cap."
+];
+
+const phases = [
+  { id: "Phase 1", title: "Getting Started", desc: "Starter loop, early Haki, Artifacts, Dark Blade, and Gryphon." },
+  { id: "Phase 2", title: "Entering Midgame", desc: "System unlocks (Skill Tree, Passives), Sailor Island stats, and Soul Reaper." },
+  { id: "Phase 3", title: "Prep for Lategame", desc: "Stable baseline, Ascension 3, and prep for Strongest of Today/History." },
+  { id: "Phase 4", title: "Strain of Lategame", desc: "Secret traits, mythical races, and Atomic or Ice Queen branches." },
+  { id: "Phase 5", title: "Entrance to New World", desc: "Sea 2 bridge, Conqueror Haki quest, and Boss Rush maxing." },
+  { id: "Phase 6", title: "Path to Strongest", desc: "Meta cap goals, maxed systems, final relics, and min-maxing." }
+];
+
+const weaponLanes = [
+  { tier: "Starter", item: "Katana / Dual Katana" },
+  { tier: "Early Bridge", item: "Dark Blade / Gryphon" },
+  { tier: "Midgame", item: "Soul Reaper / Shadow / Abyss Edge" },
+  { tier: "Lategame", item: "Ice Queen / Atomic / Dual Wielder" },
+  { tier: "Endgame", item: "Sun God / Holy Greatsword" }
+];
+
+const meleeLanes = [
+  { tier: "Starter", item: "Combat" },
+  { tier: "Early Bridge", item: "Demonite / Black Leg" },
+  { tier: "Midgame", item: "Sukuna / Gojo / Hollow Mask" },
+  { tier: "Lategame", item: "Strongest of Today / King of Heroes" },
+  { tier: "Endgame", item: "Spirit Warrior / Empyrean" }
+];
+
+const currentUpdates = [
+  { area: "Blue Planet", levels: "16,000 - 18,000", note: "Raid hub and Spirit Warrior questline." },
+  { area: "Slayer Island", levels: "18,000 - 20,000+", note: "Sun God world boss and Index Milestone NPC." },
+  { area: "Raids", items: "Celestial Aura, Dual Wielder", note: "Dual-wield meta and Legendary aura farming." }
 ];
 
 const moveset: any[] = [];
@@ -233,8 +295,71 @@ export default function EntryPage() {
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
             <ul className="space-y-6">
-              
+              {facts.map((fact, i) => (
+                <li key={i} className="flex items-start gap-4 text-gray-300 group/item transition-colors hover:text-white">
+                  <span className="mt-1.5 w-2 h-2 rounded-full bg-[var(--accent-red)] shadow-[0_0_10px_rgba(255,30,56,0.5)] shrink-0" />
+                  <span className="text-lg leading-relaxed">{fact}</span>
+                </li>
+              ))}
             </ul>
+          </div>
+        </div>
+
+        {/* Progression Phases */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Progression Phases</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {phases.map((phase, i) => (
+                <div key={i} className="bg-black/40 border border-white/10 p-6 rounded-xl hover:border-[var(--accent-red)] transition-all group/phase">
+                  <div className="text-[var(--accent-red)] font-black uppercase text-xs mb-2">{phase.id}</div>
+                  <h3 className="text-xl font-black text-white mb-3 uppercase group-hover/phase:text-[var(--accent-red)] transition-colors">{phase.title}</h3>
+                  <p className="text-sm text-gray-400 leading-relaxed">{phase.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Progression Lanes */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+          <div className="panel-action clip-diagonal p-8 relative overflow-hidden group">
+            <h2 className="text-2xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Sword Lanes</h2>
+            <div className="space-y-4">
+              {weaponLanes.map((lane, i) => (
+                <div key={i} className="flex justify-between items-center text-sm border-b border-white/5 pb-2">
+                  <span className="text-gray-500 font-mono uppercase text-xs">{lane.tier}</span>
+                  <span className="text-white font-bold">{lane.item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="panel-action clip-diagonal p-8 relative overflow-hidden group border-l-4 border-blue-500/30">
+            <h2 className="text-2xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Melee Lanes</h2>
+            <div className="space-y-4">
+              {meleeLanes.map((lane, i) => (
+                <div key={i} className="flex justify-between items-center text-sm border-b border-white/5 pb-2">
+                  <span className="text-gray-500 font-mono uppercase text-xs">{lane.tier}</span>
+                  <span className="text-blue-400 font-bold">{lane.item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Current Update Notes */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group border-2 border-orange-500/30">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4 text-orange-400">Current Update Routing</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {currentUpdates.map((update, i) => (
+                <div key={i} className="bg-orange-950/10 border border-orange-500/20 p-5 rounded-xl">
+                  <h3 className="text-lg font-black text-white uppercase mb-2">{update.area}</h3>
+                  <div className="text-[var(--accent-red)] font-bold text-xs mb-2 uppercase font-mono">{update.levels || update.items}</div>
+                  <p className="text-xs text-gray-400 italic">{update.note}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

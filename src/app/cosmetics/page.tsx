@@ -1,18 +1,32 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import { Sparkles, Palette, ShieldCheck, Gem } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Cosmetics / Auras | Sailor Piece Wiki",
-  description: "Cosmetics, aura buffs, and crate-based stat items that support your build.",
-  openGraph: {
-    title: "Cosmetics / Auras | Sailor Piece Wiki",
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Cosmetics / Auras | ${siteConfig.name}`,
     description: "Cosmetics, aura buffs, and crate-based stat items that support your build.",
-    images: [{ url: "/images/site/sailorpiece-wiki-cover-v2.webp" }],
-  },
-};
+    openGraph: {
+      title: `Cosmetics / Auras | ${siteConfig.name}`,
+      description: "Cosmetics, aura buffs, and crate-based stat items that support your build.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Cosmetics / Auras | ${siteConfig.name}`,
+      description: "Cosmetics, aura buffs, and crate-based stat items that support your build.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const entries = [
   {

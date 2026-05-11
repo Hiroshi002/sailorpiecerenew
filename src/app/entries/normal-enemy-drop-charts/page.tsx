@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Sailor Piece NPC Drop Chances | Guild Key, Dominion Brand, Relic Parts",
-  description: "Normal enemy drop charts for Sailor Piece with NPC drop chances for Guild Key, Dominion Brand, Relic Parts, rerolls, chests, keys, crates, and other rare materials.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Sailor Piece NPC Drop Chances | ${siteConfig.name}`,
+    description: "Normal enemy drop charts for Sailor Piece with NPC drop chances for Guild Key, Dominion Brand, Relic Parts, rerolls, chests, keys, crates, and other rare materials.",
+    openGraph: {
+      title: `Sailor Piece NPC Drop Chances | ${siteConfig.name}`,
+      description: "Normal enemy drop charts for Sailor Piece with NPC drop chances for Guild Key, Dominion Brand, Relic Parts, rerolls, chests, keys, crates, and other rare materials.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Sailor Piece NPC Drop Chances | ${siteConfig.name}`,
+      description: "Normal enemy drop charts for Sailor Piece with NPC drop chances for Guild Key, Dominion Brand, Relic Parts, rerolls, chests, keys, crates, and other rare materials.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {

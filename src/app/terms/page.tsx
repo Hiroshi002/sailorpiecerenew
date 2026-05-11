@@ -1,11 +1,30 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-export const metadata: Metadata = {
-  title: "Terms of Service | Sailor Piece Wiki",
-  description: "Basic terms for using this fan-made Sailor Piece wiki.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Terms of Service | ${siteConfig.name}`,
+    description: "Basic terms for using this fan-made Sailor Piece wiki.",
+    openGraph: {
+      title: `Terms of Service | ${siteConfig.name}`,
+      description: "Basic terms for using this fan-made Sailor Piece wiki.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Terms of Service | ${siteConfig.name}`,
+      description: "Basic terms for using this fan-made Sailor Piece wiki.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const termsSections = [
   {

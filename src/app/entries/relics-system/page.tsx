@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,15 +6,33 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Sailor Piece Relic Part Drop Chances | Relic Parts 1-8, NPC Routes",
-  description: "Sea 2 relics guide for Sailor Piece with Relic Part drop chances, Relic Part #1 to #8 NPC routes, Relic Crafter recipes, and current forge details.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Sailor Piece Relic Part Drop Chances | ${siteConfig.name}`,
+    description: "Sea 2 relics guide for Sailor Piece with Relic Part drop chances, Relic Part #1 to #8 NPC routes, Relic Crafter recipes, and current forge details.",
+    openGraph: {
+      title: `Sailor Piece Relic Part Drop Chances | ${siteConfig.name}`,
+      description: "Sea 2 relics guide for Sailor Piece with Relic Part drop chances, Relic Part #1 to #8 NPC routes, Relic Crafter recipes, and current forge details.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Sailor Piece Relic Part Drop Chances | ${siteConfig.name}`,
+      description: "Sea 2 relics guide for Sailor Piece with Relic Part drop chances, Relic Part #1 to #8 NPC routes, Relic Crafter recipes, and current forge details.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {
     "label": "Status",
-    "value": "Relic recipes partly confirmed from the current forge screen"
+    "value": "Sea 2 System - Live Tracking"
   },
   {
     "label": "Main NPC",
@@ -24,13 +43,40 @@ const metaItems = [
     "value": "Bizarre Island"
   },
   {
-    "label": "Current source",
-    "value": "Split across Delinquent, Strong Fighter, Strong Bandit, and Fast Ninja in Sea 2"
-  },
-  {
-    "label": "Current forge list",
-    "value": "4 relic recipes confirmed"
+    "label": "Crystal Relics",
+    "value": "Damage (+40%), Luck (+30%)"
   }
+];
+
+const facts = [
+  "Relics are one of the core progression systems introduced in Sea 2.",
+  "The Relic Crafter NPC is located on Bizarre Island.",
+  "Four craftable relics are currently confirmed: Luck, Damage, Crit Chance, and Crit Damage.",
+  "Crystal Damage and Crystal Luck relics are rare chase drops from Crystal Defense.",
+  "Relic Parts #1 through #8 drop from specific Sea 2 mobs with very low base chances."
+];
+
+const relicParts = [
+  { id: "#1", source: "Delinquent", island: "Starter Sea 2", level: "12,750", chance: "0.015%", usage: "Crit Chance / Damage" },
+  { id: "#2", source: "Delinquent", island: "Starter Sea 2", level: "12,750", chance: "0.0125%", usage: "Crit Chance / Crit Damage" },
+  { id: "#3", source: "Strong Fighter", island: "Starter Sea 2", level: "13,000", chance: "0.01%", usage: "Damage / Crit Damage" },
+  { id: "#4", source: "Strong Fighter", island: "Starter Sea 2", level: "13,000", chance: "0.009%", usage: "Crit Damage" },
+  { id: "#5", source: "Strong Bandit", island: "Bizarre Island", level: "13,500", chance: "0.008%", usage: "Luck Relic" },
+  { id: "#6", source: "Strong Bandit", island: "Bizarre Island", level: "13,500", chance: "0.007%", usage: "Luck Relic" },
+  { id: "#7", source: "Fast Ninja", island: "Punch Island", level: "14,500", chance: "0.0075%", usage: "Damage Relic" },
+  { id: "#8", source: "Fast Ninja", island: "Punch Island", level: "14,500", chance: "0.0065%", usage: "Damage Relic" }
+];
+
+const craftableRelics = [
+  { name: "Luck Relic", bonus: "+20% Luck", recipe: "30 Part #5 + 25 Part #6" },
+  { name: "Damage Relic", bonus: "+30% Damage", recipe: "40 Part #7 + 30 Part #8 + 50 Part #1 + 50 Part #3" },
+  { name: "Crit Chance Relic", bonus: "+5% Crit Chance", recipe: "20 Part #1 + 15 Part #2" },
+  { name: "Crit Damage Relic", bonus: "+15% Crit Damage", recipe: "25 Part #2 + 20 Part #3 + 15 Part #4" }
+];
+
+const crystalRelics = [
+  { name: "Crystal Damage Relic", bonus: "+40% Damage", note: "Rare Crystal Defense drop (Chase item)" },
+  { name: "Crystal Luck Relic", bonus: "+30% Luck", note: "Rare Crystal Defense drop (Chase item)" }
 ];
 
 const moveset: any[] = [];
@@ -127,8 +173,89 @@ export default function EntryPage() {
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
             <ul className="space-y-6">
-              
+              {facts.map((fact, i) => (
+                <li key={i} className="flex items-start gap-4 text-gray-300 group/item transition-colors hover:text-white">
+                  <span className="mt-1.5 w-2 h-2 rounded-full bg-[var(--accent-red)] shadow-[0_0_10px_rgba(255,30,56,0.5)] shrink-0" />
+                  <span className="text-lg leading-relaxed">{fact}</span>
+                </li>
+              ))}
             </ul>
+          </div>
+        </div>
+
+        {/* Crystal Defense Relics */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group border-2 border-blue-500/30 shadow-[0_0_30px_rgba(59,130,246,0.1)]">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Crystal Defense Relics</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {crystalRelics.map((relic, i) => (
+                <div key={i} className="bg-blue-950/20 border border-blue-500/20 p-6 rounded-xl">
+                  <div className="text-xl font-black text-blue-400 mb-2">{relic.name}</div>
+                  <div className="text-3xl font-black text-white mb-4">{relic.bonus}</div>
+                  <div className="text-sm text-gray-400 font-mono italic">{relic.note}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Craftable Relics */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Current Craftable Relics</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-white/20 text-gray-400 font-mono text-sm uppercase">
+                    <th className="py-4 px-4">Relic</th>
+                    <th className="py-4 px-4">Bonus</th>
+                    <th className="py-4 px-4 text-right">Recipe</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  {craftableRelics.map((relic, i) => (
+                    <tr key={i} className="hover:bg-white/5 transition-colors group/row">
+                      <td className="py-4 px-4 font-bold text-white group-hover/row:text-[var(--accent-red)] transition-colors">{relic.name}</td>
+                      <td className="py-4 px-4 font-black text-[var(--accent-red)]">{relic.bonus}</td>
+                      <td className="py-4 px-4 text-right text-xs text-gray-400 font-mono">{relic.recipe}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        {/* Relic Part Drop Table */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Relic Part Drop Table</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse text-sm">
+                <thead>
+                  <tr className="border-b border-white/20 text-gray-400 font-mono uppercase">
+                    <th className="py-4 px-4">Part</th>
+                    <th className="py-4 px-4">Source NPC</th>
+                    <th className="py-4 px-4">Island</th>
+                    <th className="py-4 px-4">Level</th>
+                    <th className="py-4 px-4">Chance</th>
+                    <th className="py-4 px-4 text-right">Used For</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  {relicParts.map((part, i) => (
+                    <tr key={i} className="hover:bg-white/5 transition-colors group/row text-gray-300">
+                      <td className="py-4 px-4 font-bold text-white">Relic Part {part.id}</td>
+                      <td className="py-4 px-4">{part.source}</td>
+                      <td className="py-4 px-4 text-xs text-gray-400">{part.island}</td>
+                      <td className="py-4 px-4 font-mono">{part.level}</td>
+                      <td className="py-4 px-4 font-black text-[var(--accent-red)]">{part.chance}</td>
+                      <td className="py-4 px-4 text-right text-xs italic">{part.usage}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 

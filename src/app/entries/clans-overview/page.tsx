@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,15 +6,33 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Sailor Piece Clans | Clan List, Passives, Best Clans",
-  description: "Sailor Piece clans guide with clan passives, reroll info, CCR context, and the strongest clans for swords, melees, and farming.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Sailor Piece Clans | ${siteConfig.name}`,
+    description: "Sailor Piece clans guide with clan passives, reroll info, CCR context, and the strongest clans for swords, melees, and farming.",
+    openGraph: {
+      title: `Sailor Piece Clans | ${siteConfig.name}`,
+      description: "Sailor Piece clans guide with clan passives, reroll info, CCR context, and the strongest clans for swords, melees, and farming.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Sailor Piece Clans | ${siteConfig.name}`,
+      description: "Sailor Piece clans guide with clan passives, reroll info, CCR context, and the strongest clans for swords, melees, and farming.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {
     "label": "Current clans",
-    "value": "14"
+    "value": "15 confirmed"
   },
   {
     "label": "Reroll item",
@@ -21,12 +40,21 @@ const metaItems = [
   },
   {
     "label": "Best farming clans",
-    "value": "Devil and Eminence"
+    "value": "Devil first, then Eminence"
   },
   {
     "label": "Newest tracked clan",
-    "value": "Devil"
+    "value": "Senzu"
   }
+];
+
+const facts = [
+  "Clans are rolled from your inventory with Clan Rerolls and add permanent buffs to your build.",
+  "The wiki currently tracks 15 named clans after the current update, with Senzu as the newest clan.",
+  "Devil is currently treated as the best farming clan and still a great sword clan because of its damage, sword damage, luck, HP, and +1 drop passive.",
+  "Frostbane is currently treated as the best pure sword and sustainable DPS clan, while Upper and Senzu are the main melee-damage debate.",
+  "Senzu is the newest flex-damage clan: it is close to Upper for melee burst and feels like the cooler Alter-style damage spike option.",
+  "Senzu, Alter, Upper, Eminence, Espada, Pride, Monarch, Frostbane, and Devil are the most relevant late-game clan names right now.",
 ];
 
 const moveset: any[] = [];
@@ -96,7 +124,7 @@ export default function EntryPage() {
             </h1>
 
             <p className="text-xl text-gray-300 mb-8 max-w-3xl leading-relaxed border-l-4 border-[var(--accent-red)] pl-4 backdrop-blur-sm bg-black/20 py-2">
-              Clan rerolls, clan passives, and the current late-game clan roster used for melee, sword, and farming builds, now including the new Devil clan.
+              Clan rerolls, clan passives, and the current late-game clan roster used for melee, sword, and farming builds, now including the Legendary Senzu clan.
             </p>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -111,8 +139,8 @@ export default function EntryPage() {
           
           <div className="w-full md:w-1/3 shrink-0 rounded-2xl overflow-hidden border-2 border-white/10 shadow-[0_0_30px_rgba(255,30,56,0.2)] bg-black relative aspect-square">
             <Image 
-              src="/images/site/sailorpiece-wiki-cover-v2.webp" 
-              alt="Hero Image Placeholder" 
+              src="/images/site/sailorpiecewikiv3.webp" 
+              alt="Clans Overview Hero Image" 
               fill
               className="object-contain p-4 opacity-90 transition-opacity duration-500 hover:opacity-100"
               sizes="(max-width: 768px) 100vw, 33vw"
@@ -128,7 +156,14 @@ export default function EntryPage() {
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
             <ul className="space-y-6">
-              
+              {facts.map((fact, i) => (
+                <li key={i} className="flex gap-4 group/item">
+                  <div className="text-[var(--accent-red)] font-black text-xl italic group-hover/item:scale-125 transition-transform duration-300">0{i+1}</div>
+                  <p className="text-gray-300 text-lg leading-relaxed font-medium border-b border-white/5 pb-4 w-full group-hover/item:text-white transition-colors">
+                    {fact}
+                  </p>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Sailor Piece Traits | Trait List, Stats, Best Traits",
-  description: "Sailor Piece traits guide with every tracked trait, its stats, reroll context, rarity, and the best late-game traits.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Sailor Piece Traits | ${siteConfig.name}`,
+    description: "Sailor Piece traits guide with every tracked trait, its stats, reroll context, rarity, and the best late-game traits.",
+    openGraph: {
+      title: `Sailor Piece Traits | ${siteConfig.name}`,
+      description: "Sailor Piece traits guide with every tracked trait, its stats, reroll context, rarity, and the best late-game traits.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Sailor Piece Traits | ${siteConfig.name}`,
+      description: "Sailor Piece traits guide with every tracked trait, its stats, reroll context, rarity, and the best late-game traits.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {
@@ -26,6 +45,62 @@ const metaItems = [
   {
     "label": "Top published trait",
     "value": "Emperor"
+  }
+];
+
+const facts = [
+  "There are 25 current traits spread across Common, Uncommon, Rare, Epic, Legendary, Mythical, and Secret rarities.",
+  "Traits are rerolled with Trait Rerolls at the Trait NPC on Sailor Island.",
+  "Current public trait lists agree that Emperor, Celestial, Singularity, Cataclysm, and Overlord sit at the top end of the meta."
+];
+
+const sections = [
+  {
+    title: "How to reroll traits",
+    items: [
+      "Farm or redeem Trait Rerolls.",
+      "Go to Sailor Island and talk to the Trait NPC.",
+      "Use one Trait Reroll per spin.",
+      "Bosses have the highest Trait Reroll drop rate, while low-level mobs have the weakest drop rate."
+    ]
+  }
+];
+
+const rarityOdds = [
+  { rarity: "Common", chance: "50%", color: "text-gray-400" },
+  { rarity: "Uncommon", chance: "28%", color: "text-green-400" },
+  { rarity: "Rare", chance: "15%", color: "text-blue-400" },
+  { rarity: "Epic", chance: "5%", color: "text-purple-400" },
+  { rarity: "Legendary", chance: "1%", color: "text-yellow-400" },
+  { rarity: "Mythical", chance: "0.5%", color: "text-red-400" },
+  { rarity: "Secret", chance: "0.1%", color: "text-pink-400" }
+];
+
+const traitStats = [
+  { trait: "Agile", rarity: "Common", stats: "10% Cooldown Reduction", tier: "C" },
+  { trait: "Strong", rarity: "Common", stats: "1.15x Damage, 1.05x Defense", tier: "C" },
+  { trait: "Tough", rarity: "Common", stats: "1.10x Damage, 1.15x Defense", tier: "C" },
+  { trait: "Sharp", rarity: "Uncommon", stats: "1.2x Damage, 5% Crit Chance", tier: "B" },
+  { trait: "Godspeed", rarity: "Rare", stats: "25% Cooldown Reduction, 1.1x Damage", tier: "A" },
+  { trait: "Emperor", rarity: "Mythical", stats: "1.5x Damage, 1.25x Defense, 20% Cooldown Reduction", tier: "S+" }
+];
+
+const faq = [
+  {
+    question: "What do traits do in Sailor Piece?",
+    answer: "Traits add strong passive bonuses such as damage, cooldown reduction, crit support, and other combat scaling that affect almost every build."
+  },
+  {
+    question: "Does the traits page show every trait and its stats?",
+    answer: "Yes. The traits page is meant to list all tracked traits with their stat lines, not just the best few."
+  },
+  {
+    question: "How do you reroll traits in Sailor Piece?",
+    answer: "Traits are rerolled with Trait Rerolls, which are available through gameplay rewards, codes, and store products."
+  },
+  {
+    question: "What is the best trait in Sailor Piece?",
+    answer: "The exact best trait can shift with balance and build type, but Emperor and other top-end traits are clearly separated from the weaker reroll options."
   }
 ];
 
@@ -118,10 +193,106 @@ export default function EntryPage() {
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
             <ul className="space-y-6">
-              
+              {facts.map((fact, i) => (
+                <li key={i} className="flex items-start gap-4 text-gray-300">
+                  <span className="mt-2 w-2 h-2 rounded-full bg-[var(--accent-red)] shrink-0 shadow-[0_0_8px_rgba(255,30,56,0.6)]" />
+                  <span className="text-lg leading-relaxed">{fact}</span>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
+
+        {/* Dynamic Sections */}
+        {sections.map((section, i) => (
+          <div key={i} className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+            <div className="mb-4 relative z-10">
+              <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">{section.title}</h2>
+              <ul className="space-y-4">
+                {section.items.map((item, j) => (
+                  <li key={j} className="flex items-start gap-3 text-gray-300">
+                    <span className="mt-2 w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0" />
+                    <span className="text-base">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+
+        {/* Rarity Odds Table */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Trait Rarity Odds</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-4">
+              {rarityOdds.map((odd, i) => (
+                <div key={i} className="bg-white/5 p-4 rounded-xl border border-white/10 text-center">
+                  <div className={`text-sm font-bold mb-1 ${odd.color}`}>{odd.rarity}</div>
+                  <div className="text-xl font-black text-white">{odd.chance}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Trait Stats Table */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">All Traits and Stats</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-white/20 text-gray-400 font-mono text-sm uppercase">
+                    <th className="py-4 px-4">Trait</th>
+                    <th className="py-4 px-4">Rarity</th>
+                    <th className="py-4 px-4">Stats</th>
+                    <th className="py-4 px-4 text-center">Tier</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  {traitStats.map((trait, i) => (
+                    <tr key={i} className="hover:bg-white/5 transition-colors">
+                      <td className="py-3 px-4 font-bold text-white">{trait.trait}</td>
+                      <td className="py-3 px-4">
+                        <span className={`px-2 py-0.5 rounded text-xs font-bold uppercase ${
+                          trait.rarity === 'Common' ? 'bg-gray-500/20 text-gray-400' :
+                          trait.rarity === 'Uncommon' ? 'bg-green-500/20 text-green-400' :
+                          trait.rarity === 'Rare' ? 'bg-blue-500/20 text-blue-400' :
+                          trait.rarity === 'Epic' ? 'bg-purple-500/20 text-purple-400' :
+                          trait.rarity === 'Legendary' ? 'bg-yellow-500/20 text-yellow-400' :
+                          'bg-red-500/20 text-red-400'
+                        }`}>
+                          {trait.rarity}
+                        </span>
+                      </td>
+                      <td className="py-3 px-4 text-gray-300">{trait.stats}</td>
+                      <td className="py-3 px-4 text-center">
+                        <span className="px-2 py-1 rounded bg-white/10 font-black text-white">{trait.tier}</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        {/* FAQ Section */}
+        {faq.length > 0 && (
+          <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+            <div className="mb-4 relative z-10">
+              <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">FAQ</h2>
+              <div className="space-y-6">
+                {faq.map((item, i) => (
+                  <div key={i} className="bg-white/5 p-6 rounded-xl border border-white/10">
+                    <h3 className="text-lg font-bold text-[var(--accent-red)] mb-2 uppercase tracking-tight">{item.question}</h3>
+                    <p className="text-gray-300 leading-relaxed">{item.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Content Section: Route Details */}
         {routeDetails.length > 0 && (

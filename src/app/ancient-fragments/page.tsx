@@ -1,59 +1,32 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { MapPin, Info, Image as ImageIcon } from 'lucide-react';
 
-export const metadata: Metadata = {
-  title: "Ancient Fragments | Sailor Piece Wiki",
-  description: "Dedicated Ancient Fragments route page with all 20 Sea 2 unlock spawn screenshots, the matching 1 to 20 order, and the visual route handoff from the Lost Fragments quest.",
-  robots: "index, follow, max-image-preview:large",
-  authors: [{ name: "Sailor Piece Wiki Editors" }],
-  openGraph: {
-    siteName: "Sailor Piece Wiki",
-    locale: "en_US",
-    type: "website",
-    title: "Ancient Fragments | Sailor Piece Wiki",
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Ancient Fragments | ${siteConfig.name}`,
     description: "Dedicated Ancient Fragments route page with all 20 Sea 2 unlock spawn screenshots, the matching 1 to 20 order, and the visual route handoff from the Lost Fragments quest.",
-    url: "https://sailorpiecewiki.com/ancient-fragments",
-    images: [
-      {
-        url: "../images/site/sailorpiece-wiki-cover-v2.webp",
-        width: 1200,
-        height: 630,
-        alt: "Sailor Piece Wiki branded cover image using the live game thumbnail",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Ancient Fragments | Sailor Piece Wiki",
-    description: "Dedicated Ancient Fragments route page with all 20 Sea 2 unlock spawn screenshots, the matching 1 to 20 order, and the visual route handoff from the Lost Fragments quest.",
-    images: [
-      {
-        url: "../images/site/sailorpiece-wiki-cover-v2.webp",
-        alt: "Sailor Piece Wiki branded cover image using the live game thumbnail",
-      },
-    ],
-  },
-  alternates: {
-    canonical: "https://sailorpiecewiki.com/ancient-fragments",
-  },
-  icons: {
-    icon: [
-      { url: "../siteicon.png", type: "image/png", sizes: "96x96" },
-      { url: "../favicon.svg", type: "image/svg+xml" },
-    ],
-    shortcut: "../siteicon.png",
-    apple: [
-      { url: "../apple-touch-icon.png", sizes: "96x96" },
-    ],
-  },
-  other: {
-    "site-build": "20260429002521",
-    "apple-mobile-web-app-title": "Sailor Piece Wiki",
-  },
-};
+    openGraph: {
+      title: `Ancient Fragments | ${siteConfig.name}`,
+      description: "Dedicated Ancient Fragments route page with all 20 Sea 2 unlock spawn screenshots, the matching 1 to 20 order, and the visual route handoff from the Lost Fragments quest.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Ancient Fragments | ${siteConfig.name}`,
+      description: "Dedicated Ancient Fragments route page with all 20 Sea 2 unlock spawn screenshots, the matching 1 to 20 order, and the visual route handoff from the Lost Fragments quest.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 export default function Page() {
   return (

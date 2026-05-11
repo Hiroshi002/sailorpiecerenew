@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Spec Passives | Sailor Piece Wiki",
-  description: "Judgement Island passive system that adds a rerolled buff layer onto your swords and fighting styles.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Spec Passives | ${siteConfig.name}`,
+    description: "Judgement Island passive system that adds a rerolled buff layer onto your swords and fighting styles.",
+    openGraph: {
+      title: `Spec Passives | ${siteConfig.name}`,
+      description: "Judgement Island passive system that adds a rerolled buff layer onto your swords and fighting styles.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Spec Passives | ${siteConfig.name}`,
+      description: "Judgement Island passive system that adds a rerolled buff layer onto your swords and fighting styles.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {
@@ -29,25 +48,67 @@ const metaItems = [
   }
 ];
 
-const moveset: any[] = [];
+const facts = [
+  "Spec Passives are a separate late-game system and are not the melee category itself.",
+  "The system unlocks at Judgement Island after reaching level 10,000 and paying 5,000 Gems.",
+  "Once unlocked, you can apply rerolled passives onto swords and fighting styles using Passive Shards.",
+  "You can only have one active spec passive at a time per slot (one for your sword, one for your style)."
+];
 
-const routeDetails: any[] = [];
+const rarityOdds = [
+  { rarity: "common", chance: "50.05%" },
+  { rarity: "uncommon", chance: "28.75%" },
+  { rarity: "rare", chance: "15%" },
+  { rarity: "epic", chance: "5%" },
+  { rarity: "legendary", chance: "1%" },
+  { rarity: "mythical", chance: "0.2%" }
+];
+
+const topPassives = [
+  {
+    name: "Fortune Chosen",
+    rarity: "mythical",
+    effects: "17.5% to 30% chance for +1 Drop, 5% to 10% Luck, 5% to 12.5% Damage"
+  },
+  {
+    name: "Executioner",
+    rarity: "mythical",
+    effects: "30% to 45% damage to NPCs below 50% HP, 2% to 4% Crit Chance, 7.5% to 15% Crit Damage"
+  },
+  {
+    name: "Rampage",
+    rarity: "mythical",
+    effects: "15% to 30% Damage, 2% to 4% Crit Rate, 5% to 10% Crit Damage, plus stacking hit damage up to 1.15x to 1.30x"
+  },
+  {
+    name: "Berserker",
+    rarity: "mythical",
+    effects: "25% to 45% Damage, -10% HP penalty, 5% to 10% Crit Damage"
+  }
+];
+
+const passiveFamilies = [
+  { family: "Damage I to V", range: "5% to 35% Damage" },
+  { family: "Crit Chance I to V", range: "0.25% to 5% Crit Chance" },
+  { family: "Crit Damage I to V", range: "1% to 18% Crit Damage" },
+  { family: "Luck I to V", range: "1% to 15% Luck" }
+];
 
 const relatedPages = [
   {
     "href": "/entries/specs-overview/index",
     "title": "Melees and Fighting Styles",
-    "summary": "Current melee roster in Sailor Piece and the shared way fighting styles scale into late-game content."
+    "summary": "Current melee roster in Sailor Piece and shared scaling logic."
   },
   {
     "href": "/entries/blessings-system/index",
     "title": "Blessings System",
-    "summary": "Shibuya Station upgrade system for swords and specs, with shared B1 to B10 materials and stat gains."
+    "summary": "Shibuya Station upgrade system for swords and specs."
   },
   {
     "href": "/entries/power-system-overview/index",
     "title": "Power System",
-    "summary": "Late-game Lawless Island system that rolls build-wide power traits using Power Shards."
+    "summary": "Lawless Island system that rolls build-wide power traits."
   }
 ];
 
@@ -117,58 +178,79 @@ export default function EntryPage() {
           
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
-            <ul className="space-y-6">
-              
+            <ul className="space-y-4">
+              {facts.map((fact, i) => (
+                <li key={i} className="flex items-start gap-3 text-gray-300">
+                  <span className="mt-1.5 w-2 h-2 rounded-full bg-[var(--accent-red)] shrink-0 shadow-[0_0_10px_rgba(255,30,56,0.5)]" />
+                  <span>{fact}</span>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
-        {/* Content Section: Route Details */}
-        {routeDetails.length > 0 && (
-          <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
-            <div className="mb-4 relative z-10">
-              <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Route Details</h2>
-              
-              <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse">
-                  <thead>
-                    <tr className="border-b border-white/20 text-gray-400 font-mono text-sm uppercase">
-                      <th className="py-4 px-4">Field</th>
-                      <th className="py-4 px-4">Details</th>
+        {/* Rarity Odds & Families */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+          {/* Rarity Odds Table */}
+          <div className="panel-action clip-diagonal p-8 relative overflow-hidden group">
+            <h2 className="text-2xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Rarity Odds</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-white/20 text-gray-400 font-mono text-xs uppercase">
+                    <th className="py-3 px-2">Rarity</th>
+                    <th className="py-3 px-2">Chance</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  {rarityOdds.map((row, i) => (
+                    <tr key={i} className="hover:bg-white/5 transition-colors">
+                      <td className="py-3 px-2">
+                        <span className={`text-[10px] px-2 py-0.5 rounded border border-white/10 font-mono uppercase tracking-widest rarity-${row.rarity}`}>
+                          {row.rarity}
+                        </span>
+                      </td>
+                      <td className="py-3 px-2 text-white font-mono">{row.chance}</td>
                     </tr>
-                  </thead>
-                  <tbody className="divide-y divide-white/5">
-                    {routeDetails.map((row, i) => (
-                      <tr key={i} className="hover:bg-white/5 transition-colors">
-                        <td className="py-3 px-4 font-semibold text-blue-400">{row.field}</td>
-                        <td className="py-3 px-4 text-white">
-                          {row.link ? (
-                            <Link href={row.link} className="text-blue-300 hover:text-blue-200 underline decoration-white/30 underline-offset-4">{row.details}</Link>
-                          ) : row.details}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
-        )}
 
-        {/* Content Section: Moveset */}
-        {moveset.length > 0 && (
-          <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
-            <div className="mb-4 relative z-10">
-              <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Moveset</h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {moveset.map((move, i) => (
-                  <VideoMovesetCard key={i} move={move} />
-                ))}
-              </div>
+          {/* Passive Families */}
+          <div className="panel-action clip-diagonal p-8 relative overflow-hidden group">
+            <h2 className="text-2xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Passive Families</h2>
+            <div className="space-y-4">
+              {passiveFamilies.map((family, i) => (
+                <div key={i} className="flex justify-between items-center bg-white/5 p-4 rounded-lg border border-white/10 hover:border-[var(--accent-red)]/30 transition-colors">
+                  <span className="font-bold text-white uppercase text-sm tracking-tight">{family.family}</span>
+                  <span className="text-[var(--accent-red)] font-mono text-xs">{family.range}</span>
+                </div>
+              ))}
             </div>
           </div>
-        )}
+        </div>
+
+        {/* Top Passive Rolls */}
+        <div className="panel-action clip-diagonal p-8 mb-12 relative overflow-hidden group">
+          <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Top Passive Rolls (Mythical)</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {topPassives.map((passive, i) => (
+              <div key={i} className="bg-black/40 border border-white/10 p-6 rounded-xl hover:border-[var(--accent-red)]/50 transition-all">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-black text-white uppercase tracking-tight">{passive.name}</h3>
+                  <span className="text-[9px] px-2 py-0.5 rounded border border-purple-500/50 text-purple-400 font-mono uppercase tracking-widest bg-purple-500/10">
+                    {passive.rarity}
+                  </span>
+                </div>
+                <p className="text-sm text-gray-400 leading-relaxed italic border-l-2 border-[var(--accent-red)] pl-4">
+                  {passive.effects}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
         
         {/* Related Pages */}
         {relatedPages.length > 0 && (

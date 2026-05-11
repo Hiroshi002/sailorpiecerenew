@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Auras | Sailor Piece Wiki",
-  description: "Aura crate system, current damage bonuses, and the obtainable aura ladder in Sailor Piece.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Auras | ${siteConfig.name}`,
+    description: "Aura crate system, current damage bonuses, and the obtainable aura ladder in Sailor Piece.",
+    openGraph: {
+      title: `Auras | ${siteConfig.name}`,
+      description: "Aura crate system, current damage bonuses, and the obtainable aura ladder in Sailor Piece.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Auras | ${siteConfig.name}`,
+      description: "Aura crate system, current damage bonuses, and the obtainable aura ladder in Sailor Piece.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {
@@ -21,7 +40,7 @@ const metaItems = [
   },
   {
     "label": "Equip tab",
-    "value": "Inventory &gt; Auras"
+    "value": "Inventory > Auras"
   },
   {
     "label": "Unobtainable aura",
@@ -29,8 +48,55 @@ const metaItems = [
   },
   {
     "label": "Newest confirmed auras",
-    "value": "Destroyer Aura and Demonic Aura"
+    "value": "Destroyer, Demonic, Celestial, Monster"
   }
+];
+
+const facts = [
+  "Auras are separate from cosmetics and mainly serve as damage-boosting visual effects.",
+  "Most current auras come from Aura Crates, while some older event auras are no longer obtainable.",
+  "Aura damage buffs are tracked as a flat damage increase based on rarity.",
+  "Destroyer Aura is now confirmed as the Crystal Defense reward (2,000 Crystal Coins).",
+  "Celestial Aura drops from the Minotaur Raid (up to 0.42% on Extreme at 100% luck)."
+];
+
+const updateNotes = [
+  { aura: "Celestial Aura", status: "Legendary (+15% Damage). Minotaur Raid direct drop." },
+  { aura: "Monster Aura", status: "Legendary (+15% Damage). Obtainment route being checked." },
+  { aura: "Guild Auras", status: "4 new guild leaderboard auras confirmed as rewards." },
+  { aura: "Easter Event", status: "Ended. Petal and Sacred Bloom auras are now historical." }
+];
+
+const auraList = [
+  { name: "Destroyer Aura", rarity: "Legendary", buff: "+15% Damage", status: "Obtainable" },
+  { name: "Celestial Aura", rarity: "Legendary", buff: "+15% Damage", status: "Obtainable" },
+  { name: "Monster Aura", rarity: "Legendary", buff: "+15% Damage", status: "Obtainable" },
+  { name: "Demonic Aura", rarity: "Legendary", buff: "+15% Damage", status: "Obtainable" },
+  { name: "Hellfire Aura", rarity: "Legendary", buff: "+15% Damage", status: "Obtainable" },
+  { name: "Saiyyan Aura", rarity: "Legendary", buff: "+15% Damage", status: "Obtainable" },
+  { name: "Fallen Angel", rarity: "Legendary", buff: "+15% Damage", status: "Obtainable" },
+  { name: "Corrupted", rarity: "Epic", buff: "+12.5% Damage", status: "Obtainable" },
+  { name: "Ultra Instinct", rarity: "Epic", buff: "+12.5% Damage", status: "Obtainable" },
+  { name: "Commander", rarity: "Epic", buff: "+12.5% Damage", status: "Obtainable" },
+  { name: "Singer", rarity: "Rare", buff: "+10% Damage", status: "Obtainable" },
+  { name: "Gambler", rarity: "Rare", buff: "+10% Damage", status: "Obtainable" },
+  { name: "Glitch Aura", rarity: "Rare", buff: "+10% Damage", status: "Obtainable" },
+  { name: "Valentine Aura", rarity: "Rare", buff: "+10% Damage", status: "Unobtainable" },
+  { name: "Rose", rarity: "Uncommon", buff: "+7.5% Damage", status: "Obtainable" },
+  { name: "Alter", rarity: "Common", buff: "+5% Damage", status: "Obtainable" }
+];
+
+const howToGet = [
+  "Aura Crates drop from mobs, mini-bosses, and world bosses.",
+  "Destroyer Aura is sold by the Defense Merchant for 2,000 Crystal Coins.",
+  "Celestial Aura drops directly from the Minotaur Raid.",
+  "Guild Leaderboard rewards now include 4 exclusive auras."
+];
+
+const howToEquip = [
+  "Open inventory and switch to the Aura tab.",
+  "Select the aura you want to activate.",
+  "Only one aura buff can be active at a time."
 ];
 
 const moveset: any[] = [];
@@ -127,7 +193,95 @@ export default function EntryPage() {
           <div className="mb-4 relative z-10">
             <h2 className="text-3xl font-black text-white text-kinetic mb-8 uppercase border-b border-white/10 pb-4">Overview</h2>
             <ul className="space-y-6">
-              
+              {facts.map((fact, i) => (
+                <li key={i} className="flex items-start gap-4 text-gray-300 group/item transition-colors hover:text-white">
+                  <span className="mt-1.5 w-2 h-2 rounded-full bg-[var(--accent-red)] shadow-[0_0_10px_rgba(255,30,56,0.5)] shrink-0" />
+                  <span className="text-lg leading-relaxed">{fact}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Current Update Notes */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Current Update Notes</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {updateNotes.map((note, i) => (
+                <div key={i} className="bg-black/40 border border-white/10 p-4 rounded-xl">
+                  <div className="text-[var(--accent-red)] font-bold mb-1 uppercase text-sm">{note.aura}</div>
+                  <div className="text-gray-300 text-sm">{note.status}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Aura List */}
+        <div className="panel-action clip-diagonal p-8 mb-10 relative overflow-hidden group">
+          <div className="mb-4 relative z-10">
+            <h2 className="text-3xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">Current Aura List</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-white/20 text-gray-400 font-mono text-sm uppercase">
+                    <th className="py-4 px-4">Aura Name</th>
+                    <th className="py-4 px-4">Rarity</th>
+                    <th className="py-4 px-4">Damage Buff</th>
+                    <th className="py-4 px-4 text-right">Status</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  {auraList.map((aura, i) => (
+                    <tr key={i} className="hover:bg-white/5 transition-colors group/row">
+                      <td className="py-4 px-4 font-bold text-white group-hover/row:text-[var(--accent-red)] transition-colors">{aura.name}</td>
+                      <td className="py-4 px-4">
+                        <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
+                          aura.rarity === 'Legendary' ? 'bg-orange-500/20 text-orange-400 border border-orange-500/50' :
+                          aura.rarity === 'Epic' ? 'bg-purple-500/20 text-purple-400 border border-purple-500/50' :
+                          aura.rarity === 'Rare' ? 'bg-blue-500/20 text-blue-400 border border-blue-500/50' :
+                          'bg-gray-500/20 text-gray-400 border border-gray-500/50'
+                        }`}>
+                          {aura.rarity}
+                        </span>
+                      </td>
+                      <td className="py-4 px-4 font-mono text-[var(--accent-red)]">{aura.buff}</td>
+                      <td className="py-4 px-4 text-right">
+                        <span className={`text-xs ${aura.status === 'Obtainable' ? 'text-green-400' : 'text-red-400 opacity-60'}`}>
+                          {aura.status}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        {/* Obtainment & Equip */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+          <div className="panel-action clip-diagonal p-8 relative overflow-hidden group">
+            <h2 className="text-2xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">How to Get</h2>
+            <ul className="space-y-4">
+              {howToGet.map((step, i) => (
+                <li key={i} className="flex items-start gap-3 text-gray-400 text-sm">
+                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[var(--accent-red)] shrink-0" />
+                  {step}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="panel-action clip-diagonal p-8 relative overflow-hidden group">
+            <h2 className="text-2xl font-black text-white text-kinetic mb-6 uppercase border-b border-white/10 pb-4">How to Equip</h2>
+            <ul className="space-y-4">
+              {howToEquip.map((step, i) => (
+                <li key={i} className="flex items-start gap-3 text-gray-400 text-sm">
+                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0" />
+                  {step}
+                </li>
+              ))}
             </ul>
           </div>
         </div>

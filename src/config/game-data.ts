@@ -1,0 +1,96 @@
+import { getRuntimeConfig } from "@/lib/config-loader";
+
+const DEFAULT_GAME_DATA = {
+  navigation: {
+    navItems: [
+      { label_th: "Sea 2", label_en: "Sea 2", href: "/sea-2" },
+      { label_th: "หมัด", label_en: "Melee", href: "/melees" },
+      { label_th: "ดาบ", label_en: "Swords", href: "/weapons" },
+      { label_th: "ผลปีศาจ", label_en: "Fruits", href: "/entries/powers-overview" },
+      { label_th: "เผ่าพันธุ์", label_en: "Races", href: "/entries/races-overview" },
+      { label_th: "Traits", label_en: "Traits", href: "/entries/traits-overview" },
+      { label_th: "แคลน", label_en: "Clans", href: "/entries/clans-overview" },
+      { label_th: "อาร์ติแฟกต์", label_en: "Artifacts", href: "/entries/artifacts-overview" },
+      { label_th: "เครื่องประดับ", label_en: "Accessories", href: "/entries/accessories-overview" },
+      { label_th: "คอสเมติก", label_en: "Cosmetics", href: "/entries/cosmetics-overview" },
+      { label_th: "บิลด์อาวุธ", label_en: "Best Builds", href: "/entries/best-builds-overview" },
+      { label_th: "วัสดุคราฟต์", label_en: "Materials", href: "/entries/material-sourcing" },
+      { label_th: "รูน (Runes)", label_en: "Runes", href: "/entries/runes-overview" },
+      { label_th: "ฉายา", label_en: "Titles", href: "/entries/titles-overview" },
+      { label_th: "พาสซีฟ", label_en: "Spec Passives", href: "/entries/spec-passives-overview" },
+      { label_th: "Enchantments", label_en: "Enchantments", href: "/entries/enchanting-accessories" },
+      { label_th: "ออร่า", label_en: "Auras", href: "/entries/auras-overview" },
+      { label_th: "สายเลือด", label_en: "Bloodlines", href: "/entries/bloodlines-system" },
+      { label_th: "เรลิก", label_en: "Relics", href: "/entries/relics-system" },
+      { label_th: "ตารางเทรด", label_en: "Trade Values", href: "/trade-values" },
+      { label_th: "โค้ดทั้งหมด", label_en: "All Codes", href: "/entries/codes-overview" },
+      { label_th: "ฮาคิ", label_en: "Haki", href: "/entries/haki-guide" },
+      { label_th: "บอส", label_en: "Bosses", href: "/entries/bosses-guide" },
+      { label_th: "กิลด์", label_en: "Guilds", href: "/entries/guilds-system" },
+      { label_th: "Boss Rush", label_en: "Boss Rush", href: "/entries/boss-rush" },
+      { label_th: "กันคริลตัล (Crystal Defense)", label_en: "Crystal Defense", href: "/entries/crystal-defense" },
+      { label_th: "เรด (Raids)", label_en: "Raids", href: "/entries/raids-overview" },
+      { label_th: "หอคอย", label_en: "Infinite Tower", href: "/entries/infinite-tower" },
+      { label_th: "ผังสกิล", label_en: "Skill Tree", href: "/entries/skill-tree-guide" },
+      { label_th: "ดันเจี้ยน", label_en: "Dungeons", href: "/entries/dungeons-overview" },
+      { label_th: "พรบารมี", label_en: "Blessings", href: "/entries/blessings-system" },
+      { label_th: "เส้นทางผู้เล่น", label_en: "Player Progression", href: "/entries/new-player-progression-path" },
+      { label_th: "สารบัญ (Index)", label_en: "Index", href: "/entries/index-system" }
+    ],
+    featured: [
+      { id: "dual", title_th: "Dual Wielder", title_en: "Dual Wielder", cat_th: "ดาบ / ระดับ S+", cat_en: "Sword / S+ Tier", img: "/images/icons/dualwielder.webp", href: "/entries/dual-wielder/" },
+      { id: "sun", title_th: "Sun God", title_en: "Sun God", cat_th: "ดาบ / ระดับ S+", cat_en: "Sword / S+ Tier", img: "/images/icons/sungod.webp", href: "/entries/sun-god/" },
+      { id: "spirit", title_th: "Spirit Warrior", title_en: "Spirit Warrior", cat_th: "สไตล์ต่อสู้ / ระดับ S+", cat_en: "Melee / S+ Tier", img: "/images/icons/spiritwarrior.webp", href: "/entries/spirit-warrior-style/" },
+      { id: "anti", title_th: "Anti Magic", title_en: "Anti Magic", cat_th: "ดาบ / ระดับ S+", cat_en: "Sword / S+ Tier", img: "/images/hero/antimagic.webp", href: "/entries/anti-magic/" },
+      { id: "cosmic", title_th: "Cosmic Being", title_en: "Cosmic Being", cat_th: "สไตล์ต่อสู้ / ระดับ S+", cat_en: "Melee / S+ Tier", img: "/images/icons/melee-cosmicbeing.webp", href: "/entries/cosmic-being-style/" },
+      { id: "theworld", title_th: "The World", title_en: "The World", cat_th: "สไตล์ต่อสู้ / ระดับ S+", cat_en: "Melee / S+ Tier", img: "/images/icons/melee-theworld.webp", href: "/entries/the-world-style/" }
+    ],
+    browseItems: [
+      { title_th: "สารบัญวิกิ", title_en: "Wiki Directory", desc_th: "รวมหน้าเพจและหมวดหมู่ทั้งหมดที่คุณค้นหาได้ในที่เดียว ง่ายต่อการเข้าถึง", desc_en: "Explore the collection of all guides and database entries in one place.", href: "/directory" },
+      { title_th: "แผนที่และเกาะทั้งหมด", title_en: "All Islands & Maps", desc_th: "ดูจุดเกิดของบอส, เควสต์, NPC, และจุดอัปเกรดในแต่ละเกาะแบบเจาะลึก", desc_en: "Deep dive into boss spawns, quests, NPCs, and upgrades per island.", href: "/islands" },
+      { title_th: "คู่มือลง Sea 2", title_en: "Sea 2 Guide", desc_th: "เส้นทางการหา Ancient Fragments, จุดเกิดสัตว์ทะเล, และการเดินทางไปโลกสองแบบละเอียดยิบ", desc_en: "Detailed routes for Ancient Fragments and Sea Beast spawns for Sea 2.", href: "/sea-2" },
+      { title_th: "ลิงก์เว็บหลัก", title_en: "Official Links", desc_th: "กดไปหน้าเกมเพจ Roblox หลัก, ดิสคอร์ดพูดคุย, และอัปเดตแบบเรียลไทม์", desc_en: "Direct access to Roblox game page, Discord, and real-time updates.", href: "/official-links" },
+      { title_th: "ระบบคำนวณ", title_en: "Calculators", desc_th: "ศูนย์รวมเครื่องมือคำนวณดาเมจ, วิเคราะห์พาสซีฟและบิลด์อาวุธที่เหมาะกับคุณ", desc_en: "Tools for damage simulation, passive analysis, and build testing.", href: "/calculator" },
+      { title_th: "เครื่องมือเช็คความคืบหน้า", title_en: "Progress Trackers", desc_th: "บันทึกความคืบหน้าหอคอยอนันต์, Skill Tree, และสถานะเลเวลของคุณเอง", desc_en: "Track your Infinite Tower, Skill Tree, and level progress.", href: "/progress-trackers" },
+      { title_th: "ระบบวิเคราะห์เซสชัน", title_en: "System Analysis", desc_th: "เจาะลึกสถิติการพัฒนาวิกิ, วิเคราะห์ปัญหา และแนวทางการปรับปรุงระบบ", desc_en: "Wiki development statistics, issue tracking, and system improvements.", href: "/analysis" },
+      { title_th: "พฤติกรรมผู้ใช้งาน", title_en: "User Analytics", desc_th: "ดูข้อมูลการใช้งานจริงของเหล่านักเดินเรือ หน้าเพจยอดฮิต และคำค้นหายอดนิยม", desc_en: "Audience behavior, trending pages, and top search terms.", href: "/user-analytics" },
+      { title_th: "เกี่ยวกับวิกินี้", title_en: "About This Wiki", desc_th: "ทำความรู้จักกับที่มาของวิกิ, การตรวจสอบข้อมูล, และทีมนักพัฒนาแฟนเมด", desc_en: "The history of this wiki, data validation, and the fan dev team.", href: "/about" }
+    ]
+  },
+  entries: [] as { tier: string; items: any[] }[],
+  bosses: {
+    worldBossTimer: "20 Minutes",
+    newestBoss: "Sun God (Slayer Island)",
+    highValue: [
+      { id: "jinwoo", name: "Jinwoo", location: "Sailor Island", hp: "6M", title: "Shadow Monarch (3%)", drops: ["Abyss Edge", "Dark Ring", "Jinwoo Cape"] },
+      { id: "alucard", name: "Alucard", location: "Sailor Island", hp: "20M", title: "Vampire King (2.5%)", drops: ["Soul Amulet", "Alucard Coat", "Casull"] },
+      { id: "gojo", name: "Gojo", location: "Shibuya", hp: "4M", title: "Honored One (5%)", drops: ["Limitless Key", "Gojo Blindfold", "Void Fragment"] },
+      { id: "sungod", name: "Sun God", location: "Slayer Island", hp: "1.5T", title: "Sun Dancer (1.5%)", drops: ["Sun Essence", "Sun Outfit", "Divine Remnant"] },
+      { id: "aizen", name: "Aizen", location: "Hollow Island", hp: "25M", title: "Manipulator (2%)", drops: ["Mirage Pendant", "Aizen Haori", "Illusion Prism"] }
+    ]
+  },
+  constants: {
+    maxLevel: "15,000",
+    maxStat: "5,000",
+    sea2Requirement: "Level 5,000 + Ancient Fragments"
+  },
+  melees: [
+    { tier: "S+ Tier", items: [{ slug: "spirit-warrior-style", img: "/images/icons/spiritwarrior.webp", title: "Spirit Warrior", desc: "A-tier Sea 2 melee questline tied to Blue Planet and the Empyrean Trainer; usable damage, but weaker AoE and versatility keep it below meta styles." }, { slug: "the-world-style", img: "/images/icons/melee-theworld.webp", title: "The World", desc: "Sea 2 fighting style built around The World Boss, with confirmed summon costs." }, { slug: "cosmic-being-style", img: "/images/icons/melee-cosmicbeing.webp", title: "Cosmic Being", desc: "Sea 2 fighting style from the Cosmic Being NPC on Punch Island." }] },
+    { tier: "S Tier", items: [{ slug: "moon-slayer-style", img: "/images/icons/melee-moonslayer.webp", title: "Moon Slayer", desc: "Boss Island endgame fighting style with fast abilities." }, { slug: "strongest-shinobi-style", img: "/images/icons/melee-strongestshinobi.webp", title: "Strongest Shinobi", desc: "Ninja Island endgame fighting style with a title gate." }, { slug: "anos-style", img: "/images/icons/melee-demonking.webp", title: "Anos", desc: "Academy Island endgame fighting style with clan requirement." }, { slug: "saber-alter-style", img: "/images/icons/melee-corruptedexcalibur.webp", title: "Saber Alter", desc: "Boss Island corruption melee style, also called Corrupted Excalibur." }, { slug: "gilgamesh-style", img: "/images/icons/melee-kingofheroes.webp", title: "Gilgamesh", desc: "Boss Island melee style with excellent farming efficiency." }] },
+    { tier: "A Tier", items: [{ slug: "strongest-of-today-style", img: "/images/icons/melee-strongestoftoday.webp", title: "Strongest of Today", desc: "Shinjuku Island fighting style with a consume step." }, { slug: "madoka-style", img: "/images/icons/melee-lovemaiden.webp", title: "Madoka", desc: "Valentine Island burst-focused fighting style." }, { slug: "qin-shi-style", img: "/images/icons/melee-qinshi.webp", title: "Qin Shi", desc: "Boss Island fighting style with a two-step unlock." }, { slug: "alucard-style", img: "/images/icons/melee-vampireking.webp", title: "Alucard", desc: "Sailor Island sustain-focused fighting style with a Vampire race and Vampire King title gate." }] },
+    { tier: "B Tier", items: [{ slug: "gojo-style", img: "/images/icons/melee-limitlesssorcerer.webp", title: "Gojo", desc: "Shibuya Station fighting style with strong AoE, crowd control, and one of the most practical mid-game unlock routes." }, { slug: "sukuna-style", img: "/images/icons/melee-curseking.webp", title: "Sakuna", desc: "Shibuya Station fighting style with high burst damage and aggressive PvP-focused requirements." }, { slug: "yuji-style", img: "/images/icons/melee-cursedvessel.webp", title: "Yuji", desc: "Shibuya Station combo-focused fighting style with one of the simpler material-only unlock routes." }] },
+    { tier: "C Tier", items: [{ slug: "combat-style", img: "/images/icons/melee-combat.webp", title: "Combat", desc: "Default starter melee style with basic punches and kicks and no unlock cost." }] }
+  ],
+  swords: [
+    { tier: "S+ Tier", items: [{ slug: "sun-god", img: "/images/icons/sungod.webp", title: "Sun God", desc: "S+ current-update Sun God sword route on Slayer Island, playing like a more damage-focused Ice Queen with slightly less versatility." }, { slug: "dual-wielder", img: "/images/icons/dualwielder.webp", title: "Dual Wielder", desc: "S+ current-update sword from Minotaur Raid and the current pure DPS king, with slightly weaker AoE than wider rivals like Ice Queen." }, { slug: "anti-magic", img: "/images/hero/antimagic.webp", title: "Anti Magic", desc: "Legendary sword with anti-magic properties and unique moveset." }, { slug: "dragon-goddess", img: "/images/icons/weapon-dragongoddess.webp", title: "Dragon Goddess", desc: "Sea 2 legendary sword with divine dragon powers." }, { slug: "great-mage-style", img: "/images/icons/weapon-greatmage.webp", title: "Great Mage", desc: "Magic-focused sword style with large AoE and high burst." }, { slug: "atomic", img: "/images/icons/weapon-atomic.webp", title: "Atomic", desc: "Powerful sword with explosive capabilities and fast scaling." }, { slug: "ice-queen", img: "/images/icons/weapon-icequeen.webp", title: "Ice Queen", desc: "Boss Island late-game sword built around the Ice Queen boss, Frost Empress title, and a full bundle of frost materials." }] },
+    { tier: "S Tier", items: [{ slug: "shadow-monarch", img: "/images/icons/weapon-shadowmonarch.webp", title: "Shadow Monarch", desc: "Dungeon Island upgrade sword that consumes Jinwoo and a full set of Shadow Monarch boss drops." }, { slug: "abyssal-empress", img: "/images/icons/weapon-abyssalempress.webp", title: "Abyssal Empress", desc: "Tower Island endgame sword earned through Infinite Tower grinding or by buying it with Tower Tokens." }, { slug: "escanor", img: "/images/icons/weapon-sinofpride.webp", title: "Escanor", desc: "Boss Rush weapon route with fire-heavy AoE moves, Pride synergy, and the matching Sun Armor grind on Sailor Island." }, { slug: "yamato", img: "/images/icons/weapon-yamato.webp", title: "Yamato", desc: "Judgement Island sword that asks for gems, a title, a race, and a full set of Yamato boss drops." }, { slug: "true-aizen", img: "/images/icons/weapon-truemanipulator.webp", title: "True Aizen / True Manipulator", desc: "Soul Dominion upgrade sword that builds directly on the Manipulator Sword and needs boss materials, a title, and unlocked island access." }, { slug: "rimuru", img: "/images/icons/weapon-slimesword.webp", title: "Rimuru", desc: "Slime Island sword route tied to the slime collection puzzle, Slime Key crafting, and one of the strongest late-game boss grinds." }, { slug: "shadow", img: "/images/icons/weapon-shadowsword.webp", title: "Shadow", desc: "Dungeon Island sword, also searched as CID V1, that acts as the direct base weapon for Atomic." }] },
+    { tier: "A Tier", items: [{ slug: "manipulator-sword", img: "/images/icons/weapon-manipulator.webp", title: "Manipulator Sword (Aizen Sword)", desc: "Dungeon Island upgrade sword that consumes Jinwoo and a full set of Shadow Monarch boss drops." }, { slug: "ragna", img: "/images/icons/weapon-dragonslayer.webp", title: "Ragna", desc: "Tower Island endgame sword earned through Infinite Tower grinding or by buying it with Tower Tokens." }, { slug: "ichigo", img: "/images/icons/weapon-soulreaper.webp", title: "Ichigo", desc: "Boss Rush weapon route with fire-heavy AoE moves, Pride synergy, and the matching Sun Armor grind on Sailor Island." }] },
+    { tier: "B Tier", items: [{ slug: "saber", img: "/images/icons/weapon-excalibur.webp", title: "Excalibur(Suber Sword)", desc: "Dungeon Island upgrade sword that consumes Jinwoo and a full set of Shadow Monarch boss drops." }, { slug: "jinwoo", img: "/images/icons/weapon-solohunter.webp", title: "Jinwoo", desc: "Tower Island endgame sword earned through Infinite Tower grinding or by buying it with Tower Tokens." }] },
+    { tier: "C Tier", items: [{ slug: "gryphon", img: "/images/icons/weapon-gryphon.webp", title: "Gryphon", desc: "Dungeon Island upgrade sword that consumes Jinwoo and a full set of Shadow Monarch boss drops." }, { slug: "dark-blade", img: "/images/icons/weapon-darkblade.webp", title: "Drak Blade", desc: "Tower Island endgame sword earned through Infinite Tower grinding or by buying it with Tower Tokens." }, { slug: "katana", img: "/images/icons/weapon-katana.webp", title: "Katana", desc: "Tower Island endgame sword earned through Infinite Tower grinding or by buying it with Tower Tokens." }] }
+  ]
+};
+
+// Use a function to get the config to ensure fresh data during dev
+export const getGameData = () => getRuntimeConfig("game-data", DEFAULT_GAME_DATA);
+
+export type GameData = typeof DEFAULT_GAME_DATA;

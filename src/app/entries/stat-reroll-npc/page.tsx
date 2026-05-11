@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Stat Reroll NPC | Sailor Piece Wiki",
-  description: "Sailor Island gem-based stat reroll station for Damage, Defense, Cooldown Reduction, Crit, Damage Reduction, and Luck lines, with current visible grade values and pity notes.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Stat Reroll NPC | ${siteConfig.name}`,
+    description: "Sailor Island gem-based stat reroll station for Damage, Defense, Cooldown Reduction, Crit, Damage Reduction, and Luck lines, with current visible grade values and pity notes.",
+    openGraph: {
+      title: `Stat Reroll NPC | ${siteConfig.name}`,
+      description: "Sailor Island gem-based stat reroll station for Damage, Defense, Cooldown Reduction, Crit, Damage Reduction, and Luck lines, with current visible grade values and pity notes.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Stat Reroll NPC | ${siteConfig.name}`,
+      description: "Sailor Island gem-based stat reroll station for Damage, Defense, Cooldown Reduction, Crit, Damage Reduction, and Luck lines, with current visible grade values and pity notes.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {

@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "How to Get Relic Parts in Sailor Piece | Relic Part Drop Chances, Routes, Recipes",
-  description: "How to get Relic Parts in Sailor Piece, including Relic Part #1 to #8 drop chances, NPC routes, and the relic recipes they are used for.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `How to Get Relic Parts in Sailor Piece | ${siteConfig.name}`,
+    description: "How to get Relic Parts in Sailor Piece, including Relic Part #1 to #8 drop chances, NPC routes, and the relic recipes they are used for.",
+    openGraph: {
+      title: `How to Get Relic Parts in Sailor Piece | ${siteConfig.name}`,
+      description: "How to get Relic Parts in Sailor Piece, including Relic Part #1 to #8 drop chances, NPC routes, and the relic recipes they are used for.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `How to Get Relic Parts in Sailor Piece | ${siteConfig.name}`,
+      description: "How to get Relic Parts in Sailor Piece, including Relic Part #1 to #8 drop chances, NPC routes, and the relic recipes they are used for.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {

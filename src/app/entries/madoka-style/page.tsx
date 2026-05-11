@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "How to Get Madoka in Sailor Piece",
-  description: "Madoka guide for Sailor Piece with trainer location, quest steps, materials, mastery, and F move progression.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `How to Get Madoka in Sailor Piece | ${siteConfig.name}`,
+    description: "Madoka guide for Sailor Piece with trainer location, quest steps, materials, mastery, and F move progression.",
+    openGraph: {
+      title: `How to Get Madoka in Sailor Piece | ${siteConfig.name}`,
+      description: "Madoka guide for Sailor Piece with trainer location, quest steps, materials, mastery, and F move progression.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `How to Get Madoka in Sailor Piece | ${siteConfig.name}`,
+      description: "Madoka guide for Sailor Piece with trainer location, quest steps, materials, mastery, and F move progression.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {

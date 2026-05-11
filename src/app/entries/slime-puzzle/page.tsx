@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "Slime Puzzle | Sailor Piece Wiki",
-  description: "Seven hidden slime collectibles tied to the Slime Key Crafter on Slime Island and the route into the Slime Crafter unlock.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Slime Puzzle | ${siteConfig.name}`,
+    description: "Seven hidden slime collectibles tied to the Slime Key Crafter on Slime Island and the route into the Slime Crafter unlock.",
+    openGraph: {
+      title: `Slime Puzzle | ${siteConfig.name}`,
+      description: "Seven hidden slime collectibles tied to the Slime Key Crafter on Slime Island and the route into the Slime Crafter unlock.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Slime Puzzle | ${siteConfig.name}`,
+      description: "Seven hidden slime collectibles tied to the Slime Key Crafter on Slime Island and the route into the Slime Crafter unlock.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   {

@@ -1,4 +1,5 @@
 "use client";
+import { getSiteConfig } from "@/config/site";
 
 import React, { useState } from "react";
 import Header from "@/components/Header";

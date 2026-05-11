@@ -1,3 +1,4 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -5,10 +6,28 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import VideoMovesetCard from "@/components/VideoMovesetCard";
 
-export const metadata: Metadata = {
-  title: "How to Get Great Mage in Sailor Piece",
-  description: "Great Mage guide for Sailor Piece with obtainment steps, NPC location, materials, questline, mastery, and evolution path notes.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `How to Get Great Mage in Sailor Piece | ${siteConfig.name}`,
+    description: "Great Mage guide for Sailor Piece with obtainment steps, NPC location, materials, questline, mastery, and evolution path notes.",
+    openGraph: {
+      title: `How to Get Great Mage in Sailor Piece | ${siteConfig.name}`,
+      description: "Great Mage guide for Sailor Piece with obtainment steps, NPC location, materials, questline, mastery, and evolution path notes.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `How to Get Great Mage in Sailor Piece | ${siteConfig.name}`,
+      description: "Great Mage guide for Sailor Piece with obtainment steps, NPC location, materials, questline, mastery, and evolution path notes.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const metaItems = [
   { label: "NPC", value: "Great Mage Prompt" },
@@ -118,27 +137,10 @@ const relatedPages = [
 
 export default function EntryPage() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-start pb-16 md:pb-24 border-l-2 md:border-l-4 border-r-2 md:border-r-4 border-[var(--accent-red)] mx-auto max-w-[1920px] shadow-[inset_0_0_40px_rgba(255,30,56,0.1)] md:shadow-[inset_0_0_80px_rgba(255,30,56,0.15)] relative font-sans bg-slate-950">
-      
-      {/* GLOBAL BACKGROUND ELEMENTS */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute inset-0 bg-vignette opacity-80" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,30,56,0.1),transparent_70%)]" />
-      </div>
-
+    <div className="w-full flex flex-col items-center justify-start pb-16 md:pb-24 relative font-sans">
       <Header />
 
-      <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10 block">
-        
-        {/* Breadcrumb */}
-        <div className="text-sm text-gray-400 mb-6 font-mono opacity-80">
-          <Link href="/" className="hover:text-[var(--accent-red)] transition-colors">Home</Link>
-          <span className="mx-2">/</span>
-          <Link href="/entries" className="hover:text-[var(--accent-red)] transition-colors">Weapons</Link>
-          <span className="mx-2">/</span>
-          <span className="text-gray-300">Great Mage</span>
-        </div>
-
+      <main className="max-w-7xl w-full px-4 md:px-6 pt-24 md:pt-32">
         {/* Hero */}
         <div className="mb-12 flex flex-col md:flex-row gap-8 items-start">
           <div className="flex-1">
@@ -146,7 +148,7 @@ export default function EntryPage() {
               Wiki Entry
             </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 text-white text-kinetic uppercase tracking-normal drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" style={{ textShadow: "3px 3px 0px rgba(255, 30, 56, 1), -1px -1px 0px rgba(0,0,0,1)" }}>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 text-white text-kinetic uppercase tracking-normal drop-shadow-[0_0_20px_rgba(255,255,255,0.2)] neon-text-red" style={{ textShadow: "3px 3px 0px rgba(255, 30, 56, 1), -1px -1px 0px rgba(0,0,0,1)" }}>
               Great Mage
             </h1>
 
@@ -164,7 +166,7 @@ export default function EntryPage() {
             </div>
           </div>
           
-          <div className="w-full md:w-1/3 shrink-0 rounded-2xl overflow-hidden border-2 border-white/10 shadow-[0_0_30px_rgba(255,30,56,0.2)] bg-black relative aspect-square">
+          <div className="w-full md:w-1/3 shrink-0 rounded-2xl overflow-hidden border-2 border-white/10 shadow-[0_0_30px_rgba(255,30,56,0.2)] bg-black relative aspect-square manga-border clip-diagonal">
             <Image 
               src="/images/hero/weapon-greatmage.webp" 
               alt="Great Mage Hero Image" 

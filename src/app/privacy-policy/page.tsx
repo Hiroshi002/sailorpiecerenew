@@ -1,11 +1,30 @@
+import { getSiteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy | Sailor Piece Wiki",
-  description: "What this site stores locally in your browser and what it does not collect.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  return {
+    title: `Privacy Policy | ${siteConfig.name}`,
+    description: "What this site stores locally in your browser and what it does not collect.",
+    openGraph: {
+      title: `Privacy Policy | ${siteConfig.name}`,
+      description: "What this site stores locally in your browser and what it does not collect.",
+      url: `${siteConfig.url}`,
+      siteName: siteConfig.name,
+      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "th_TH",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Privacy Policy | ${siteConfig.name}`,
+      description: "What this site stores locally in your browser and what it does not collect.",
+      images: [siteConfig.ogImage],
+    },
+  };
+}
 
 const policySections = [
   {
